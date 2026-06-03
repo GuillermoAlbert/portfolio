@@ -39,3 +39,33 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# OS
+Thumbs.db
+
+# Personal / Internal
+relevant_documents/
+.claude/
+
+# AI-related
+.anthropic/
+.ai/
+
+# Local development
+.env.local
+.env.test.local
+
+# Lock files (optional - keep for reproducibility)
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
