@@ -1,0 +1,69 @@
+// Stack / Skills. Grouped so recruiters (and ATS keyword search) can scan it fast.
+// Every item here already appears elsewhere on the site — extend the arrays as needed.
+
+type Tag = { label: string; cls?: string };
+type Group = { es: string; en: string; fr: string; items: Tag[] };
+
+const GROUPS: Group[] = [
+  {
+    es: "LENGUAJES", en: "LANGUAGES", fr: "LANGAGES",
+    items: [{ label: "Java 21" }, { label: "TypeScript" }, { label: "Python", cls: "tag--mut" }, { label: "SQL" }],
+  },
+  {
+    es: "BACKEND", en: "BACKEND", fr: "BACKEND",
+    items: [{ label: "Spring Boot" }, { label: "Spring Security" }, { label: "JPA / Hibernate" }, { label: "REST" }, { label: "JWT" }],
+  },
+  {
+    es: "FRONTEND", en: "FRONTEND", fr: "FRONTEND",
+    items: [{ label: "Angular" }, { label: "React", cls: "tag--mut" }, { label: "HTML / CSS" }],
+  },
+  {
+    es: "DATOS", en: "DATA", fr: "DONNÉES",
+    items: [{ label: "PostgreSQL", cls: "tag--db" }, { label: "Liquibase", cls: "tag--db" }, { label: "ETL", cls: "tag--mut" }, { label: "Power BI" }],
+  },
+  {
+    es: "INFRA / DEVOPS", en: "INFRA / DEVOPS", fr: "INFRA / DEVOPS",
+    items: [{ label: "Docker", cls: "tag--infra" }, { label: "Proxmox / LXC", cls: "tag--infra" }, { label: "Tailscale", cls: "tag--infra" }, { label: "Linux", cls: "tag--infra" }],
+  },
+  {
+    es: "PRÁCTICAS", en: "PRACTICES", fr: "PRATIQUES",
+    items: [{ label: "Testing (pytest)" }, { label: "Diseño de APIs" }, { label: "Modelado de datos" }, { label: "Git" }],
+  },
+];
+
+export default function Stack() {
+  return (
+    <section className="section section--sand" id="stack">
+      <div className="container">
+        <div className="section-head reveal">
+          <span className="sec-index">§ 03</span>
+          <h2 className="sec-title">Stack</h2>
+          <span
+            className="sec-note mono"
+            data-en="// tools I reach for"
+            data-fr="// mes outils"
+          >
+            {"// herramientas que uso"}
+          </span>
+        </div>
+
+        <div className="stack reveal" data-d="1">
+          {GROUPS.map((g) => (
+            <div className="stack__group" key={g.es}>
+              <span className="stack__k" data-en={g.en} data-fr={g.fr}>
+                {g.es}
+              </span>
+              <div className="stack__tags" aria-label={g.es}>
+                {g.items.map((t) => (
+                  <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} key={t.label}>
+                    {t.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

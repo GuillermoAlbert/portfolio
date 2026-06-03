@@ -3,7 +3,7 @@ export default function Publications() {
     <section className="section section--sand" id="publications">
       <div className="container">
         <div className="section-head reveal">
-          <span className="sec-index">§ 03</span>
+          <span className="sec-index">§ 05</span>
           <h2
             className="sec-title"
             data-en="Publications"
@@ -16,7 +16,7 @@ export default function Publications() {
             data-en="// peer-reviewed"
             data-fr="// évalué par les pairs"
           >
-            // revisadas por pares
+            {"// revisadas por pares"}
           </span>
         </div>
 

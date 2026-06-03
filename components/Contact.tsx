@@ -3,7 +3,7 @@ export default function Contact() {
     <section className="section" id="contact">
       <div className="container">
         <div className="section-head reveal">
-          <span className="sec-index">§ 04</span>
+          <span className="sec-index">§ 06</span>
           <h2 className="sec-title" data-en="Contact" data-fr="Contact">
             Contacto
           </h2>
@@ -12,7 +12,7 @@ export default function Contact() {
             data-en="// let's build something"
             data-fr="// construisons quelque chose"
           >
-            // construyamos algo
+            {"// construyamos algo"}
           </span>
         </div>
 

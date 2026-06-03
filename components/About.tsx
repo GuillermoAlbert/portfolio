@@ -7,7 +7,7 @@ export default function About() {
           <h2 className="sec-title" data-en="About" data-fr="À propos">
             Sobre mí
           </h2>
-          <span className="sec-note mono">// biology → dev</span>
+          <span className="sec-note mono">{"// biology → dev"}</span>
         </div>
 
         <div className="about__grid">
