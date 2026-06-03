@@ -8,5 +8,8 @@
       "Bash(Get-Item \"B:\\\\Portfolio personal\\\\out\\\\favicon_dev.svg\")",
       "Bash(Select-Object Name, Length)"
     ]
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true
   }
 }
