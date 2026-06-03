@@ -7,7 +7,7 @@ export default function Interactions() {
     const CV = {
       es: { fb: "cv/Guillermo_Albert_CV_ES.pdf", file: "Guillermo_Albert_CV_ES.pdf" },
       en: { fb: "cv/Guillermo_Albert_CV_EN.pdf", file: "Guillermo_Albert_CV_EN.pdf" },
-      fr: { fb: "cv/Guillermo_Albert_CV_EN.pdf", file: "Guillermo_Albert_CV_FR-EN.pdf" },
+      fr: { fb: "cv/Guillermo_Albert_CV_FR.pdf", file: "Guillermo_Albert_CV_FR.pdf" },
     };
     const cvLinks = document.querySelectorAll("[data-cv]");
 
