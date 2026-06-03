@@ -1,6 +1,14 @@
 name = "guillermoalbert"
 compatibility_date = "2026-06-03"
 
+[[routes]]
+pattern = "guillermoalbert.dev"
+custom_domain = true
+
+[[routes]]
+pattern = "www.guillermoalbert.dev"
+custom_domain = true
+
 [assets]
 directory = "./out"
 not_found_handling = "404-page"
