@@ -30,7 +30,7 @@ export default function Contact() {
           data-d="1"
           href="mailto:guillermo.albert@outlook.com"
         >
-          guillermo.albert@outlook.com
+          guillermo.albert<wbr />@outlook.com
         </a>
 
         <div className="contact__row reveal" data-d="2">
@@ -38,25 +38,27 @@ export default function Contact() {
             <span data-en="Download CV" data-fr="Télécharger le CV">Descargar CV</span>{" "}
             <span className="dl" aria-hidden="true">↓</span>
           </a>
-          <a
-            className="linkmono"
-            href="https://github.com/GuillermoAlbert"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub <span className="arr" aria-hidden="true">↗</span>
-          </a>
-          <a
-            className="linkmono"
-            href="https://linkedin.com/in/guillermo-albert-garcia"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn <span className="arr" aria-hidden="true">↗</span>
-          </a>
-          <a className="linkmono" href="tel:+34640347624">
-            (+34) 640 347 624 <span className="arr" aria-hidden="true">↗</span>
-          </a>
+          <div className="contact__social">
+            <a
+              className="linkmono"
+              href="https://github.com/GuillermoAlbert"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub <span className="arr" aria-hidden="true">↗</span>
+            </a>
+            <a
+              className="linkmono"
+              href="https://linkedin.com/in/guillermo-albert-garcia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn <span className="arr" aria-hidden="true">↗</span>
+            </a>
+            <a className="linkmono" href="tel:+34640347624">
+              (+34) 640 347 624 <span className="arr" aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

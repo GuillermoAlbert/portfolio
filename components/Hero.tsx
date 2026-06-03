@@ -110,25 +110,27 @@ export default function Hero() {
               <span data-en="Download CV" data-fr="Télécharger le CV">Descargar CV</span>{" "}
               <span className="dl" aria-hidden="true">↓</span>
             </a>
-            <a
-              className="linkmono"
-              href="https://github.com/GuillermoAlbert"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub <span className="arr" aria-hidden="true">↗</span>
-            </a>
-            <a
-              className="linkmono"
-              href="https://linkedin.com/in/guillermo-albert-garcia"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn <span className="arr" aria-hidden="true">↗</span>
-            </a>
-            <a className="linkmono" href="mailto:guillermo.albert@outlook.com">
-              Email <span className="arr" aria-hidden="true">↗</span>
-            </a>
+            <div className="hero__socials">
+              <a
+                className="linkmono"
+                href="https://github.com/GuillermoAlbert"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub <span className="arr" aria-hidden="true">↗</span>
+              </a>
+              <a
+                className="linkmono"
+                href="https://linkedin.com/in/guillermo-albert-garcia"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn <span className="arr" aria-hidden="true">↗</span>
+              </a>
+              <a className="linkmono" href="mailto:guillermo.albert@outlook.com">
+                Email <span className="arr" aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
         </div>
 
