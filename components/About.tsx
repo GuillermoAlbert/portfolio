@@ -3,7 +3,7 @@ export default function About() {
     <section className="section section--sand" id="about">
       <div className="container">
         <div className="section-head reveal">
-          <span className="sec-index">§ 02</span>
+          <span className="sec-index">§ 01</span>
           <h2 className="sec-title" data-en="About" data-fr="À propos">
             Sobre mí
           </h2>
@@ -30,10 +30,10 @@ export default function About() {
                 contenedores en producción. El método apenas cambió.
               </p>
               <p
-                data-en="My scientific background — a Biology degree, research, and a peer-reviewed publication — is the lens I bring to engineering: rigour, critical reading of the data, and the discipline of measuring before deciding."
-                data-fr="Ma formation scientifique —une licence de Biologie, de la recherche et une publication évaluée par les pairs— est le prisme avec lequel j'aborde l'ingénierie : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
+                data-en="My scientific background — a Biology degree, research, and two peer-reviewed publications — is the lens I bring to engineering: rigour, critical reading of the data, and the discipline of measuring before deciding."
+                data-fr="Ma formation scientifique —une licence de Biologie, de la recherche et deux publications évaluées par les pairs— est le prisme avec lequel j'aborde l'ingénierie : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
               >
-                Mi base científica —un Grado en Biología, investigación y una publicación revisada
+                Mi base científica —un Grado en Biología, investigación y dos publicaciones revisadas
                 por pares— es la lente con la que abordo la ingeniería: rigor, lectura crítica de
                 los datos y la disciplina de medir antes de decidir.
               </p>
@@ -63,11 +63,11 @@ export default function About() {
               <span className="facts__k">INVESTIGACIÓN / RESEARCH</span>
               <span
                 className="facts__v"
-                data-en={'Peer-reviewed publication (IBIS, 2022)<span class="sub">Wildlife detection with AI</span>'}
-                data-fr={'Publication évaluée par les pairs (IBIS, 2022)<span class="sub">Détection de la faune par IA</span>'}
+                data-en={'2 peer-reviewed publications<span class="sub">Iberomyrmex 2015 · Ibis 2022</span>'}
+                data-fr={'2 publications évaluées par les pairs<span class="sub">Iberomyrmex 2015 · Ibis 2022</span>'}
               >
-                Publicación revisada por pares (IBIS, 2022)
-                <span className="sub">Detección de fauna con IA</span>
+                2 publicaciones revisadas por pares
+                <span className="sub">Iberomyrmex 2015 · Ibis 2022</span>
               </span>
             </div>
             <div className="facts__row">

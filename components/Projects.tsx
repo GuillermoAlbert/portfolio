@@ -3,7 +3,7 @@ export default function Projects() {
     <section className="section" id="work">
       <div className="container">
         <div className="section-head reveal">
-          <span className="sec-index">§ 01</span>
+          <span className="sec-index">§ 02</span>
           <h2
             className="sec-title"
             data-en="Selected work"

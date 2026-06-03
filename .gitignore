@@ -57,6 +57,11 @@ Thumbs.db
 relevant_documents/
 .claude/
 
+# AI & development artifacts (local only — not part of the deployed site)
+CLAUDE.md
+AGENTS.md
+STYLING.md
+
 # AI-related
 .anthropic/
 .ai/

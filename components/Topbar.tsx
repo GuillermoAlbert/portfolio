@@ -9,16 +9,20 @@ export default function Topbar() {
           </span>
         </a>
         <nav className="nav" aria-label="Secciones">
-          <a className="navlink" href="#work">
-            <span className="idx">01</span>
-            <span data-en="Work" data-fr="Travaux">Trabajo</span>
-          </a>
           <a className="navlink" href="#about">
-            <span className="idx">02</span>
+            <span className="idx">01</span>
             <span data-en="About" data-fr="À propos">Sobre mí</span>
           </a>
-          <a className="navlink" href="#contact">
+          <a className="navlink" href="#work">
+            <span className="idx">02</span>
+            <span data-en="Work" data-fr="Travaux">Trabajo</span>
+          </a>
+          <a className="navlink" href="#publications">
             <span className="idx">03</span>
+            <span data-en="Publications" data-fr="Publications">Publicaciones</span>
+          </a>
+          <a className="navlink" href="#contact">
+            <span className="idx">04</span>
             <span data-en="Contact" data-fr="Contact">Contacto</span>
           </a>
           <div className="langtoggle" role="group" aria-label="Idioma / Language / Langue">
