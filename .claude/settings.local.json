@@ -6,7 +6,17 @@
       "Bash(git remote *)",
       "WebSearch",
       "Bash(Get-Item \"B:\\\\Portfolio personal\\\\out\\\\favicon_dev.svg\")",
-      "Bash(Select-Object Name, Length)"
+      "Bash(Select-Object Name, Length)",
+      "WebFetch(domain:pixelpoint.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx skills *)",
+      "PowerShell(Stop-Process *)",
+      "Bash(npm run *)",
+      "Bash(node .claude/skills/animate-text/scripts/get-effect.mjs typewriter)",
+      "Bash(node \".claude/skills/animate-text/scripts/get-spec.mjs\" typewriter)",
+      "Bash(git -C \"B:\\\\Portfolio personal\" status --short)",
+      "Bash(Select-String -Pattern \"CLAUDE|AGENTS|STYLING|\\\\.agents|memory\")"
     ]
   },
   "enabledPlugins": {

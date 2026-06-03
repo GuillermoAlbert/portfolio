@@ -480,6 +480,20 @@ a { color: inherit; text-decoration: none; }
   html.reveal-armed .reveal[data-d="3"] { transition-delay: 0.21s; }
 }
 
+/* ============================================================
+   TYPEWRITER — hero name cursor
+   ============================================================ */
+@keyframes tw-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.tw-cursor {
+  display: inline-block;
+  margin-left: 0.04em;
+  font-weight: 300;
+  animation: tw-blink 0.7s steps(1, end) infinite;
+}
+
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
 /* ============================================================

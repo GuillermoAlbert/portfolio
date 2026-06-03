@@ -1,4 +1,69 @@
+"use client";
+import { useEffect, useRef } from "react";
+
 export default function Hero() {
+  const nameRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const h1 = nameRef.current;
+    if (!h1) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const lines = ["Guillermo", "Albert García"];
+    const STEP = 100;  // ms between keystrokes
+    const HOLD = 900;  // ms the cursor blinks once the name is written
+    const savedHTML = h1.innerHTML;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    // Hidden character spans, one non-wrapping block per line. Splitting text
+    // into spans drops kerning and widens it slightly; nowrap stops that from
+    // bumping "Albert García" to a 3rd line, so the layout stays identical
+    // before, during, and after typing — no reflow when the markup restores.
+    h1.innerHTML = "";
+    const chars: HTMLSpanElement[] = [];
+    lines.forEach((text) => {
+      const lineEl = document.createElement("span");
+      lineEl.style.display = "block";
+      lineEl.style.whiteSpace = "nowrap";
+      Array.from(text).forEach((ch) => {
+        const span = document.createElement("span");
+        span.textContent = ch;
+        span.style.opacity = "0";
+        lineEl.appendChild(span);
+        chars.push(span);
+      });
+      h1.appendChild(lineEl);
+    });
+
+    // A blinking cursor that travels with the text: each keystroke reveals one
+    // character and parks the cursor right after it.
+    const cursor = document.createElement("span");
+    cursor.className = "tw-cursor";
+    cursor.textContent = "_";
+    chars[0].before(cursor);
+
+    chars.forEach((span, i) => {
+      timers.push(setTimeout(() => {
+        span.style.opacity = "1";
+        span.after(cursor);
+      }, i * STEP));
+    });
+
+    // Let the cursor blink, fade it out, then restore the pristine markup so
+    // the heading keeps its original kerning.
+    timers.push(setTimeout(() => {
+      cursor.style.animation = "none";
+      cursor.style.transition = "opacity 0.3s ease";
+      cursor.style.opacity = "0";
+      timers.push(setTimeout(() => { h1.innerHTML = savedHTML; }, 300));
+    }, (chars.length - 1) * STEP + HOLD));
+
+    return () => {
+      timers.forEach(clearTimeout);
+      h1.innerHTML = savedHTML;
+    };
+  }, []);
+
   return (
     <section className="hero">
       <div className="container hero__grid">
@@ -13,7 +78,11 @@ export default function Hero() {
             </span>
           </p>
 
-          <h1 className="hero__name reveal" data-d="1">
+          <h1
+            className="hero__name"
+            ref={nameRef}
+            aria-label="Guillermo Albert García"
+          >
             Guillermo
             <br />
             Albert García

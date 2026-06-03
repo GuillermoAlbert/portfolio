@@ -65,6 +65,7 @@ STYLING.md
 # AI-related
 .anthropic/
 .ai/
+.agents/
 
 # Local development
 .env.local
