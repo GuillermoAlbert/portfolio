@@ -78,7 +78,7 @@ export default function Interactions() {
 
     /* ---------- Scroll reveal ---------- */
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let reveals = Array.from(document.querySelectorAll(".reveal"));
+    const reveals = Array.from(document.querySelectorAll(".reveal"));
 
     const checkReveals = () => {
       const trigger = window.innerHeight * 0.9;
@@ -101,8 +101,26 @@ export default function Interactions() {
       });
     }
 
+    /* ---------- Mobile section menu ---------- */
+    const navToggle = document.querySelector(".navtoggle");
+    const navSections = document.getElementById("nav-sections");
+
+    const closeNav = () => {
+      navSections?.classList.remove("is-open");
+      navToggle?.setAttribute("aria-expanded", "false");
+    };
+    const toggleNav = () => {
+      const open = navSections?.classList.toggle("is-open");
+      navToggle?.setAttribute("aria-expanded", String(!!open));
+    };
+    const onNavKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeNav(); };
+
+    navToggle?.addEventListener("click", toggleNav);
+    navSections?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+    document.addEventListener("keydown", onNavKey);
+
     /* ---------- Active nav section ---------- */
-    const sections = (["work", "about", "contact"] as const)
+    const sections = (["about", "experience", "stack", "work", "publications", "contact"] as const)
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
 
@@ -127,6 +145,8 @@ export default function Interactions() {
       window.removeEventListener("resize", checkReveals);
       window.removeEventListener("scroll", updateActive);
       window.removeEventListener("resize", updateActive);
+      navToggle?.removeEventListener("click", toggleNav);
+      document.removeEventListener("keydown", onNavKey);
     };
   }, []);
 

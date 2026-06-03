@@ -3,7 +3,7 @@ export default function Projects() {
     <section className="section" id="work">
       <div className="container">
         <div className="section-head reveal">
-          <span className="sec-index">§ 02</span>
+          <span className="sec-index">§ 04</span>
           <h2
             className="sec-title"
             data-en="Selected work"
@@ -16,7 +16,7 @@ export default function Projects() {
             data-en="// projects in production"
             data-fr="// projets en production"
           >
-            // proyectos en producción
+            {"// proyectos en producción"}
           </span>
         </div>
 
@@ -69,10 +69,10 @@ export default function Projects() {
               <span className="tag tag--mut">React</span>
             </div>
             <div className="card__actions">
-              <a className="btn" href="#" aria-disabled="true">
+              <button type="button" className="btn" disabled>
                 <span data-en="Live demo" data-fr="Voir la démo">Ver demo</span>{" "}
                 <span className="arr" aria-hidden="true">→</span>
-              </a>
+              </button>
               <a
                 className="btn btn--ghost"
                 href="https://github.com/GuillermoAlbert"
@@ -130,10 +130,10 @@ export default function Projects() {
               <span className="tag tag--mut">Python · ETL</span>
             </div>
             <div className="card__actions">
-              <a className="btn" href="#" aria-disabled="true">
+              <button type="button" className="btn" disabled>
                 <span data-en="Write-up" data-fr="Détails">Ver detalle</span>{" "}
                 <span className="arr" aria-hidden="true">→</span>
-              </a>
+              </button>
               <a
                 className="btn btn--ghost"
                 href="https://github.com/GuillermoAlbert"
