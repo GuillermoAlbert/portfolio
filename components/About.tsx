@@ -63,11 +63,11 @@ export default function About() {
               <span className="facts__k">INVESTIGACIÓN / RESEARCH</span>
               <span
                 className="facts__v"
-                data-en={'2 peer-reviewed publications<span class="sub">Iberomyrmex 2015 · Ibis 2022</span>'}
-                data-fr={'2 publications évaluées par les pairs<span class="sub">Iberomyrmex 2015 · Ibis 2022</span>'}
+                data-en={'3 peer-reviewed publications<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
+                data-fr={'3 publications évaluées par les pairs<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
               >
-                2 publicaciones revisadas por pares
-                <span className="sub">Iberomyrmex 2015 · Ibis 2022</span>
+                3 publicaciones revisadas por pares
+                <span className="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>
               </span>
             </div>
             <div className="facts__row">
