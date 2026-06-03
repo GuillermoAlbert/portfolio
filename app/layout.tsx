@@ -17,10 +17,71 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = "https://guillermoalbert.dev";
+const DESCRIPTION =
+  "Guillermo Albert García — Desarrollador Full Stack backend-first. Java, Spring, Angular. De secuenciar datos en un laboratorio a desplegar contenedores en producción.";
+
 export const metadata: Metadata = {
-  title: "Guillermo Albert García — Full Stack Developer",
-  description:
-    "Guillermo Albert García — Desarrollador Full Stack backend-first. Java, Spring, Angular. De secuenciar datos en un laboratorio a desplegar contenedores en producción.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Guillermo Albert García — Full Stack Developer",
+    template: "%s · Guillermo Albert García",
+  },
+  description: DESCRIPTION,
+  keywords: [
+    "Guillermo Albert García",
+    "Full Stack Developer",
+    "Backend Developer",
+    "Java",
+    "Spring Boot",
+    "Angular",
+    "PostgreSQL",
+    "Docker",
+    "Alicante",
+    "España",
+    "remoto",
+  ],
+  authors: [{ name: "Guillermo Albert García", url: SITE_URL }],
+  creator: "Guillermo Albert García",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "Guillermo Albert García",
+    title: "Guillermo Albert García — Full Stack Developer",
+    description: DESCRIPTION,
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Guillermo Albert García — Full Stack Developer",
+    description: DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
+};
+
+// Structured data (schema.org Person) for SEO E-E-A-T and AI/LLM attribution.
+// All facts here are already shown on the site.
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Guillermo Albert García",
+  url: SITE_URL,
+  jobTitle: "Full Stack Developer",
+  email: "mailto:guillermo.albert@outlook.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "La Nucía",
+    addressRegion: "Alicante",
+    addressCountry: "ES",
+  },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Universidad de Alicante" },
+  knowsLanguage: ["es", "fr", "en"],
+  knowsAbout: ["Java", "Spring Boot", "Angular", "PostgreSQL", "Docker", "REST APIs", "ETL"],
+  sameAs: [
+    "https://github.com/GuillermoAlbert",
+    "https://linkedin.com/in/guillermo-albert-garcia",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -39,9 +100,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `(function(){try{var t=localStorage.getItem('ga-theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
+        />
       </head>
       <body data-lang="es" suppressHydrationWarning>
-        <a className="skip" href="#work">
+        <a className="skip" href="#top">
           Saltar al contenido
         </a>
         <Topbar />

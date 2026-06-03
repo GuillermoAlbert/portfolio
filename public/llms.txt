@@ -1,0 +1,13 @@
+# Guillermo Albert García — Desarrollador Full Stack (backend-first)
+
+> Java · Spring · Angular · PostgreSQL · Docker. Ex-biólogo (Grado en Biología, UA),
+> 3 publicaciones revisadas por pares incl. un paper de detección por IA con cámaras-trampa.
+> Con base en La Nucía, Alicante (España). Abierto a roles backend / full-stack (híbrido / remoto).
+
+## Páginas clave
+- https://guillermoalbert.dev/ : Inicio (sobre mí, experiencia, stack, trabajo, publicaciones, contacto)
+- https://github.com/GuillermoAlbert : código fuente
+
+## Contacto
+- guillermo.albert@outlook.com
+- https://linkedin.com/in/guillermo-albert-garcia
