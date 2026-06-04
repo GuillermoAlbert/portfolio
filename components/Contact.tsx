@@ -28,9 +28,12 @@ export default function Contact() {
         <a
           className="contact__email reveal"
           data-d="1"
-          href="mailto:guillermo.albert@outlook.com"
+          data-mail=""
+          href="mailto:hola@guillermoalbert.dev"
+          data-en="contact<wbr />@guillermoalbert.dev"
+          data-fr="contact<wbr />@guillermoalbert.dev"
         >
-          guillermo.albert<wbr />@outlook.com
+          hola<wbr />@guillermoalbert.dev
         </a>
 
         <div className="contact__row reveal" data-d="2">

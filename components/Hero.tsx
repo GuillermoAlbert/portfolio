@@ -127,7 +127,7 @@ export default function Hero() {
               >
                 LinkedIn <span className="arr" aria-hidden="true">↗</span>
               </a>
-              <a className="linkmono" href="mailto:guillermo.albert@outlook.com">
+              <a className="linkmono" data-mail="" href="mailto:hola@guillermoalbert.dev">
                 Email <span className="arr" aria-hidden="true">↗</span>
               </a>
             </div>

@@ -55,7 +55,7 @@ const personLd = {
   name: "Guillermo Albert García",
   url: SITE_URL,
   jobTitle: "Backend-first Full Stack Developer",
-  email: "guillermo.albert@outlook.com",
+  email: "hola@guillermoalbert.dev",
   description:
     "Desarrollador Full Stack (backend-first) especializado en Java, Spring Boot, Angular y PostgreSQL. Graduado en Biología por la Universidad de Alicante con 3 publicaciones revisadas por pares. Actualmente en Inetum, desarrollando un proyecto del sector público. Residente en La Nucía, Alicante.",
   address: {

@@ -11,6 +11,14 @@ export default function Interactions() {
     };
     const cvLinks = document.querySelectorAll("[data-cv]");
 
+    /* ---------- Contact email per language ---------- */
+    const MAIL = {
+      es: "hola@guillermoalbert.dev",
+      en: "contact@guillermoalbert.dev",
+      fr: "contact@guillermoalbert.dev",
+    };
+    const mailLinks = document.querySelectorAll("[data-mail]");
+
     /* ---------- Language toggle ---------- */
     // Cache only outermost [data-en] nodes so nested ones aren't double-processed.
     const i18nNodes = Array.from(document.querySelectorAll("[data-en]")).filter(
@@ -35,6 +43,9 @@ export default function Interactions() {
         a.setAttribute("href", c.fb);
         a.setAttribute("download", c.file);
       });
+
+      const mail = MAIL[lang as keyof typeof MAIL] ?? MAIL.es;
+      mailLinks.forEach((a) => { a.setAttribute("href", `mailto:${mail}`); });
 
       document.querySelectorAll("[data-setlang]").forEach((btn) => {
         const on = btn.getAttribute("data-setlang") === lang;
