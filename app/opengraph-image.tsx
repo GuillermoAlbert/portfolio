@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const dynamic = "force-static";
 
 // Build-time generated share image (1200×630). Next auto-wires og:image + twitter:image.
-export const alt = "Guillermo Albert García — Full Stack Developer";
+export const alt = "Guillermo Albert García — Backend-first Full Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -36,13 +36,13 @@ export default function OpengraphImage() {
             Albert García
           </div>
           <div style={{ marginTop: 28, fontSize: 38, fontWeight: 600, color: "#6ea6e6" }}>
-            Full Stack Developer · Java / Spring / Angular
+            Backend-first Full Stack Developer
           </div>
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: "#818ea4" }}>
           <div>guillermoalbert.dev</div>
-          <div>Backend-first</div>
+          <div>Java · Spring · Angular</div>
         </div>
       </div>
     ),

@@ -43,8 +43,11 @@ export default function Interactions() {
       });
 
       try { localStorage.setItem("ga-lang", lang); } catch (_) {}
+      // Keep the URL on the matching static route (/, /en, /fr) so a refresh or
+      // a shared link lands on the right language and hreflang stays coherent.
       const url = new URL(location.href);
-      url.searchParams.set("lang", lang);
+      url.searchParams.delete("lang");
+      url.pathname = lang === "es" ? "/" : `/${lang}`;
       history.replaceState(null, "", url.toString());
     }
 
@@ -60,11 +63,21 @@ export default function Interactions() {
       return LANGS.has(primary) ? primary : "es";
     }
 
+    // The /en and /fr routes are explicit — the path wins over any saved choice.
+    function detectPathLang(): string | null {
+      const p = location.pathname;
+      if (p === "/en" || p.startsWith("/en/")) return "en";
+      if (p === "/fr" || p.startsWith("/fr/")) return "fr";
+      return null;
+    }
+
     const urlLang = new URLSearchParams(location.search).get("lang");
     let savedLang: string | null = null;
     try { savedLang = localStorage.getItem("ga-lang"); } catch (_) {}
 
-    const initialLang = LANGS.has(urlLang ?? "") ? urlLang! : (savedLang ?? detectBrowserLang());
+    const initialLang =
+      detectPathLang() ??
+      (LANGS.has(urlLang ?? "") ? urlLang! : (savedLang ?? detectBrowserLang()));
     setLang(initialLang);
 
     /* ---------- Theme toggle ---------- */

@@ -1,6 +1,5 @@
-// Experience timeline. Scaffolded from facts already on the site.
-// TODO (feed later): add real periods (e.g. "2023 — Presente") via <p className="xp__period mono">,
-// add 2–3 quantified bullets per role via <ul className="xp__bullets">, and add more roles.
+// Experience timeline. Periods are real; quantified bullets can be added later
+// via <ul className="xp__bullets"><li>…</li></ul> inside each <article>.
 
 export default function Experience() {
   return (
@@ -22,7 +21,13 @@ export default function Experience() {
 
         <div className="xp reveal" data-d="1">
           <article className="xp__item">
-            {/* TODO: <p className="xp__period mono">2023 — Presente</p> */}
+            <p
+              className="xp__period mono"
+              data-en="Mar 2024 — Present"
+              data-fr="mars 2024 — Présent"
+            >
+              mar. 2024 — Presente
+            </p>
             <h3 className="xp__role">
               Full Stack Developer <span className="xp__org">· Inetum</span>
             </h3>
@@ -44,7 +49,7 @@ export default function Experience() {
           </article>
 
           <article className="xp__item">
-            {/* TODO: <p className="xp__period mono">2014 — 2022</p> */}
+            <p className="xp__period mono">2016 — 2024</p>
             <h3 className="xp__role">
               <span data-en="Research &amp; Biology" data-fr="Recherche &amp; Biologie">
                 Investigación y Biología

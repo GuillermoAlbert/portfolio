@@ -1,21 +1,6 @@
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Experience from "@/components/Experience";
-import Stack from "@/components/Stack";
-import Projects from "@/components/Projects";
-import Publications from "@/components/Publications";
-import Contact from "@/components/Contact";
+import Sections from "@/components/Sections";
 
+// Spanish (default) route. Metadata + hreflang come from the root layout.
 export default function Home() {
-  return (
-    <main id="top" tabIndex={-1}>
-      <Hero />
-      <About />
-      <Experience />
-      <Stack />
-      <Projects />
-      <Publications />
-      <Contact />
-    </main>
-  );
+  return <Sections />;
 }

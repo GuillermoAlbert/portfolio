@@ -89,7 +89,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero__role reveal" data-d="2">
-            Full Stack Developer
+            Backend-first Full Stack Developer
             <span className="sep">·</span>Java
             <span className="sep">/</span>Spring
             <span className="sep">/</span>Angular

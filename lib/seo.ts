@@ -1,0 +1,49 @@
+import type { Metadata } from "next";
+
+export const SITE_URL = "https://guillermoalbert.dev";
+
+// Reciprocal hreflang map. The three routes (/, /en, /fr) all declare the same
+// alternates so crawlers and AI engines can find every language version.
+export const LANGUAGE_ALTERNATES = {
+  es: "/",
+  en: "/en",
+  fr: "/fr",
+} as const;
+
+type Locale = keyof typeof LANGUAGE_ALTERNATES;
+
+const TITLE = "Guillermo Albert García — Backend-first Full Stack Developer";
+
+const DESCRIPTION: Record<Locale, string> = {
+  es: "Guillermo Albert García — Desarrollador Full Stack backend-first. Java, Spring, Angular. De secuenciar datos en un laboratorio a desplegar contenedores en producción.",
+  en: "Guillermo Albert García — Backend-first Full Stack Developer. Java, Spring, Angular. From sequencing data in a lab to deploying containers in production.",
+  fr: "Guillermo Albert García — Développeur Full Stack backend-first. Java, Spring, Angular. De séquencer des données en laboratoire à déployer des conteneurs en production.",
+};
+
+const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_GB", fr: "fr_FR" };
+
+// The build-time share image (app/opengraph-image.tsx) is served at this path.
+// Referenced explicitly because each route sets its own `openGraph`, which would
+// otherwise drop the auto-attached image on /en and /fr.
+const OG_IMAGE = "/opengraph-image";
+
+// Per-locale metadata shared by the language routes. Relative URLs resolve
+// against `metadataBase` (set in the root layout).
+export function localeMetadata(locale: Locale): Metadata {
+  const path = LANGUAGE_ALTERNATES[locale];
+  const description = DESCRIPTION[locale];
+  return {
+    description,
+    alternates: { canonical: path, languages: LANGUAGE_ALTERNATES },
+    openGraph: {
+      type: "website",
+      url: path,
+      siteName: "Guillermo Albert García",
+      title: TITLE,
+      description,
+      locale: OG_LOCALE[locale],
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE }],
+    },
+    twitter: { card: "summary_large_image", title: TITLE, description, images: [OG_IMAGE] },
+  };
+}

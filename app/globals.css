@@ -414,6 +414,12 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted-2); border: 1px dashed var(--line-strong);
   padding: 1px 6px; border-radius: 2px;
 }
+/* Strategic AI signal: ties the camera-trap paper to the applied-ML thread. */
+.pub__ai-tag {
+  font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--blue); border: 1px solid var(--blue);
+  padding: 1px 6px; border-radius: 2px;
+}
 
 .pub__title {
   font-size: 1.06rem; font-weight: 600; color: var(--navy);
@@ -519,6 +525,15 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted-2);
 }
 .stack__tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+/* Full-width feature row: spans every column so an odd group count
+   never leaves an empty cell. Label sits inline with the tags. */
+.stack__group--feature {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+.stack__group--feature .stack__k { margin-bottom: 0; flex-shrink: 0; }
 
 /* ============================================================
    EXPERIENCE

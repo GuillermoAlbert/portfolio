@@ -2,7 +2,7 @@
 // Every item here already appears elsewhere on the site — extend the arrays as needed.
 
 type Tag = { label: string; cls?: string };
-type Group = { es: string; en: string; fr: string; items: Tag[] };
+type Group = { es: string; en: string; fr: string; items: Tag[]; feature?: boolean };
 
 const GROUPS: Group[] = [
   {
@@ -23,15 +23,16 @@ const GROUPS: Group[] = [
   },
   {
     es: "INFRA / DEVOPS", en: "INFRA / DEVOPS", fr: "INFRA / DEVOPS",
-    items: [{ label: "Docker", cls: "tag--infra" }, { label: "Proxmox / LXC", cls: "tag--infra" }, { label: "Tailscale", cls: "tag--infra" }, { label: "Linux", cls: "tag--infra" }],
+    items: [{ label: "Docker", cls: "tag--infra" }, { label: "Proxmox / LXC", cls: "tag--infra" }, { label: "Tailscale", cls: "tag--infra" }, { label: "Linux", cls: "tag--infra" }, { label: "Cloudflare Workers", cls: "tag--infra" }, { label: "GitLab CI", cls: "tag--infra" }],
   },
   {
     es: "PRÁCTICAS", en: "PRACTICES", fr: "PRATIQUES",
-    items: [{ label: "Testing (pytest)" }, { label: "Diseño de APIs" }, { label: "Modelado de datos" }, { label: "Git" }],
+    items: [{ label: "Testing (pytest · JUnit)" }, { label: "Diseño de APIs" }, { label: "Modelado de datos" }, { label: "Git" }],
   },
   {
     es: "IA / AGENTES", en: "AI / AGENTS", fr: "IA / AGENTS",
-    items: [{ label: "Claude API" }, { label: "MCP" }, { label: "AI Agents" }, { label: "Prompt Engineering", cls: "tag--mut" }],
+    items: [{ label: "Claude API" }, { label: "MCP" }, { label: "AI Agents" }, { label: "Codex" }, { label: "Opencode" }, { label: "Prompt Engineering", cls: "tag--mut" }],
+    feature: true,
   },
 ];
 
@@ -53,7 +54,7 @@ export default function Stack() {
 
         <div className="stack reveal" data-d="1">
           {GROUPS.map((g) => (
-            <div className="stack__group" key={g.es}>
+            <div className={`stack__group${g.feature ? " stack__group--feature" : ""}`} key={g.es}>
               <span className="stack__k" data-en={g.en} data-fr={g.fr}>
                 {g.es}
               </span>

@@ -25,6 +25,13 @@ export default function Publications() {
           <article className="pub">
             <div className="pub__bar">
               <span className="pub__year mono">2022</span>
+              <span
+                className="pub__ai-tag mono"
+                data-en="applied ML"
+                data-fr="ML appliqué"
+              >
+                IA aplicada
+              </span>
               <span className="pub__venue-wrap">
                 <em className="pub__venue">Ibis</em>
                 <span className="pub__vol mono">164(4) · 1123–1131</span>

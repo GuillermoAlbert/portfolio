@@ -30,10 +30,10 @@ export default function About() {
                 contenedores en producción. El método apenas cambió.
               </p>
               <p
-                data-en="My scientific background — a Biology degree, research, and two peer-reviewed publications — is the lens I bring to engineering: rigour, critical reading of the data, and the discipline of measuring before deciding."
-                data-fr="Ma formation scientifique —une licence de Biologie, de la recherche et deux publications évaluées par les pairs— est le prisme avec lequel j'aborde l'ingénierie : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
+                data-en="My scientific background — a Biology degree, research, and three peer-reviewed publications — is the lens I bring to engineering: rigour, critical reading of the data, and the discipline of measuring before deciding."
+                data-fr="Ma formation scientifique —une licence de Biologie, de la recherche et trois publications évaluées par les pairs— est le prisme avec lequel j'aborde l'ingénierie : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
               >
-                Mi base científica —un Grado en Biología, investigación y dos publicaciones revisadas
+                Mi base científica —un Grado en Biología, investigación y tres publicaciones revisadas
                 por pares— es la lente con la que abordo la ingeniería: rigor, lectura crítica de
                 los datos y la disciplina de medir antes de decidir.
               </p>
@@ -44,6 +44,13 @@ export default function About() {
                 Soy <strong>backend-first</strong>. Me importan la arquitectura, el modelo de datos
                 y que el sistema siga en pie cuando nadie mira. El frontend lo defiendo; el backend
                 lo lidero.
+              </p>
+              <p
+                data-en="And I work with agentic AI tools — Claude Code, MCP — the way I drive Docker or Git: one more tool I direct, not a substitute for engineering judgement."
+                data-fr="Et je travaille avec des outils d'IA agentique — Claude Code, MCP — comme je pilote Docker ou Git : un outil de plus que je dirige, pas un substitut au jugement d'ingénierie."
+              >
+                Y trabajo con herramientas de IA agéntica —Claude Code, MCP— como dirijo Docker o
+                Git: una herramienta más que controlo, no un sustituto del criterio de ingeniería.
               </p>
             </div>
           </div>

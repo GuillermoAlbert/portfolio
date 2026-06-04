@@ -100,12 +100,13 @@ export default function Projects() {
             </p>
             <p
               className="card__desc"
-              data-en="My own infrastructure running in production: 9 LXC containers, Python ETL pipelines (Catapult → PostgreSQL + Power BI), a self-built monitoring dashboard, and hands-on incident management with encrypted off-site backups."
-              data-fr="Mon infrastructure en production : 9 conteneurs LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un tableau de bord de supervision maison et une gestion réelle des incidents avec sauvegardes chiffrées externes."
+              data-en="My own infrastructure running in production: 9 LXC containers, Python ETL pipelines (Catapult → PostgreSQL + Power BI), a self-built monitoring dashboard, an LLM-assisted pipeline that classifies invoices and extracts their data, and hands-on incident management with encrypted off-site backups."
+              data-fr="Mon infrastructure en production : 9 conteneurs LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un tableau de bord de supervision maison, un pipeline assisté par LLM qui classe les factures et en extrait les données, et une gestion réelle des incidents avec sauvegardes chiffrées externes."
             >
               Infraestructura propia corriendo en producción: 9 contenedores LXC, pipelines ETL en
-              Python (Catapult → PostgreSQL + Power BI), un panel de monitorización propio y gestión
-              real de incidentes con backups cifrados externos.
+              Python (Catapult → PostgreSQL + Power BI), un panel de monitorización propio, un
+              pipeline asistido por LLM que clasifica facturas y extrae sus datos, y gestión real de
+              incidentes con backups cifrados externos.
             </p>
             <p className="card__metrics">
               <span
@@ -128,6 +129,7 @@ export default function Projects() {
               <span className="tag tag--infra">Tailscale</span>
               <span className="tag tag--db">PostgreSQL</span>
               <span className="tag tag--mut">Python · ETL</span>
+              <span className="tag tag--mut">LLM</span>
             </div>
             <div className="card__actions">
               <button type="button" className="btn" disabled>
