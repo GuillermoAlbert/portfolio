@@ -49,7 +49,7 @@ export default function Contact() {
             </a>
             <a
               className="linkmono"
-              href="https://linkedin.com/in/guillermo-albert-garcia"
+              href="https://www.linkedin.com/in/guillermo-albert-garcia"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -75,7 +75,7 @@ export default function Projects() {
               </button>
               <a
                 className="btn btn--ghost"
-                href="https://github.com/GuillermoAlbert"
+                href="https://github.com/GuillermoAlbert/mams-architecture"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -136,7 +136,7 @@ export default function Projects() {
               </button>
               <a
                 className="btn btn--ghost"
-                href="https://github.com/GuillermoAlbert"
+                href="https://github.com/GuillermoAlbert/homelab"
                 target="_blank"
                 rel="noopener noreferrer"
               >

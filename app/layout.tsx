@@ -68,7 +68,9 @@ const personLd = {
   name: "Guillermo Albert García",
   url: SITE_URL,
   jobTitle: "Full Stack Developer",
-  email: "mailto:guillermo.albert@outlook.com",
+  email: "guillermo.albert@outlook.com",
+  description:
+    "Desarrollador Full Stack (backend-first) especializado en Java, Spring Boot, Angular y PostgreSQL. Graduado en Biología por la Universidad de Alicante con 3 publicaciones revisadas por pares. Actualmente en Inetum, desarrollando un proyecto del sector público. Residente en La Nucía, Alicante.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "La Nucía",
@@ -80,7 +82,7 @@ const personLd = {
   knowsAbout: ["Java", "Spring Boot", "Angular", "PostgreSQL", "Docker", "REST APIs", "ETL"],
   sameAs: [
     "https://github.com/GuillermoAlbert",
-    "https://linkedin.com/in/guillermo-albert-garcia",
+    "https://www.linkedin.com/in/guillermo-albert-garcia",
   ],
 };
 
