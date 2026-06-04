@@ -86,18 +86,20 @@ export default function Experience() {
             </h3>
             <p
               className="xp__meta"
-              data-en="BSc Biology · research"
-              data-fr="Licence de Biologie · recherche"
+              data-en="BSc + MSc · research"
+              data-fr="Licence + Master · recherche"
             >
-              Grado en Biología · investigación
+              Grado + Máster · investigación
             </p>
             <p
               className="xp__desc"
-              data-en="Sequencing data, measuring biodiversity, and 3 peer-reviewed publications — the origin of my evidence-based approach to engineering."
-              data-fr="Séquencer des données, mesurer la biodiversité et 3 publications évaluées par les pairs — l'origine de mon approche fondée sur les preuves."
+              data-en="Research at CSIC (Doñana Biological Station) and the Helsinki Natural History Museum, with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 peer-reviewed publications — the origin of my evidence-based approach to engineering."
+              data-fr="Recherche au CSIC (Station biologique de Doñana) et au Muséum d'histoire naturelle d'Helsinki, avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications évaluées par les pairs — l'origine de mon approche fondée sur les preuves."
             >
-              Secuenciación de datos, medición de biodiversidad y 3 publicaciones revisadas por
-              pares — el origen de mi enfoque basado en la evidencia.
+              Investigación en el CSIC (Estación Biológica de Doñana) y en el Museo de Historia
+              Natural de Helsinki, con un Máster en Biodiversidad (Univ. de València). Secuenciación
+              de datos, medición de biodiversidad y 3 publicaciones revisadas por pares — el origen
+              de mi enfoque basado en la evidencia.
             </p>
           </article>
         </div>

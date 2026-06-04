@@ -46,11 +46,11 @@ export default function About() {
                 lo lidero.
               </p>
               <p
-                data-en="And I work with agentic AI tools — Claude Code, MCP — the way I drive Docker or Git: one more tool I direct, not a substitute for engineering judgement."
-                data-fr="Et je travaille avec des outils d'IA agentique — Claude Code, MCP — comme je pilote Docker ou Git : un outil de plus que je dirige, pas un substitut au jugement d'ingénierie."
+                data-en="And I work with agentic AI tools — Claude Code, MCP — just like Docker or Git: one more tool I control, not a substitute for technical judgement."
+                data-fr="Et je travaille avec des outils d'IA agentique — Claude Code, MCP — comme avec Docker ou Git : un outil de plus que je contrôle, pas un substitut au jugement technique."
               >
-                Y trabajo con herramientas de IA agéntica —Claude Code, MCP— como dirijo Docker o
-                Git: una herramienta más que controlo, no un sustituto del criterio de ingeniería.
+                Y trabajo con herramientas de IA agéntica —Claude Code, MCP— como con Docker o Git:
+                una herramienta más que controlo, no un sustituto del criterio técnico.
               </p>
             </div>
           </div>
