@@ -43,15 +43,29 @@ export default function Interactions() {
       });
 
       try { localStorage.setItem("ga-lang", lang); } catch (_) {}
+      const url = new URL(location.href);
+      url.searchParams.set("lang", lang);
+      history.replaceState(null, "", url.toString());
     }
 
     document.querySelectorAll("[data-setlang]").forEach((btn) => {
       btn.addEventListener("click", () => setLang(btn.getAttribute("data-setlang")!));
     });
 
+    const LANGS = new Set(["es", "en", "fr"]);
+
+    function detectBrowserLang(): string {
+      const nav = navigator.language ?? "";
+      const primary = nav.split("-")[0].toLowerCase();
+      return LANGS.has(primary) ? primary : "es";
+    }
+
+    const urlLang = new URLSearchParams(location.search).get("lang");
     let savedLang: string | null = null;
     try { savedLang = localStorage.getItem("ga-lang"); } catch (_) {}
-    setLang(savedLang ?? "es");
+
+    const initialLang = LANGS.has(urlLang ?? "") ? urlLang! : (savedLang ?? detectBrowserLang());
+    setLang(initialLang);
 
     /* ---------- Theme toggle ---------- */
     const themeBtn = document.querySelector("[data-theme-toggle]");
