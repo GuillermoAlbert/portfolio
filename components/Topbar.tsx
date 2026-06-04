@@ -5,7 +5,8 @@ export default function Topbar() {
         <a className="brand" href="#top" aria-label="Guillermo Albert García">
           <span className="brand__dot"></span>
           <span>
-            <b>Guillermo Albert</b> <span>· guillermoalbert.dev</span>
+            <b>Guillermo Albert</b>{" "}
+            <span className="brand__domain">· guillermoalbert.dev</span>
           </span>
         </a>
         <nav className="nav" aria-label="Secciones">
