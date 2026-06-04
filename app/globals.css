@@ -538,15 +538,51 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    EXPERIENCE
    ============================================================ */
+/* Timeline: a vertical rail with square nodes — borders only, no shadows. */
 .xp { display: flex; flex-direction: column; }
 .xp__item {
+  position: relative;
   padding-block: clamp(22px, 3vw, 30px);
+  padding-left: 26px;
   border-bottom: 1px solid var(--line);
 }
+/* Rail segment — contiguous items render one continuous line. */
+.xp__item::before {
+  content: "";
+  position: absolute;
+  left: 4px; top: 0; bottom: 0;
+  width: 1.5px;
+  background: var(--line);
+}
 .xp__item:first-child { padding-top: 0; }
+.xp__item:first-child::before { top: 8px; }            /* begin at the first node */
+.xp__item:last-child::before {
+  bottom: auto;
+  height: calc(clamp(22px, 3vw, 30px) + 9px);          /* stop at the last node */
+}
 .xp__period {
+  position: relative;
   font-family: var(--mono); font-size: 0.76rem; color: var(--blue);
   margin-bottom: 8px;
+}
+/* Node sitting on the rail. Square to match the grid language (tags, indices). */
+.xp__period::before {
+  content: "";
+  position: absolute;
+  left: -26px; top: 0.2em;
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  background: var(--bg);
+  border: 1.5px solid var(--line-strong);
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+/* Current role (top item) — filled node. */
+.xp__item:first-child .xp__period::before {
+  background: var(--blue); border-color: var(--blue);
+}
+/* Interactive but simple: light the node on hover. */
+.xp__item:hover .xp__period::before {
+  background: var(--blue); border-color: var(--blue);
 }
 .xp__role {
   font-size: clamp(1.1rem, 2.2vw, 1.32rem); font-weight: 700;

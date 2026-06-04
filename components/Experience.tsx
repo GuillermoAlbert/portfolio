@@ -49,7 +49,35 @@ export default function Experience() {
           </article>
 
           <article className="xp__item">
-            <p className="xp__period mono">2016 — 2024</p>
+            <p className="xp__period mono">2022 — 2024</p>
+            <h3 className="xp__role">
+              <span
+                data-en="Web App Development (DAW)"
+                data-fr="Développement d'applications web (DAW)"
+              >
+                Desarrollo de Aplicaciones Web (DAW)
+              </span>{" "}
+              <span className="xp__org">· IES Mare Nostrum</span>
+            </h3>
+            <p
+              className="xp__meta"
+              data-en="Higher diploma · software development"
+              data-fr="Diplôme supérieur · développement logiciel"
+            >
+              FP Superior · desarrollo de software
+            </p>
+            <p
+              className="xp__desc"
+              data-en="My formal switch into software: two years of full-stack development, databases and deployment. I joined Inetum before finishing the programme."
+              data-fr="Ma transition formelle vers le logiciel : deux ans de développement full-stack, bases de données et déploiement. J'ai rejoint Inetum avant la fin du cursus."
+            >
+              Mi transición formal al software: dos años de desarrollo full-stack, bases de datos
+              y despliegue. Me incorporé a Inetum antes de terminar el ciclo.
+            </p>
+          </article>
+
+          <article className="xp__item">
+            <p className="xp__period mono">2016 — 2022</p>
             <h3 className="xp__role">
               <span data-en="Research &amp; Biology" data-fr="Recherche &amp; Biologie">
                 Investigación y Biología
