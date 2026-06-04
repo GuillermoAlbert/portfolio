@@ -30,11 +30,11 @@ export default function About() {
                 contenedores en producción. El método apenas cambió.
               </p>
               <p
-                data-en="My scientific background — a Biology degree, research, and three peer-reviewed publications — is the lens I bring to engineering: rigour, critical reading of the data, and the discipline of measuring before deciding."
-                data-fr="Ma formation scientifique —une licence de Biologie, de la recherche et trois publications évaluées par les pairs— est le prisme avec lequel j'aborde l'ingénierie : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
+                data-en="My scientific background — a Biology degree, research, and three peer-reviewed publications — is the lens I bring to development: rigour, critical reading of the data, and the discipline of measuring before deciding."
+                data-fr="Ma formation scientifique —une licence de Biologie, de la recherche et trois publications évaluées par les pairs— est le prisme avec lequel j'aborde le développement : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
               >
                 Mi base científica —un Grado en Biología, investigación y tres publicaciones revisadas
-                por pares— es la lente con la que abordo la ingeniería: rigor, lectura crítica de
+                por pares— es la lente con la que abordo el desarrollo: rigor, lectura crítica de
                 los datos y la disciplina de medir antes de decidir.
               </p>
               <p
