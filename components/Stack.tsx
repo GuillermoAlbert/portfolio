@@ -29,6 +29,10 @@ const GROUPS: Group[] = [
     es: "PRÁCTICAS", en: "PRACTICES", fr: "PRATIQUES",
     items: [{ label: "Testing (pytest)" }, { label: "Diseño de APIs" }, { label: "Modelado de datos" }, { label: "Git" }],
   },
+  {
+    es: "IA / AGENTES", en: "AI / AGENTS", fr: "IA / AGENTS",
+    items: [{ label: "Claude API" }, { label: "MCP" }, { label: "AI Agents" }, { label: "Prompt Engineering", cls: "tag--mut" }],
+  },
 ];
 
 export default function Stack() {
