@@ -59,7 +59,7 @@ export default function Contact() {
               LinkedIn <span className="arr" aria-hidden="true">↗</span>
             </a>
             <a className="linkmono" href="tel:+34640347624">
-              (+34) 640 347 624 <span className="arr" aria-hidden="true">↗</span>
+              (+34) 640 347 624
             </a>
           </div>
         </div>
