@@ -1,10 +1,11 @@
 import { T, type Locale } from "@/lib/i18n";
+import { MamsDiagram, HomelabDiagram } from "@/components/ProjectDiagrams";
 
 export default function Projects({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section" id="work">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head reveal" data-num="04">
           <span className="sec-index">§ 04</span>
           <T
             locale={locale}
@@ -62,6 +63,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
                 fr="<b>Catapult</b> GPS"
               />
             </p>
+            <MamsDiagram locale={locale} />
             <div className="tags" aria-label="Stack">
               <span className="tag">Spring Boot</span>
               <span className="tag">Java 21</span>
@@ -128,6 +130,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
                 fr="<b>77</b> tests pytest"
               />
             </p>
+            <HomelabDiagram locale={locale} />
             <div className="tags" aria-label="Stack">
               <span className="tag tag--infra">Proxmox VE</span>
               <span className="tag tag--infra">Docker</span>

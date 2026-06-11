@@ -159,6 +159,18 @@ export default function Interactions() {
     navSections?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
     document.addEventListener("keydown", onNavKey);
 
+    /* ---------- Scroll progress ---------- */
+    const progressBar = document.querySelector(".topbar__progress") as HTMLElement | null;
+    const updateProgress = () => {
+      if (!progressBar) return;
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      progressBar.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
+    };
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+
     /* ---------- Active nav section ---------- */
     const sections = (["about", "experience", "stack", "work", "publications", "contact"] as const)
       .map((id) => document.getElementById(id))
@@ -185,6 +197,8 @@ export default function Interactions() {
       window.removeEventListener("resize", checkReveals);
       window.removeEventListener("scroll", updateActive);
       window.removeEventListener("resize", updateActive);
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
       navToggle?.removeEventListener("click", toggleNav);
       document.removeEventListener("keydown", onNavKey);
     };

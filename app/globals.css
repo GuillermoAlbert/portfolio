@@ -20,6 +20,7 @@
   --topbar-bg:   rgba(255, 255, 255, 0.86);
   --line:        rgba(17, 32, 58, 0.14);
   --line-strong: rgba(17, 32, 58, 0.30);
+  --grid:        rgba(17, 32, 58, 0.05);
   --maxw:        1160px;
   --gutter:      clamp(20px, 5vw, 64px);
   --mono: var(--jb-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -44,6 +45,14 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--blue); color: var(--on-navy); }
+
+/* Numbers in mono labels align like an instrument panel. */
+.sec-index, .spec__row, .card__idx, .card__year, .card__metrics,
+.xp__period, .pub__year, .nav a .idx {
+  font-variant-numeric: tabular-nums;
+}
 
 .container {
   width: 100%;
@@ -78,6 +87,13 @@ a { color: inherit; text-decoration: none; }
 .topbar__inner {
   display: flex; align-items: center; justify-content: space-between;
   height: 60px;
+}
+/* Reading progress: a hairline that fills the topbar's bottom rule. */
+.topbar__progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--blue);
+  transform: scaleX(0); transform-origin: left;
+  pointer-events: none;
 }
 .brand {
   font-family: var(--mono);
@@ -157,7 +173,16 @@ a { color: inherit; text-decoration: none; }
    SECTION SCAFFOLD
    ============================================================ */
 .section { padding-block: clamp(56px, 9vw, 116px); }
-.section--sand { background: var(--sand); border-block: 1px solid var(--line); }
+/* Graph-paper grid: the one sanctioned use of linear-gradient — it draws
+   hairlines, not color blends, so it stays within the borders-only language. */
+.section--sand {
+  background-color: var(--sand);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+  border-block: 1px solid var(--line);
+}
 
 .section-head {
   display: grid;
@@ -167,7 +192,23 @@ a { color: inherit; text-decoration: none; }
   padding-bottom: 14px;
   margin-bottom: clamp(30px, 5vw, 54px);
   border-bottom: 1.5px solid var(--navy);
+  position: relative;
 }
+/* Ghost numeral — outlined display digit sitting on the section rule. */
+.section-head::before {
+  content: attr(data-num);
+  position: absolute;
+  right: 0; bottom: 4px;
+  font-family: var(--mono);
+  font-size: clamp(3.2rem, 9vw, 5.6rem);
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line);
+  pointer-events: none;
+}
+.section-head > * { position: relative; }
 .sec-index {
   font-family: var(--mono); font-size: 0.82rem;
   color: var(--blue); letter-spacing: 0.04em;
@@ -344,6 +385,37 @@ a { color: inherit; text-decoration: none; }
 }
 .card__metrics b { color: var(--navy); font-weight: 700; }
 
+/* Architecture sketch — same language as the spec card: hairline boxes and
+   dashed wires. Stroke/fill via variables so both themes work. */
+.card__diagram {
+  margin-top: 20px;
+  padding: 12px 12px 8px;
+  border: 1px dashed var(--line);
+  border-radius: 3px;
+}
+.card__diagram svg { display: block; width: 100%; height: auto; }
+.card__diagram-k {
+  display: block; font-size: 0.68rem; color: var(--muted-2);
+  letter-spacing: 0.05em; margin-bottom: 10px;
+}
+.diag-box  { fill: none; stroke: var(--line-strong); }
+.diag-box--soft   { stroke: var(--line); }
+.diag-box--accent { stroke: var(--blue); }
+.diag-box--dashed { stroke-dasharray: 3 3; }
+.diag-wire { fill: none; stroke: var(--line-strong); stroke-dasharray: 3 3; }
+.diag-head { fill: none; stroke: var(--line-strong); }
+.diag-label {
+  font-family: var(--mono); font-size: 9.5px;
+  fill: var(--navy); text-anchor: middle;
+}
+.diag-note {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.05em;
+  fill: var(--muted-2); text-anchor: middle;
+}
+.diag-note--start { text-anchor: start; }
+.diag-note--end   { text-anchor: end; }
+.diag-accent { fill: var(--blue); }
+
 .tags {
   margin-top: 22px; display: flex; flex-wrap: wrap; gap: 7px;
 }
@@ -489,9 +561,11 @@ a { color: inherit; text-decoration: none; }
   font-weight: 700; color: var(--navy); letter-spacing: -0.035em;
   line-height: 1.15; position: relative;
   overflow-wrap: break-word;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed var(--line-strong);
 }
 .contact__email::after {
-  content: ""; position: absolute; left: 0; bottom: 4px; height: 3px; width: 100%;
+  content: ""; position: absolute; left: 0; bottom: -1.5px; height: 3px; width: 100%;
   background: var(--blue); transform: scaleX(0); transform-origin: left;
   transition: transform 0.3s cubic-bezier(.4,0,.2,1);
 }
@@ -610,6 +684,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--mono); font-size: 0.74rem; color: var(--muted-2);
 }
 .footer__inner a:hover { color: var(--navy); }
+.footer__colophon { flex-basis: 100%; }
 
 /* ============================================================
    SCROLL REVEAL

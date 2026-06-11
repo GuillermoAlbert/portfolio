@@ -104,6 +104,7 @@ export default function Topbar({ locale = "es" }: { locale?: Locale }) {
           </button>
         </nav>
       </div>
+      <span className="topbar__progress" aria-hidden="true"></span>
     </header>
   );
 }

@@ -7,7 +7,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section" id="experience">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head reveal" data-num="02">
           <span className="sec-index">§ 02</span>
           <T
             locale={locale}

@@ -4,7 +4,7 @@ export default function Publications({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section section--sand" id="publications">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head reveal" data-num="05">
           <span className="sec-index">§ 05</span>
           <T
             locale={locale}

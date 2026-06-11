@@ -5,7 +5,7 @@ export default function Contact({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section" id="contact">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head reveal" data-num="06">
           <span className="sec-index">§ 06</span>
           <T
             locale={locale}

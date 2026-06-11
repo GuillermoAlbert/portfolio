@@ -19,6 +19,13 @@ export default function Footer({ locale = "es" }: { locale?: Locale }) {
           en="Back to top ↑"
           fr="Retour en haut ↑"
         />
+        <T
+          locale={locale}
+          className="footer__colophon"
+          es="Tipografía: Inter &amp; JetBrains Mono · Next.js · export estático"
+          en="Set in Inter &amp; JetBrains Mono · Built with Next.js · Static export"
+          fr="Typographie : Inter &amp; JetBrains Mono · Next.js · export statique"
+        />
       </div>
     </footer>
   );

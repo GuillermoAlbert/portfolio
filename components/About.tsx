@@ -4,7 +4,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section section--sand" id="about">
       <div className="container">
-        <div className="section-head reveal">
+        <div className="section-head reveal" data-num="01">
           <span className="sec-index">§ 01</span>
           <T
             locale={locale}
