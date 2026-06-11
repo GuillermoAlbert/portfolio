@@ -5,9 +5,9 @@ export default function Interactions() {
   useEffect(() => {
     /* ---------- CV files per language ---------- */
     const CV = {
-      es: { fb: "cv/Guillermo_Albert_CV_ES.pdf", file: "Guillermo_Albert_CV_ES.pdf" },
-      en: { fb: "cv/Guillermo_Albert_CV_EN.pdf", file: "Guillermo_Albert_CV_EN.pdf" },
-      fr: { fb: "cv/Guillermo_Albert_CV_FR.pdf", file: "Guillermo_Albert_CV_FR.pdf" },
+      es: { fb: "/cv/Guillermo_Albert_CV_ES.pdf", file: "Guillermo_Albert_CV_ES.pdf" },
+      en: { fb: "/cv/Guillermo_Albert_CV_EN.pdf", file: "Guillermo_Albert_CV_EN.pdf" },
+      fr: { fb: "/cv/Guillermo_Albert_CV_FR.pdf", file: "Guillermo_Albert_CV_FR.pdf" },
     };
     const cvLinks = document.querySelectorAll("[data-cv]");
 
@@ -21,10 +21,12 @@ export default function Interactions() {
 
     /* ---------- Language toggle ---------- */
     // Cache only outermost [data-en] nodes so nested ones aren't double-processed.
+    // Spanish comes from the data-es attribute (the static HTML is rendered in
+    // the route's language, so innerHTML can't be assumed to be Spanish).
     const i18nNodes = Array.from(document.querySelectorAll("[data-en]")).filter(
       (el) => !el.parentElement?.closest("[data-en]")
     ) as HTMLElement[];
-    i18nNodes.forEach((el) => { el.dataset.es = el.innerHTML; });
+    i18nNodes.forEach((el) => { if (!el.dataset.es) el.dataset.es = el.innerHTML; });
 
     function setLang(lang: string) {
       if (!CV[lang as keyof typeof CV]) lang = "es";

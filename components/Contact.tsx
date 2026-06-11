@@ -1,44 +1,58 @@
-export default function Contact() {
+import { T, cvFile, contactEmail, type Locale } from "@/lib/i18n";
+
+export default function Contact({ locale = "es" }: { locale?: Locale }) {
+  const email = contactEmail(locale);
   return (
     <section className="section" id="contact">
       <div className="container">
         <div className="section-head reveal">
           <span className="sec-index">§ 06</span>
-          <h2 className="sec-title" data-en="Contact" data-fr="Contact">
-            Contacto
-          </h2>
-          <span
+          <T
+            locale={locale}
+            as="h2"
+            className="sec-title"
+            es="Contacto"
+            en="Contact"
+            fr="Contact"
+          />
+          <T
+            locale={locale}
             className="sec-note mono"
-            data-en="// let's build something"
-            data-fr="// construisons quelque chose"
-          >
-            {"// construyamos algo"}
-          </span>
+            es="// construyamos algo"
+            en="// let's build something"
+            fr="// construisons quelque chose"
+          />
         </div>
 
-        <p
+        <T
+          locale={locale}
+          as="p"
           className="contact__lead reveal"
-          data-en="Got a backend that needs designing, a system that needs to stay up, or a project to talk through? Write to me."
-          data-fr="Un backend à concevoir, un système à garder debout ou un projet à discuter ? Écrivez-moi."
-        >
-          ¿Un backend que diseñar, un sistema que mantener en pie o un proyecto del que hablar?
-          Escríbeme.
-        </p>
+          es="¿Un backend que diseñar, un sistema que mantener en pie o un proyecto del que hablar? Escríbeme."
+          en="Got a backend that needs designing, a system that needs to stay up, or a project to talk through? Write to me."
+          fr="Un backend à concevoir, un système à garder debout ou un projet à discuter ? Écrivez-moi."
+        />
 
-        <a
+        <T
+          locale={locale}
+          as="a"
           className="contact__email reveal"
           data-d="1"
           data-mail=""
-          href="mailto:hola@guillermoalbert.dev"
-          data-en="contact<wbr />@guillermoalbert.dev"
-          data-fr="contact<wbr />@guillermoalbert.dev"
-        >
-          hola<wbr />@guillermoalbert.dev
-        </a>
+          href={`mailto:${email}`}
+          es="hola<wbr>@guillermoalbert.dev"
+          en="contact<wbr>@guillermoalbert.dev"
+          fr="contact<wbr>@guillermoalbert.dev"
+        />
 
         <div className="contact__row reveal" data-d="2">
-          <a className="cvbtn" data-cv="" href="cv/Guillermo_Albert_CV_ES.pdf" download>
-            <span data-en="Download CV" data-fr="Télécharger le CV">Descargar CV</span>{" "}
+          <a className="cvbtn" data-cv="" href={`/cv/${cvFile(locale)}`} download={cvFile(locale)}>
+            <T
+              locale={locale}
+              es="Descargar CV"
+              en="Download CV"
+              fr="Télécharger le CV"
+            />{" "}
             <span className="dl" aria-hidden="true">↓</span>
           </a>
           <div className="contact__social">

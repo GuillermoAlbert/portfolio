@@ -1,23 +1,26 @@
-export default function Publications() {
+import { T, type Locale } from "@/lib/i18n";
+
+export default function Publications({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section section--sand" id="publications">
       <div className="container">
         <div className="section-head reveal">
           <span className="sec-index">§ 05</span>
-          <h2
+          <T
+            locale={locale}
+            as="h2"
             className="sec-title"
-            data-en="Publications"
-            data-fr="Publications"
-          >
-            Publicaciones
-          </h2>
-          <span
+            es="Publicaciones"
+            en="Publications"
+            fr="Publications"
+          />
+          <T
+            locale={locale}
             className="sec-note mono"
-            data-en="// peer-reviewed"
-            data-fr="// évalué par les pairs"
-          >
-            {"// revisadas por pares"}
-          </span>
+            es="// revisadas por pares"
+            en="// peer-reviewed"
+            fr="// évalué par les pairs"
+          />
         </div>
 
         <div className="pubs reveal">
@@ -25,13 +28,13 @@ export default function Publications() {
           <article className="pub">
             <div className="pub__bar">
               <span className="pub__year mono">2022</span>
-              <span
+              <T
+                locale={locale}
                 className="pub__ai-tag mono"
-                data-en="applied ML"
-                data-fr="ML appliqué"
-              >
-                IA aplicada
-              </span>
+                es="IA aplicada"
+                en="applied ML"
+                fr="ML appliqué"
+              />
               <span className="pub__venue-wrap">
                 <em className="pub__venue">Ibis</em>
                 <span className="pub__vol mono">164(4) · 1123–1131</span>
@@ -59,10 +62,7 @@ export default function Publications() {
           <article className="pub">
             <div className="pub__bar">
               <span className="pub__year mono">2022</span>
-              <span className="pub__conf-tag mono"
-                data-en="conf."
-                data-fr="conf."
-              >conf.</span>
+              <span className="pub__conf-tag mono">conf.</span>
               <span className="pub__venue-wrap">
                 <em className="pub__venue">INTED2022 Proceedings</em>
                 <span className="pub__vol mono">pp. 2481–2487</span>

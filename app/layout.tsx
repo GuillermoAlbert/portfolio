@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Topbar from "@/components/Topbar";
-import Footer from "@/components/Footer";
 import Interactions from "@/components/Interactions";
 import { SITE_URL, localeMetadata } from "@/lib/seo";
 
@@ -107,13 +105,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
         />
       </head>
+      {/* The skip link, Topbar and Footer live in Sections (per-route) so their
+          static HTML is generated in each route's language. */}
       <body data-lang="es" suppressHydrationWarning>
-        <a className="skip" href="#top">
-          Saltar al contenido
-        </a>
-        <Topbar />
         {children}
-        <Footer />
         <Interactions />
         {/* Cloudflare Web Analytics — cookieless. Only renders when the token is
             set (NEXT_PUBLIC_CF_BEACON_TOKEN in the build/deploy env), so nothing

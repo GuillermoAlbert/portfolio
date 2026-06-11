@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { T, cvFile, contactEmail, type Locale } from "@/lib/i18n";
 
-export default function Hero() {
+export default function Hero({ locale = "es" }: { locale?: Locale }) {
   const nameRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -70,12 +71,12 @@ export default function Hero() {
         <div className="hero__main">
           <p className="hero__eyebrow reveal">
             <span className="status-dot" aria-hidden="true"></span>
-            <span
-              data-en="Available for opportunities · La Nucía, Alicante (ES)"
-              data-fr="Ouvert aux opportunités · La Nucía, Alicante (ES)"
-            >
-              Abierto a oportunidades · La Nucía, Alicante (ES)
-            </span>
+            <T
+              locale={locale}
+              es="Abierto a oportunidades · La Nucía, Alicante (ES)"
+              en="Available for opportunities · La Nucía, Alicante (ES)"
+              fr="Ouvert aux opportunités · La Nucía, Alicante (ES)"
+            />
           </p>
 
           <h1
@@ -96,18 +97,22 @@ export default function Hero() {
           </p>
 
           <p className="hero__anchor reveal" data-d="2">
-            <span
-              data-en="From sequencing data in a lab to deploying containers in production."
-              data-fr="De séquencer des données en laboratoire à déployer des conteneurs en production."
-            >
-              De secuenciar datos en un laboratorio a desplegar{" "}
-              <span className="hi">contenedores en producción</span>.
-            </span>
+            <T
+              locale={locale}
+              es={'De secuenciar datos en un laboratorio a desplegar <span class="hi">contenedores en producción</span>.'}
+              en="From sequencing data in a lab to deploying containers in production."
+              fr="De séquencer des données en laboratoire à déployer des conteneurs en production."
+            />
           </p>
 
           <div className="hero__links reveal" data-d="3">
-            <a className="cvbtn" data-cv="" href="cv/Guillermo_Albert_CV_ES.pdf" download>
-              <span data-en="Download CV" data-fr="Télécharger le CV">Descargar CV</span>{" "}
+            <a className="cvbtn" data-cv="" href={`/cv/${cvFile(locale)}`} download={cvFile(locale)}>
+              <T
+                locale={locale}
+                es="Descargar CV"
+                en="Download CV"
+                fr="Télécharger le CV"
+              />{" "}
               <span className="dl" aria-hidden="true">↓</span>
             </a>
             <div className="hero__socials">
@@ -127,7 +132,7 @@ export default function Hero() {
               >
                 LinkedIn <span className="arr" aria-hidden="true">↗</span>
               </a>
-              <a className="linkmono" data-mail="" href="mailto:hola@guillermoalbert.dev">
+              <a className="linkmono" data-mail="" href={`mailto:${contactEmail(locale)}`}>
                 Email <span className="arr" aria-hidden="true">↗</span>
               </a>
             </div>
@@ -142,20 +147,23 @@ export default function Hero() {
           <div className="spec__rows">
             <div className="spec__row">
               <span className="spec__k">LOCATION</span>
-              <span
+              <T
+                locale={locale}
                 className="spec__v"
-                data-en="La Nucía, Alicante · Hybrid / Remote"
-                data-fr="La Nucía, Alicante · Hybride / À distance"
-              >
-                La Nucía, Alicante · Híbrido / Remoto
-              </span>
+                es="La Nucía, Alicante · Híbrido / Remoto"
+                en="La Nucía, Alicante · Hybrid / Remote"
+                fr="La Nucía, Alicante · Hybride / À distance"
+              />
             </div>
             <div className="spec__row">
               <span className="spec__k">FOCUS</span>
-              <span className="spec__v">
-                <em data-en="Backend-first" data-fr="Backend-first">Backend-first</em>{" "}
-                <span data-en="· architecture" data-fr="· architecture">· arquitectura</span>
-              </span>
+              <T
+                locale={locale}
+                className="spec__v"
+                es="<em>Backend-first</em> · arquitectura"
+                en="<em>Backend-first</em> · architecture"
+                fr="<em>Backend-first</em> · architecture"
+              />
             </div>
             <div className="spec__row">
               <span className="spec__k">STACK</span>

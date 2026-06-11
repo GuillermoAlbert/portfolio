@@ -1,3 +1,5 @@
+import { T, type Locale } from "@/lib/i18n";
+
 // Stack / Skills. Grouped so recruiters (and ATS keyword search) can scan it fast.
 // Every item here already appears elsewhere on the site — extend the arrays as needed.
 
@@ -36,29 +38,27 @@ const GROUPS: Group[] = [
   },
 ];
 
-export default function Stack() {
+export default function Stack({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section section--sand" id="stack">
       <div className="container">
         <div className="section-head reveal">
           <span className="sec-index">§ 03</span>
           <h2 className="sec-title">Stack</h2>
-          <span
+          <T
+            locale={locale}
             className="sec-note mono"
-            data-en="// tools I reach for"
-            data-fr="// mes outils"
-          >
-            {"// herramientas que uso"}
-          </span>
+            es="// herramientas que uso"
+            en="// tools I reach for"
+            fr="// mes outils"
+          />
         </div>
 
         <div className="stack reveal" data-d="1">
           {GROUPS.map((g) => (
             <div className={`stack__group${g.feature ? " stack__group--feature" : ""}`} key={g.es}>
-              <span className="stack__k" data-en={g.en} data-fr={g.fr}>
-                {g.es}
-              </span>
-              <div className="stack__tags" aria-label={g.es}>
+              <T locale={locale} className="stack__k" es={g.es} en={g.en} fr={g.fr} />
+              <div className="stack__tags" aria-label={g[locale]}>
                 {g.items.map((t) => (
                   <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} key={t.label}>
                     {t.label}

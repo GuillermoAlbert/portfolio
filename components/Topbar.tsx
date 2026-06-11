@@ -1,4 +1,6 @@
-export default function Topbar() {
+import { T, LOCALES, type Locale } from "@/lib/i18n";
+
+export default function Topbar({ locale = "es" }: { locale?: Locale }) {
   return (
     <header className="topbar">
       <div className="container topbar__inner">
@@ -13,11 +15,11 @@ export default function Topbar() {
           <div className="nav__sections" id="nav-sections">
             <a className="navlink" href="#about">
               <span className="idx">01</span>
-              <span data-en="About" data-fr="À propos">Sobre mí</span>
+              <T locale={locale} es="Sobre mí" en="About" fr="À propos" />
             </a>
             <a className="navlink" href="#experience">
               <span className="idx">02</span>
-              <span data-en="Experience" data-fr="Expérience">Experiencia</span>
+              <T locale={locale} es="Experiencia" en="Experience" fr="Expérience" />
             </a>
             <a className="navlink" href="#stack">
               <span className="idx">03</span>
@@ -25,21 +27,29 @@ export default function Topbar() {
             </a>
             <a className="navlink" href="#work">
               <span className="idx">04</span>
-              <span data-en="Work" data-fr="Travaux">Trabajo</span>
+              <T locale={locale} es="Trabajo" en="Work" fr="Travaux" />
             </a>
             <a className="navlink" href="#publications">
               <span className="idx">05</span>
-              <span data-en="Publications" data-fr="Publications">Publicaciones</span>
+              <T locale={locale} es="Publicaciones" en="Publications" fr="Publications" />
             </a>
             <a className="navlink" href="#contact">
               <span className="idx">06</span>
-              <span data-en="Contact" data-fr="Contact">Contacto</span>
+              <T locale={locale} es="Contacto" en="Contact" fr="Contact" />
             </a>
           </div>
           <div className="langtoggle" role="group" aria-label="Idioma / Language / Langue">
-            <button type="button" data-setlang="es" className="is-on">ES</button>
-            <button type="button" data-setlang="en">EN</button>
-            <button type="button" data-setlang="fr">FR</button>
+            {LOCALES.map((l) => (
+              <button
+                key={l}
+                type="button"
+                data-setlang={l}
+                className={l === locale ? "is-on" : undefined}
+                aria-pressed={l === locale}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
           </div>
           <button
             type="button"

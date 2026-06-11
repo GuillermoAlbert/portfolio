@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Sections from "@/components/Sections";
 import { localeMetadata } from "@/lib/seo";
 
-// French route. Same markup as / — the client swaps the copy to French on load
-// (the URL path drives the language). Metadata + hreflang are localized here.
+// French route: the static HTML is generated in French at build time, so
+// crawlers that don't run JS read the language the metadata claims.
 export const metadata: Metadata = localeMetadata("fr");
 
 export default function HomeFr() {
-  return <Sections />;
+  return <Sections locale="fr" />;
 }

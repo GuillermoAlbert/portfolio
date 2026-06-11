@@ -5,7 +5,9 @@ export const dynamic = "force-static";
 const SITE_URL = "https://guillermoalbert.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  // Bump this date when the page content actually changes — a fresh date on
+  // every build teaches crawlers to ignore the sitemap.
+  const lastModified = new Date("2026-06-11");
   return [
     { url: `${SITE_URL}/`, lastModified, changeFrequency: "monthly", priority: 1 },
     { url: `${SITE_URL}/en`, lastModified, changeFrequency: "monthly", priority: 0.9 },
