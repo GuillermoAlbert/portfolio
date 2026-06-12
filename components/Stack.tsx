@@ -33,7 +33,7 @@ const GROUPS: Group[] = [
   },
   {
     es: "IA / AGENTES", en: "AI / AGENTS", fr: "IA / AGENTS",
-    items: [{ label: "Claude API" }, { label: "MCP" }, { label: "AI Agents" }, { label: "Codex" }, { label: "Opencode" }, { label: "Prompt Engineering", cls: "tag--mut" }],
+    items: [{ label: "Claude Code (skills · hooks)" }, { label: "Claude API" }, { label: "MCP" }, { label: "AI Agents" }, { label: "Codex" }, { label: "Opencode" }],
     feature: true,
   },
 ];
