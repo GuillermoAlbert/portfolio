@@ -88,7 +88,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <T locale={locale} es="Código" en="Code" fr="Code" />
+                <T locale={locale} es="Arquitectura" en="Architecture" fr="Architecture" />
               </a>
             </div>
           </article>
@@ -155,7 +155,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <T locale={locale} es="Código" en="Code" fr="Code" />
+                <T locale={locale} es="Documentación" en="Documentation" fr="Documentation" />
               </a>
             </div>
           </article>
