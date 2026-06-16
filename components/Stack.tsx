@@ -17,7 +17,7 @@ const GROUPS: Group[] = [
   },
   {
     es: "FRONTEND", en: "FRONTEND", fr: "FRONTEND",
-    items: [{ label: "Angular" }, { label: "React", cls: "tag--mut" }, { label: "HTML / CSS" }],
+    items: [{ label: "Angular", cls: "tag--fe" }, { label: "React", cls: "tag--mut" }, { label: "HTML / CSS", cls: "tag--fe" }],
   },
   {
     es: "DATOS", en: "DATA", fr: "DONNÉES",
@@ -33,7 +33,7 @@ const GROUPS: Group[] = [
   },
   {
     es: "IA / AGENTES", en: "AI / AGENTS", fr: "IA / AGENTS",
-    items: [{ label: "Claude Code (skills · hooks)" }, { label: "Claude API" }, { label: "MCP" }, { label: "AI Agents" }, { label: "Codex" }, { label: "Opencode" }],
+    items: [{ label: "Claude Code (skills · hooks)", cls: "tag--ai" }, { label: "Claude API", cls: "tag--ai" }, { label: "MCP", cls: "tag--ai" }, { label: "AI Agents", cls: "tag--ai" }, { label: "Codex", cls: "tag--ai" }, { label: "Opencode", cls: "tag--ai" }],
     feature: true,
   },
 ];
@@ -54,9 +54,9 @@ export default function Stack({ locale = "es" }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="stack reveal" data-d="1">
-          {GROUPS.map((g) => (
-            <div className={`stack__group${g.feature ? " stack__group--feature" : ""}`} key={g.es}>
+        <div className="stack reveal" data-d="1" data-stagger>
+          {GROUPS.filter((g) => !g.feature).map((g) => (
+            <div className="stack__group" key={g.es}>
               <T locale={locale} className="stack__k" es={g.es} en={g.en} fr={g.fr} />
               <div className="stack__tags" aria-label={g[locale]}>
                 {g.items.map((t) => (
@@ -68,6 +68,19 @@ export default function Stack({ locale = "es" }: { locale?: Locale }) {
             </div>
           ))}
         </div>
+
+        {GROUPS.filter((g) => g.feature).map((g) => (
+          <div className="stack-feature reveal" data-d="2" key={g.es}>
+            <T locale={locale} className="stack__k" es={g.es} en={g.en} fr={g.fr} />
+            <div className="stack__tags" aria-label={g[locale]}>
+              {g.items.map((t) => (
+                <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} key={t.label}>
+                  {t.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

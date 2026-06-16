@@ -26,7 +26,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="xp reveal" data-d="1">
+        <div className="xp reveal" data-d="1" data-stagger>
           <article className="xp__item">
             <T
               locale={locale}

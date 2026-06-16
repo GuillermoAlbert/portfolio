@@ -24,7 +24,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="cards reveal" data-d="1">
+        <div className="cards reveal" data-d="1" data-stagger>
 
           {/* MAMS */}
           <article className="card">
@@ -112,16 +112,16 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="card__desc"
-              es="Infraestructura propia corriendo en producción: 9 contenedores LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un panel de monitorización propio, un pipeline asistido por LLM que clasifica facturas y extrae sus datos, y gestión real de incidentes con backups cifrados externos."
-              en="My own infrastructure running in production: 9 LXC containers, Python ETL pipelines (Catapult → PostgreSQL + Power BI), a self-built monitoring dashboard, an LLM-assisted pipeline that classifies invoices and extracts their data, and hands-on incident management with encrypted off-site backups."
-              fr="Mon infrastructure en production : 9 conteneurs LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un tableau de bord de supervision maison, un pipeline assisté par LLM qui classe les factures et en extrait les données, et une gestion réelle des incidents avec sauvegardes chiffrées externes."
+              es="Infraestructura propia corriendo en producción: 10 contenedores LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un panel de monitorización propio, un pipeline asistido por LLM que clasifica facturas y extrae sus datos, y gestión real de incidentes con backups cifrados externos."
+              en="My own infrastructure running in production: 10 LXC containers, Python ETL pipelines (Catapult → PostgreSQL + Power BI), a self-built monitoring dashboard, an LLM-assisted pipeline that classifies invoices and extracts their data, and hands-on incident management with encrypted off-site backups."
+              fr="Mon infrastructure en production : 10 conteneurs LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un tableau de bord de supervision maison, un pipeline assisté par LLM qui classe les factures et en extrait les données, et une gestion réelle des incidents avec sauvegardes chiffrées externes."
             />
             <p className="card__metrics">
               <T
                 locale={locale}
-                es="<b>9</b> contenedores LXC"
-                en="<b>9</b> LXC containers"
-                fr="<b>9</b> conteneurs LXC"
+                es="<b>10</b> contenedores LXC"
+                en="<b>10</b> LXC containers"
+                fr="<b>10</b> conteneurs LXC"
               />
               <T
                 locale={locale}

@@ -171,7 +171,7 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
             </div>
             <div className="spec__row">
               <span className="spec__k">INFRA</span>
-              <span className="spec__v">Proxmox · Docker · 9× LXC</span>
+              <span className="spec__v">Proxmox · Docker · 10× LXC</span>
             </div>
             <div className="spec__row">
               <span className="spec__k">LANGS</span>

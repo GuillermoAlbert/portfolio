@@ -71,7 +71,7 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         {/* host */}
         <rect className="diag-box" x="118" y="2" width="240" height="70" rx="2" />
         <text className="diag-note diag-note--start" x="126" y="14">PROXMOX VE</text>
-        <text className="diag-note diag-note--end diag-accent" x="350" y="14">9× LXC</text>
+        <text className="diag-note diag-note--end diag-accent" x="350" y="14">10× LXC</text>
 
         <rect className="diag-box diag-box--soft" x="126" y="20" width="106" height="20" rx="2" />
         <text className="diag-label" x="179" y="33">Docker · apps</text>

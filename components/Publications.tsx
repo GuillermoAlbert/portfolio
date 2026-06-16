@@ -23,7 +23,7 @@ export default function Publications({ locale = "es" }: { locale?: Locale }) {
           />
         </div>
 
-        <div className="pubs reveal">
+        <div className="pubs reveal" data-stagger>
 
           <article className="pub">
             <div className="pub__bar">

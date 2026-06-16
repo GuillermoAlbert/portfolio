@@ -120,6 +120,14 @@ export default function Interactions() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const reveals = Array.from(document.querySelectorAll(".reveal"));
 
+    // Index direct children of [data-stagger] containers so the CSS cascade
+    // (transition-delay: var(--i) * 60ms) knows each item's position.
+    document.querySelectorAll<HTMLElement>(".reveal[data-stagger]").forEach((c) => {
+      Array.from(c.children).forEach((child, i) =>
+        (child as HTMLElement).style.setProperty("--i", String(i))
+      );
+    });
+
     const checkReveals = () => {
       const trigger = window.innerHeight * 0.9;
       for (let i = reveals.length - 1; i >= 0; i--) {
