@@ -2,7 +2,10 @@ import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
 
-// Build-time generated share image (1200×630). Next auto-wires og:image + twitter:image.
+// Build-time generated share image (1200×630), served at /opengraph-image and
+// shared by all locales (referenced explicitly in lib/seo.ts). Kept at the app
+// root — above the per-locale route groups — so every language points to the
+// same URL. Next auto-wires og:image + twitter:image.
 export const alt = "Guillermo Albert García — Backend-first Full Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
