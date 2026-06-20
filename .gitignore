@@ -73,6 +73,15 @@ MEJORAS-2026-06.html
 .ai/
 .agents/
 
+# GEO-SEO skill output artifacts (zubair-trabzada/geo-seo-claude — local only, never deploy/commit)
+GEO-AUDIT-REPORT.md
+GEO-*-REPORT.md
+geo-audit*.json
+geo-report*.pdf
+GEO-*.pdf
+.geo-prospects/
+geo-prospects/
+
 # Local development
 .env.local
 .env.test.local
