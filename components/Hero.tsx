@@ -99,9 +99,9 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
           <p className="hero__anchor reveal" data-d="2">
             <T
               locale={locale}
-              es={'Antes medía biodiversidad en el campo. Ahora despliego <span class="hi">contenedores en producción</span>.'}
-              en="I used to measure biodiversity in the field. Now I deploy containers in production."
-              fr="Avant, je mesurais la biodiversité sur le terrain. Aujourd'hui, je déploie des conteneurs en production."
+              es={'Antes secuenciaba datos en un laboratorio. Ahora despliego <span class="hi">contenedores en producción</span>.'}
+              en="I used to sequence data in a lab. Now I deploy containers in production."
+              fr="Avant, je séquençais des données en laboratoire. Aujourd'hui, je déploie des conteneurs en production."
             />
           </p>
 
