@@ -1,12 +1,12 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "@/app/globals.css";
 import Interactions from "@/components/Interactions";
 import { SITE_URL } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n";
 
-const inter = Inter({
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -69,7 +69,7 @@ export default function RootDocument({
     <html
       lang={lang}
       data-theme="light"
-      className={`${inter.variable} ${mono.variable}`}
+      className={`${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       {/* App Router renders <head> directly here (next/head is Pages-Router only). */}
