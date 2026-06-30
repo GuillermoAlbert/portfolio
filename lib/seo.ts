@@ -15,9 +15,9 @@ type Locale = keyof typeof LANGUAGE_ALTERNATES;
 const TITLE = "Guillermo Albert García — Backend-first Full Stack Developer";
 
 const DESCRIPTION: Record<Locale, string> = {
-  es: "Guillermo Albert García — Desarrollador Full Stack backend-first. Java, Spring, Angular. De secuenciar datos en un laboratorio a desplegar contenedores en producción.",
-  en: "Guillermo Albert García — Backend-first Full Stack Developer. Java, Spring, Angular. From sequencing data in a lab to deploying containers in production.",
-  fr: "Guillermo Albert García — Développeur Full Stack backend-first. Java, Spring, Angular. De séquencer des données en laboratoire à déployer des conteneurs en production.",
+  es: "Guillermo Albert García — Desarrollador Full Stack backend-first. Java, Spring, Angular, PostgreSQL. Biólogo de formación que hoy diseña APIs y despliega contenedores en producción.",
+  en: "Guillermo Albert García — Backend-first Full Stack Developer. Java, Spring, Angular, PostgreSQL. A biologist by training, now designing APIs and deploying containers to production.",
+  fr: "Guillermo Albert García — Développeur Full Stack backend-first. Java, Spring, Angular, PostgreSQL. Biologiste de formation, je conçois des API et déploie des conteneurs en production.",
 };
 
 const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_GB", fr: "fr_FR" };

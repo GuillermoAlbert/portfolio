@@ -38,23 +38,23 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 as="p"
-                es="Mi base científica —un Grado en Biología, investigación y tres publicaciones revisadas por pares— es la lente con la que abordo el desarrollo: rigor, lectura crítica de los datos y la disciplina de medir antes de decidir."
-                en="My scientific background — a Biology degree, research, and three peer-reviewed publications — is the lens I bring to development: rigour, critical reading of the data, and the discipline of measuring before deciding."
-                fr="Ma formation scientifique —une licence de Biologie, de la recherche et trois publications évaluées par les pairs— est le prisme avec lequel j'aborde le développement : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
+                es="Mi base científica (un Grado en Biología, investigación y tres publicaciones revisadas por pares) es la lente con la que abordo el desarrollo: rigor, lectura crítica de los datos y la disciplina de medir antes de decidir."
+                en="My scientific background (a Biology degree, research, and three peer-reviewed publications) is the lens I bring to development: rigour, critical reading of the data, and the discipline of measuring before deciding."
+                fr="Ma formation scientifique (une licence de Biologie, de la recherche et trois publications évaluées par les pairs) est le prisme avec lequel j'aborde le développement : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
               />
               <T
                 locale={locale}
                 as="p"
-                es="Soy <strong>backend-first</strong>. Me importan la arquitectura, el modelo de datos y que el sistema siga en pie cuando nadie mira. El frontend lo defiendo; el backend lo lidero."
-                en="I'm <strong>backend-first</strong>. I care about architecture, the data model, and whether the system stays up when nobody is watching. I can hold my own on the frontend — but the backend is where I lead."
-                fr="Je suis <strong>backend-first</strong>. Ce qui m'importe : l'architecture, le modèle de données et que le système tienne debout quand personne ne regarde. Le frontend, je le défends ; le backend, je le mène."
+                es="Soy <strong>backend-first</strong>. Me importan la arquitectura, el modelo de datos y que el sistema aguante en producción. El frontend lo defiendo; el backend lo lidero."
+                en="I'm <strong>backend-first</strong>. I care about architecture, the data model, and whether the system holds up in production. I can hold my own on the frontend; the backend is where I lead."
+                fr="Je suis <strong>backend-first</strong>. Ce qui m'importe : l'architecture, le modèle de données et que le système tienne en production. Le frontend, je le défends ; le backend, je le mène."
               />
               <T
                 locale={locale}
                 as="p"
-                es="Con IA agéntica —Claude Code, MCP— no improviso: especifico, el agente ejecuta y el código pasa por mis puertas de verificación —tests, revisión, monitorización—. He montado un sistema de trabajo donde <strong>la IA acelera y la evidencia decide</strong>. El mismo método del laboratorio, a otra velocidad."
-                en="With agentic AI — Claude Code, MCP — I don't improvise: I specify, the agent executes, and the code passes through my verification gates — tests, review, monitoring. I've built a way of working where <strong>AI accelerates and evidence decides</strong>. Same method as the lab, at a different speed."
-                fr="Avec l'IA agentique — Claude Code, MCP — je n'improvise pas : je spécifie, l'agent exécute, et le code passe par mes garde-fous de vérification — tests, revue, supervision. J'ai bâti une façon de travailler où <strong>l'IA accélère et la preuve décide</strong>. La même méthode qu'au laboratoire, à une autre vitesse."
+                es="Con IA agéntica (Claude Code, MCP) no improviso: especifico, el agente ejecuta y el código pasa por mis puertas de verificación —tests, revisión, monitorización—. He montado un sistema de trabajo donde <strong>la IA acelera y la evidencia decide</strong>. El mismo método del laboratorio, a otra velocidad."
+                en="With agentic AI (Claude Code, MCP) I don't improvise: I specify, the agent executes, and the code passes through my verification gates —tests, review, monitoring—. I've built a way of working where <strong>AI accelerates and evidence decides</strong>. Same method as the lab, at a different speed."
+                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas : je spécifie, l'agent exécute, et le code passe par mes garde-fous de vérification —tests, revue, supervision—. J'ai bâti une façon de travailler où <strong>l'IA accélère et la preuve décide</strong>. La même méthode qu'au laboratoire, à une autre vitesse."
               />
             </div>
           </div>
