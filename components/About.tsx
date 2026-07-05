@@ -52,9 +52,9 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 as="p"
-                es="Con IA agéntica (Claude Code, MCP) no improviso: especifico, el agente ejecuta y el código pasa por mis puertas de verificación —tests, revisión, monitorización—. He montado un sistema de trabajo donde <strong>la IA acelera y la evidencia decide</strong>. El mismo método del laboratorio, a otra velocidad."
-                en="With agentic AI (Claude Code, MCP) I don't improvise: I specify, the agent executes, and the code passes through my verification gates —tests, review, monitoring—. I've built a way of working where <strong>AI accelerates and evidence decides</strong>. Same method as the lab, at a different speed."
-                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas : je spécifie, l'agent exécute, et le code passe par mes garde-fous de vérification —tests, revue, supervision—. J'ai bâti une façon de travailler où <strong>l'IA accélère et la preuve décide</strong>. La même méthode qu'au laboratoire, à une autre vitesse."
+                es="Con IA agéntica (Claude Code, MCP) no improviso: especifico, el agente ejecuta y el código pasa por mis puertas de verificación (tests, revisión, monitorización). He montado un sistema de trabajo donde <strong>la IA acelera y la evidencia decide</strong>."
+                en="With agentic AI (Claude Code, MCP) I don't improvise: I specify, the agent executes, and the code passes through my verification gates (tests, review, monitoring). I've built a way of working where <strong>AI accelerates and evidence decides</strong>."
+                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas : je spécifie, l'agent exécute, et le code passe par mes garde-fous de vérification (tests, revue, supervision). J'ai bâti une façon de travailler où <strong>l'IA accélère et la preuve décide</strong>."
               />
             </div>
           </div>
