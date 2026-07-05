@@ -32,7 +32,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                 locale={locale}
                 as="p"
                 es="Empecé en un laboratorio: secuenciando datos, midiendo biodiversidad y defendiendo cada conclusión con evidencia. Hoy diseño APIs, modelo bases de datos y despliego contenedores en producción. El método apenas cambió."
-                en="I started in a lab — sequencing data, measuring biodiversity, defending every conclusion with evidence. Today I design APIs, model databases and deploy containers to production. The method barely changed."
+                en="I started in a lab: sequencing data, measuring biodiversity, defending every conclusion with evidence. Today I design APIs, model databases and deploy containers to production. The method barely changed."
                 fr="J'ai commencé dans un laboratoire : à séquencer des données, mesurer la biodiversité et défendre chaque conclusion par des preuves. Aujourd'hui je conçois des API, modélise des bases de données et déploie des conteneurs en production. La méthode n'a presque pas changé."
               />
               <T
