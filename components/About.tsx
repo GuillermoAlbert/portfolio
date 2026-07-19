@@ -14,7 +14,13 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
             en="About"
             fr="À propos"
           />
-          <span className="sec-note mono">{"// biology → dev"}</span>
+          <T
+            locale={locale}
+            className="sec-note mono"
+            es="// biología → dev"
+            en="// biology → dev"
+            fr="// biologie → dev"
+          />
         </div>
 
         <div className="about__grid">
@@ -59,7 +65,12 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
             </div>
           </div>
 
-          <aside className="facts reveal" data-d="1" data-stagger aria-label="Datos">
+          <aside
+            className="facts reveal"
+            data-d="1"
+            data-stagger
+            aria-label={locale === "en" ? "Facts" : locale === "fr" ? "Repères" : "Datos"}
+          >
             <div className="facts__row">
               <span className="facts__k">FORMACIÓN / EDUCATION</span>
               <T

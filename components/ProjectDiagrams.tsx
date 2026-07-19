@@ -97,7 +97,10 @@ export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
         <T locale={locale} as="text" className="diag-label" x="66" y="73"
            es="producción" en="production" fr="production" />
 
-        <text className="diag-note" x="228" y="100">tests · review · monitoring</text>
+        <T locale={locale} as="text" className="diag-note" x="228" y="100"
+           es="tests · revisión · monitorización"
+           en="tests · review · monitoring"
+           fr="tests · revue · supervision" />
       </svg>
     </figure>
   );

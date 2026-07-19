@@ -141,7 +141,10 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
         </div>
 
         <div className="hero__side reveal" data-d="3">
-          <aside className="spec" aria-label="Resumen">
+          <aside
+            className="spec"
+            aria-label={locale === "en" ? "Summary" : locale === "fr" ? "Résumé" : "Resumen"}
+          >
             <div className="spec__bar">
             <span className="b" aria-hidden="true"></span>
             <span>~/ developer.profile</span>

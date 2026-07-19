@@ -30,7 +30,13 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
           <article className="card">
             <div className="card__top">
               <span className="card__idx">01</span>
-              <span className="card__year">2025 — Present</span>
+              <T
+                locale={locale}
+                className="card__year"
+                es="2025 — Presente"
+                en="2025 — Present"
+                fr="2025 — Présent"
+              />
             </div>
             <h3 className="card__title">MAMS — My Athlete Monitoring System</h3>
             <T
@@ -90,7 +96,13 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
           <article className="card">
             <div className="card__top">
               <span className="card__idx">02</span>
-              <span className="card__year">2024 — Present</span>
+              <T
+                locale={locale}
+                className="card__year"
+                es="2024 — Presente"
+                en="2024 — Present"
+                fr="2024 — Présent"
+              />
             </div>
             <h3 className="card__title">Proxmox Home Server + Tailscale</h3>
             <T

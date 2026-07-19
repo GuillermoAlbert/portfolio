@@ -32,7 +32,7 @@ export default function NotFound() {
           Esta página no existe. · This page doesn’t exist. · Cette page n’existe pas.
         </p>
         <Link className="cvbtn" href="/">
-          Volver al inicio
+          Volver al inicio · Back home · Accueil
         </Link>
       </main>
     </RootDocument>
