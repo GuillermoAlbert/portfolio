@@ -1,4 +1,4 @@
-import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Hanken_Grotesk, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "@/app/globals.css";
 import Interactions from "@/components/Interactions";
 import { SITE_URL } from "@/lib/seo";
@@ -14,6 +14,15 @@ const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--jb-mono",
   display: "swap",
+});
+
+// Display face for the big moments only (hero name, section titles, card
+// titles, quote, contact email). Body stays Hanken; labels stay JetBrains.
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  weight: ["500", "700"],
 });
 
 // Structured data (schema.org Person) for SEO E-E-A-T and AI/LLM attribution.
@@ -69,7 +78,7 @@ export default function RootDocument({
     <html
       lang={lang}
       data-theme="light"
-      className={`${sans.variable} ${mono.variable}`}
+      className={`${sans.variable} ${mono.variable} ${displayFont.variable}`}
       suppressHydrationWarning
     >
       {/* App Router renders <head> directly here (next/head is Pages-Router only). */}
