@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import RootDocument from "@/components/RootDocument";
+import NotFoundTitle from "@/components/NotFoundTitle";
 import { SITE_URL } from "@/lib/seo";
 
 // Root not-found (→ 404.html in the static export). With multiple root layouts
@@ -27,12 +28,12 @@ export default function NotFound() {
           padding: "2rem",
         }}
       >
-        <h1 style={{ fontSize: "3.5rem", margin: 0, lineHeight: 1 }}>404</h1>
+        <NotFoundTitle />
         <p style={{ margin: 0, opacity: 0.8 }}>
           Esta página no existe. · This page doesn’t exist. · Cette page n’existe pas.
         </p>
         <Link className="cvbtn" href="/">
-          Volver al inicio
+          Volver al inicio · Back home · Accueil
         </Link>
       </main>
     </RootDocument>

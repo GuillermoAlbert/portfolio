@@ -11,7 +11,7 @@ export default function Topbar({ locale = "es" }: { locale?: Locale }) {
             <span className="brand__domain">· guillermoalbert.dev</span>
           </span>
         </a>
-        <nav className="nav" aria-label="Secciones">
+        <nav className="nav" aria-label={locale === "es" ? "Secciones" : "Sections"}>
           <div className="nav__sections" id="nav-sections">
             <a className="navlink" href="#about">
               <span className="idx">01</span>
@@ -87,7 +87,13 @@ export default function Topbar({ locale = "es" }: { locale?: Locale }) {
           <button
             type="button"
             className="iconbtn navtoggle"
-            aria-label="Abrir menú de secciones"
+            aria-label={
+              locale === "en"
+                ? "Open section menu"
+                : locale === "fr"
+                  ? "Ouvrir le menu des sections"
+                  : "Abrir menú de secciones"
+            }
             aria-expanded="false"
             aria-controls="nav-sections"
           >

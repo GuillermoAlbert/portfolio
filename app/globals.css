@@ -27,6 +27,7 @@
   --gutter:      clamp(20px, 5vw, 64px);
   --mono: var(--jb-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: var(--font-sans), system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --display: var(--font-display), var(--sans);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -207,7 +208,8 @@ a { color: inherit; text-decoration: none; }
   line-height: 0.8;
   letter-spacing: -0.04em;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--line);
+  /* Dimmer than --line: the sec-note sits on top of the digit and must win. */
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--line) 55%, transparent);
   pointer-events: none;
 }
 .section-head > * { position: relative; }
@@ -216,6 +218,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--blue); letter-spacing: 0.04em;
 }
 .sec-title {
+  font-family: var(--display);
   font-size: clamp(1.35rem, 3.4vw, 2.1rem);
   font-weight: 700; color: var(--navy);
   letter-spacing: -0.02em; line-height: 1.05;
@@ -263,10 +266,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero__name {
+  font-family: var(--display);
   font-size: clamp(2.9rem, 9.2vw, 6.3rem);
   font-weight: 700;
   line-height: 0.98;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   color: var(--navy);
   text-wrap: balance;
 }
@@ -315,11 +319,16 @@ a { color: inherit; text-decoration: none; }
 .linkmono .arr { transition: transform 0.22s ease; }
 .linkmono:hover .arr { transform: translate(2px, -2px); }
 
-/* hero spec sheet */
+/* hero side column: spec sheet + method sketch */
+.hero__side {
+  display: flex; flex-direction: column; gap: 18px;
+  align-self: start;
+}
+.hero__side .card__diagram { margin-top: 0; }
+
 .spec {
   border: 1px solid var(--line-strong);
   border-radius: 4px;
-  align-self: start;
 }
 .spec__bar {
   display: flex; align-items: center; gap: 7px;
@@ -369,6 +378,7 @@ a { color: inherit; text-decoration: none; }
 .card__year { font-family: var(--mono); font-size: 0.74rem; color: var(--muted-2); }
 
 .card__title {
+  font-family: var(--display);
   font-size: clamp(1.25rem, 2.6vw, 1.6rem);
   font-weight: 700; color: var(--navy); letter-spacing: -0.02em;
   line-height: 1.12;
@@ -463,12 +473,6 @@ a { color: inherit; text-decoration: none; }
 .btn .arr { transition: transform 0.18s ease; }
 .btn--ghost { border-color: var(--line-strong); color: var(--muted); }
 .btn--ghost:hover { background: transparent; border-color: var(--navy); color: var(--navy); }
-.btn:disabled {
-  opacity: 0.45; cursor: not-allowed;
-  color: var(--muted-2); border-color: var(--line);
-}
-.btn:disabled:hover { background: transparent; color: var(--muted-2); }
-.btn:disabled .arr { transform: none; }
 
 /* ============================================================
    PUBLICATIONS
@@ -541,6 +545,7 @@ a { color: inherit; text-decoration: none; }
   .about__grid { grid-template-columns: minmax(0, 1.55fr) minmax(220px, 0.9fr); }
 }
 .about__quote {
+  font-family: var(--display);
   font-size: clamp(1.4rem, 3.4vw, 2.05rem);
   font-weight: 700; color: var(--navy); letter-spacing: -0.025em;
   line-height: 1.18; max-width: 22ch; margin-bottom: clamp(26px, 4vw, 38px);
@@ -574,8 +579,9 @@ a { color: inherit; text-decoration: none; }
 }
 .contact__email {
   display: inline-block;
+  font-family: var(--display);
   font-size: clamp(1.9rem, 7vw, 4.2rem);
-  font-weight: 700; color: var(--navy); letter-spacing: -0.035em;
+  font-weight: 700; color: var(--navy); letter-spacing: -0.03em;
   line-height: 1.15; position: relative;
   overflow-wrap: break-word;
   padding-bottom: 8px;
@@ -740,8 +746,10 @@ a { color: inherit; text-decoration: none; }
   display: inline-block;
   margin-left: 0.04em;
   font-weight: 300;
-  animation: tw-blink 0.7s steps(1, end) infinite;
+  animation: tw-blink 0.85s steps(1, end) infinite;
 }
+/* Terminal physics: the cursor holds solid while keys land, blinks when idle. */
+.tw-cursor--typing { animation: none; }
 
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
