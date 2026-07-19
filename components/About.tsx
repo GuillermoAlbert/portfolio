@@ -45,9 +45,9 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 as="p"
-                es="Soy <strong>backend-first</strong>. Me importan la arquitectura, el modelo de datos y que el sistema aguante en producción. El frontend lo defiendo; el backend lo lidero."
-                en="I'm <strong>backend-first</strong>. I care about architecture, the data model, and whether the system holds up in production. I can hold my own on the frontend; the backend is where I lead."
-                fr="Je suis <strong>backend-first</strong>. Ce qui m'importe : l'architecture, le modèle de données et que le système tienne en production. Le frontend, je le défends ; le backend, je le mène."
+                es="Soy <strong>backend-first</strong>. Me defiendo bien en frontend, pero donde de verdad aporto es en el backend: arquitectura, modelo de datos y que el sistema aguante en producción."
+                en="I'm <strong>backend-first</strong>. I can hold my own on the frontend, but where I really add value is the backend: architecture, the data model, and a system that holds up in production."
+                fr="Je suis <strong>backend-first</strong>. Je me débrouille bien côté frontend, mais c'est sur le backend que j'apporte le plus : l'architecture, le modèle de données et un système qui tient en production."
               />
               <T
                 locale={locale}

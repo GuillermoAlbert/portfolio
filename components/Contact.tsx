@@ -18,9 +18,9 @@ export default function Contact({ locale = "es" }: { locale?: Locale }) {
           <T
             locale={locale}
             className="sec-note mono"
-            es="// construyamos algo"
-            en="// let's build something"
-            fr="// construisons quelque chose"
+            es="// hablamos?"
+            en="// let's talk"
+            fr="// on en parle ?"
           />
         </div>
 
