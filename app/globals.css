@@ -463,12 +463,6 @@ a { color: inherit; text-decoration: none; }
 .btn .arr { transition: transform 0.18s ease; }
 .btn--ghost { border-color: var(--line-strong); color: var(--muted); }
 .btn--ghost:hover { background: transparent; border-color: var(--navy); color: var(--navy); }
-.btn:disabled {
-  opacity: 0.45; cursor: not-allowed;
-  color: var(--muted-2); border-color: var(--line);
-}
-.btn:disabled:hover { background: transparent; color: var(--muted-2); }
-.btn:disabled .arr { transform: none; }
 
 /* ============================================================
    PUBLICATIONS

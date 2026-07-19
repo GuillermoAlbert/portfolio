@@ -74,21 +74,14 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               <span className="tag tag--mut">React</span>
             </div>
             <div className="card__actions">
-              <button type="button" className="btn" disabled>
-                <T
-                  locale={locale}
-                  es="Demo próximamente"
-                  en="Demo coming soon"
-                  fr="Démo bientôt disponible"
-                />
-              </button>
               <a
-                className="btn btn--ghost"
+                className="btn"
                 href="https://github.com/GuillermoAlbert/mams-architecture"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <T locale={locale} es="Arquitectura" en="Architecture" fr="Architecture" />
+                <T locale={locale} es="Arquitectura" en="Architecture" fr="Architecture" />{" "}
+                <span className="arr" aria-hidden="true">↗</span>
               </a>
             </div>
           </article>
@@ -141,21 +134,14 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               <span className="tag tag--mut">LLM</span>
             </div>
             <div className="card__actions">
-              <button type="button" className="btn" disabled>
-                <T
-                  locale={locale}
-                  es="Detalle próximamente"
-                  en="Write-up coming soon"
-                  fr="Détails bientôt disponibles"
-                />
-              </button>
               <a
-                className="btn btn--ghost"
+                className="btn"
                 href="https://github.com/GuillermoAlbert/homelab"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <T locale={locale} es="Documentación" en="Documentation" fr="Documentation" />
+                <T locale={locale} es="Documentación" en="Documentation" fr="Documentation" />{" "}
+                <span className="arr" aria-hidden="true">↗</span>
               </a>
             </div>
           </article>
