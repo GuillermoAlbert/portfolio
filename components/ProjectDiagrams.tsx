@@ -50,6 +50,59 @@ export function MamsDiagram({ locale = "es" }: { locale?: Locale }) {
   );
 }
 
+// Working-method sketch for the hero's side column: the AI-assisted loop where
+// verification gates everything. Same visual language as the project sketches.
+export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
+  return (
+    <figure className="card__diagram" aria-hidden="true">
+      <T
+        locale={locale}
+        className="card__diagram-k mono"
+        es="// cómo trabajo"
+        en="// how I work"
+        fr="// ma méthode"
+      />
+      <svg viewBox="0 0 320 112" strokeWidth="1">
+        {/* row 1: input → agent */}
+        <rect className="diag-box diag-box--dashed" x="2" y="2" width="128" height="24" rx="2" />
+        <T locale={locale} as="text" className="diag-label" x="66" y="17"
+           es="problema real" en="real problem" fr="problème réel" />
+
+        <line className="diag-wire" x1="130" y1="14" x2="154" y2="14" />
+        <path className="diag-head" d="M155 10 l6 4 -6 4" />
+
+        <rect className="diag-box" x="164" y="2" width="128" height="24" rx="2" />
+        <T locale={locale} as="text" className="diag-label" x="228" y="17"
+           es="IA agéntica" en="agentic AI" fr="IA agentique" />
+
+        {/* down into verification */}
+        <line className="diag-wire" x1="196" y1="26" x2="196" y2="50" />
+        <path className="diag-head" d="M192 51 l4 6 4 -6" />
+
+        {/* feedback: verification kicks it back until it passes */}
+        <line className="diag-wire" x1="260" y1="58" x2="260" y2="34" />
+        <path className="diag-head" d="M256 33 l4 -6 4 6" />
+        <T locale={locale} as="text" className="diag-note diag-note--start" x="268" y="45"
+           es="itera" en="iterate" fr="itère" />
+
+        {/* row 2: verification → production */}
+        <rect className="diag-box" x="164" y="58" width="128" height="24" rx="2" />
+        <T locale={locale} as="text" className="diag-label" x="228" y="73"
+           es="verificación" en="verification" fr="vérification" />
+
+        <line className="diag-wire" x1="164" y1="70" x2="140" y2="70" />
+        <path className="diag-head" d="M139 66 l-6 4 6 4" />
+
+        <rect className="diag-box diag-box--accent" x="2" y="58" width="128" height="24" rx="2" />
+        <T locale={locale} as="text" className="diag-label" x="66" y="73"
+           es="producción" en="production" fr="production" />
+
+        <text className="diag-note" x="228" y="100">tests · review · monitoring</text>
+      </svg>
+    </figure>
+  );
+}
+
 export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
   return (
     <figure className="card__diagram" aria-hidden="true">

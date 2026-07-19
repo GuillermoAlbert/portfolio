@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { T, cvFile, contactEmail, type Locale } from "@/lib/i18n";
+import { MethodDiagram } from "@/components/ProjectDiagrams";
 
 export default function Hero({ locale = "es" }: { locale?: Locale }) {
   const nameRef = useRef<HTMLHeadingElement>(null);
@@ -139,8 +140,9 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
           </div>
         </div>
 
-        <aside className="spec reveal" data-d="3" aria-label="Resumen">
-          <div className="spec__bar">
+        <div className="hero__side reveal" data-d="3">
+          <aside className="spec" aria-label="Resumen">
+            <div className="spec__bar">
             <span className="b" aria-hidden="true"></span>
             <span>~/ developer.profile</span>
           </div>
@@ -178,7 +180,9 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
               <span className="spec__v">ES · FR · EN (C1)</span>
             </div>
           </div>
-        </aside>
+          </aside>
+          <MethodDiagram locale={locale} />
+        </div>
       </div>
     </section>
   );

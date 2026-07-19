@@ -319,11 +319,16 @@ a { color: inherit; text-decoration: none; }
 .linkmono .arr { transition: transform 0.22s ease; }
 .linkmono:hover .arr { transform: translate(2px, -2px); }
 
-/* hero spec sheet */
+/* hero side column: spec sheet + method sketch */
+.hero__side {
+  display: flex; flex-direction: column; gap: 18px;
+  align-self: start;
+}
+.hero__side .card__diagram { margin-top: 0; }
+
 .spec {
   border: 1px solid var(--line-strong);
   border-radius: 4px;
-  align-self: start;
 }
 .spec__bar {
   display: flex; align-items: center; gap: 7px;
