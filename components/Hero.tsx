@@ -12,8 +12,10 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lines = ["Guillermo", "Albert García"];
-    const STEP = 100;  // ms between keystrokes
-    const HOLD = 900;  // ms the cursor blinks once the name is written
+    const STEP = 72;        // base ms between keystrokes (jittered per key)
+    const LINE_PAUSE = 430; // "Enter" beat before starting the second line
+    const WORD_PAUSE = 120; // extra breath after a space
+    const BLINK_MS = 850;   // must match the tw-blink cycle in globals.css
     const savedHTML = h1.innerHTML;
     const timers: ReturnType<typeof setTimeout>[] = [];
 
@@ -22,43 +24,71 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
     // bumping "Albert García" to a 3rd line, so the layout stays identical
     // before, during, and after typing — no reflow when the markup restores.
     h1.innerHTML = "";
-    const chars: HTMLSpanElement[] = [];
-    lines.forEach((text) => {
+    const chars: { span: HTMLSpanElement; ch: string; newLine: boolean }[] = [];
+    lines.forEach((text, li) => {
       const lineEl = document.createElement("span");
       lineEl.style.display = "block";
       lineEl.style.whiteSpace = "nowrap";
-      Array.from(text).forEach((ch) => {
+      Array.from(text).forEach((ch, ci) => {
         const span = document.createElement("span");
         span.textContent = ch;
         span.style.opacity = "0";
         lineEl.appendChild(span);
-        chars.push(span);
+        chars.push({ span, ch, newLine: li > 0 && ci === 0 });
       });
       h1.appendChild(lineEl);
     });
 
-    // A blinking cursor that travels with the text: each keystroke reveals one
-    // character and parks the cursor right after it.
+    // A cursor with terminal physics: solid while keys are landing, blinking
+    // only when idle (before the first key, on the line break, at the end).
     const cursor = document.createElement("span");
     cursor.className = "tw-cursor";
     cursor.textContent = "_";
-    chars[0].before(cursor);
+    const setTyping = (typing: boolean) =>
+      cursor.classList.toggle("tw-cursor--typing", typing);
+    chars[0].span.before(cursor);
 
-    chars.forEach((span, i) => {
+    // Choreographed exit: hold solid a beat (hands leaving the keyboard), blink
+    // two calm full cycles, then dissolve from the visible phase — never cutting
+    // a blink halfway, which is what made the old ending feel abrupt.
+    const finish = () => {
       timers.push(setTimeout(() => {
-        span.style.opacity = "1";
-        span.after(cursor);
-      }, i * STEP));
-    });
+        setTyping(false); // idle again — calm blinking over the finished name
+        timers.push(setTimeout(() => {
+          // 2 whole cycles in: the animation is back at its visible phase, so
+          // removing it can't jump, and the fade starts from a solid cursor.
+          cursor.style.animation = "none";
+          cursor.style.transition = "opacity 0.6s ease";
+          cursor.style.opacity = "0";
+          // Then restore the pristine markup so the heading keeps its kerning.
+          timers.push(setTimeout(() => { h1.innerHTML = savedHTML; }, 650));
+        }, 2 * BLINK_MS));
+      }, 380));
+    };
 
-    // Let the cursor blink, fade it out, then restore the pristine markup so
-    // the heading keeps its original kerning.
-    timers.push(setTimeout(() => {
-      cursor.style.animation = "none";
-      cursor.style.transition = "opacity 0.3s ease";
-      cursor.style.opacity = "0";
-      timers.push(setTimeout(() => { h1.innerHTML = savedHTML; }, 300));
-    }, (chars.length - 1) * STEP + HOLD));
+    // Human cadence: every keystroke lands with jitter, a space buys a breath,
+    // the line break reads as Enter + a beat, and now and then a key hesitates.
+    const step = (i: number) => {
+      const c = chars[i];
+      c.span.style.opacity = "1";
+      c.span.after(cursor);
+      if (i + 1 >= chars.length) { finish(); return; }
+
+      const next = chars[i + 1];
+      let delay = STEP * (0.6 + Math.random() * 0.85);
+      if (next.newLine) delay += LINE_PAUSE;
+      else if (c.ch === " ") delay += WORD_PAUSE * (0.6 + Math.random() * 0.8);
+      else if (Math.random() < 0.07) delay += 120 + Math.random() * 150;
+
+      const idle = delay > 260;
+      setTyping(!idle);
+      // On Enter the cursor jumps to the empty next line and waits there.
+      if (next.newLine) next.span.before(cursor);
+      timers.push(setTimeout(() => { setTyping(true); step(i + 1); }, delay));
+    };
+
+    // Sit down first: the cursor blinks a beat before the first key lands.
+    timers.push(setTimeout(() => { setTyping(true); step(0); }, 220 + Math.random() * 240));
 
     return () => {
       timers.forEach(clearTimeout);

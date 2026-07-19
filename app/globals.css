@@ -746,8 +746,10 @@ a { color: inherit; text-decoration: none; }
   display: inline-block;
   margin-left: 0.04em;
   font-weight: 300;
-  animation: tw-blink 0.7s steps(1, end) infinite;
+  animation: tw-blink 0.85s steps(1, end) infinite;
 }
+/* Terminal physics: the cursor holds solid while keys land, blinks when idle. */
+.tw-cursor--typing { animation: none; }
 
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
 
