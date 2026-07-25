@@ -32,8 +32,8 @@ export default function Publications({ locale = "es" }: { locale?: Locale }) {
                 locale={locale}
                 className="pub__ai-tag mono"
                 es="IA aplicada"
-                en="applied ML"
-                fr="ML appliqué"
+                en="applied AI"
+                fr="IA appliquée"
               />
               <span className="pub__venue-wrap">
                 <em className="pub__venue">Ibis</em>

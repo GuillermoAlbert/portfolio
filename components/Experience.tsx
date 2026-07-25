@@ -139,9 +139,9 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Investigación en el CSIC (Estación Biológica de Doñana) y en el Museo de Historia Natural de Helsinki, con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones revisadas por pares. Ahí nació mi enfoque basado en la evidencia."
-              en="Research at CSIC (Doñana Biological Station) and the Helsinki Natural History Museum, with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 peer-reviewed publications. That's where my evidence-based approach to engineering began."
-              fr="Recherche au CSIC (Station biologique de Doñana) et au Muséum d'histoire naturelle d'Helsinki, avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications évaluées par les pairs. C'est là qu'est née mon approche fondée sur les preuves."
+              es="Investigación en el CSIC (Estación Biológica de Doñana) y en el Museo de Historia Natural de Helsinki, con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones revisadas por pares."
+              en="Research at CSIC (Doñana Biological Station) and the Helsinki Natural History Museum, with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 peer-reviewed publications."
+              fr="Recherche au CSIC (Station biologique de Doñana) et au Muséum d'histoire naturelle d'Helsinki, avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications évaluées par les pairs."
             />
           </article>
         </div>

@@ -33,7 +33,7 @@ export default function Contact({ locale = "es" }: { locale?: Locale }) {
           as="p"
           className="contact__lead reveal"
           es="Si tienes un backend que diseñar o un sistema que hay que mantener en pie, escríbeme."
-          en="If you've got a backend to design, or a system that has to stay up, write to me."
+          en="If you've got a backend to design, or a system that has to stay up, get in touch."
           fr="Si vous avez un backend à concevoir ou un système à garder debout, écrivez-moi."
         />
 

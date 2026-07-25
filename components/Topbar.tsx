@@ -11,7 +11,16 @@ export default function Topbar({ locale = "es" }: { locale?: Locale }) {
             <span className="brand__domain">· guillermoalbert.dev</span>
           </span>
         </a>
-        <nav className="nav" aria-label={locale === "es" ? "Secciones" : "Sections"}>
+        {/* data-aria-* lets the language toggle rewrite the accessible name too;
+            without it the label stayed Spanish and got read out by an English or
+            French voice. The ternary stays as the no-JS default. See Interactions. */}
+        <nav
+          className="nav"
+          aria-label={locale === "es" ? "Secciones" : "Sections"}
+          data-aria-es="Secciones"
+          data-aria-en="Sections"
+          data-aria-fr="Sections"
+        >
           <div className="nav__sections" id="nav-sections">
             <a className="navlink" href="#about">
               <span className="idx">01</span>
@@ -94,6 +103,9 @@ export default function Topbar({ locale = "es" }: { locale?: Locale }) {
                   ? "Ouvrir le menu des sections"
                   : "Abrir menú de secciones"
             }
+            data-aria-es="Abrir menú de secciones"
+            data-aria-en="Open section menu"
+            data-aria-fr="Ouvrir le menu des sections"
             aria-expanded="false"
             aria-controls="nav-sections"
           >

@@ -46,7 +46,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                 as="p"
                 es="Soy <strong>backend-first</strong>. En frontend me defiendo, pero donde aporto de verdad es una capa por debajo: en cómo se modelan los datos y en qué pasa cuando llega más carga de la prevista."
                 en="I'm <strong>backend-first</strong>. I can hold my own on the frontend, but I earn my keep a layer below it: in how the data is modelled and in what happens when more load turns up than anyone planned for."
-                fr="Je suis <strong>backend-first</strong>. En frontend je m'en sors très bien, mais je suis vraiment utile une couche plus bas : dans la façon dont les données sont modélisées et dans ce qui se passe quand la charge dépasse ce qui était prévu."
+                fr="Je suis <strong>backend-first</strong>. En frontend je me débrouille, mais je suis vraiment utile une couche plus bas : dans la façon dont les données sont modélisées et dans ce qui se passe quand la charge dépasse ce qui était prévu."
               />
               <T
                 locale={locale}
@@ -63,9 +63,12 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
             data-d="1"
             data-stagger
             aria-label={locale === "en" ? "Facts" : locale === "fr" ? "Repères" : "Datos"}
+            data-aria-es="Datos"
+            data-aria-en="Facts"
+            data-aria-fr="Repères"
           >
             <div className="facts__row">
-              <span className="facts__k">FORMACIÓN / EDUCATION</span>
+              <span className="facts__k">EDUCATION</span>
               <T
                 locale={locale}
                 className="facts__v"
@@ -75,7 +78,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               />
             </div>
             <div className="facts__row">
-              <span className="facts__k">INVESTIGACIÓN / RESEARCH</span>
+              <span className="facts__k">RESEARCH</span>
               <T
                 locale={locale}
                 className="facts__v"
@@ -85,7 +88,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               />
             </div>
             <div className="facts__row">
-              <span className="facts__k">EXPERIENCIA / EXPERIENCE</span>
+              <span className="facts__k">EXPERIENCE</span>
               <T
                 locale={locale}
                 className="facts__v"
@@ -95,7 +98,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               />
             </div>
             <div className="facts__row">
-              <span className="facts__k">IDIOMAS / LANGUAGES</span>
+              <span className="facts__k">LANGS</span>
               <T
                 locale={locale}
                 className="facts__v"
@@ -105,7 +108,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               />
             </div>
             <div className="facts__row">
-              <span className="facts__k">ENFOQUE / FOCUS</span>
+              <span className="facts__k">FOCUS</span>
               <T
                 locale={locale}
                 className="facts__v"

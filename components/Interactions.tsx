@@ -28,6 +28,15 @@ export default function Interactions() {
     ) as HTMLElement[];
     i18nNodes.forEach((el) => { if (!el.dataset.es) el.dataset.es = el.innerHTML; });
 
+    // aria-labels can't ride on innerHTML, so elements with a localized one
+    // ship all three variants as data-aria-{es,en,fr}. Without this the label
+    // kept the build language and was then announced by an English or French
+    // voice. Cached at mount like i18nNodes — same rule applies: nothing here
+    // may live inside a [data-en] node, whose innerHTML the toggle replaces.
+    const ariaNodes = Array.from(
+      document.querySelectorAll("[data-aria-en]")
+    ) as HTMLElement[];
+
     function setLang(lang: string) {
       if (!CV[lang as keyof typeof CV]) lang = "es";
       document.body.setAttribute("data-lang", lang);
@@ -38,6 +47,11 @@ export default function Interactions() {
           lang === "es"
             ? el.dataset.es!
             : (el.getAttribute(`data-${lang}`) ?? el.getAttribute("data-en") ?? el.dataset.es!);
+      });
+
+      ariaNodes.forEach((el) => {
+        const label = el.getAttribute(`data-aria-${lang}`) ?? el.getAttribute("data-aria-en");
+        if (label) el.setAttribute("aria-label", label);
       });
 
       cvLinks.forEach((a) => {
@@ -162,10 +176,20 @@ export default function Interactions() {
       navToggle?.setAttribute("aria-expanded", String(!!open));
     };
     const onNavKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeNav(); };
+    // This menu only exists on phones, which have no Escape key — without an
+    // outside tap it had no dismissal at all. Boundary is `.nav`, not the
+    // panel, so the toggle button's own tap isn't closed-then-reopened.
+    const onOutsidePointer = (e: PointerEvent) => {
+      if (!navSections?.classList.contains("is-open")) return;
+      const t = e.target;
+      if (t instanceof Element && t.closest(".nav")) return;
+      closeNav();
+    };
 
     navToggle?.addEventListener("click", toggleNav);
     navSections?.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
     document.addEventListener("keydown", onNavKey);
+    document.addEventListener("pointerdown", onOutsidePointer);
 
     /* ---------- Scroll progress ---------- */
     const progressBar = document.querySelector(".topbar__progress") as HTMLElement | null;
@@ -209,6 +233,7 @@ export default function Interactions() {
       window.removeEventListener("resize", updateProgress);
       navToggle?.removeEventListener("click", toggleNav);
       document.removeEventListener("keydown", onNavKey);
+      document.removeEventListener("pointerdown", onOutsidePointer);
     };
   }, []);
 
