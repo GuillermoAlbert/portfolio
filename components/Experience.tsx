@@ -80,8 +80,15 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
             </ul>
           </article>
 
-          <article className="xp__item">
+          <article className="xp__item xp__item--pivot">
             <p className="xp__period mono">2022 — 2024</p>
+            <T
+              locale={locale}
+              className="xp__pivot mono"
+              es="el giro"
+              en="the turn"
+              fr="le virage"
+            />
             <h3 className="xp__role">
               <T
                 locale={locale}
@@ -103,9 +110,9 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Mi transición formal al software: dos años de desarrollo full-stack, bases de datos y despliegue. Me incorporé a Inetum antes de terminar el ciclo."
-              en="My formal switch into software: two years of full-stack development, databases and deployment. I joined Inetum before finishing the programme."
-              fr="Ma transition formelle vers le logiciel : deux ans de développement full-stack, bases de données et déploiement. J'ai rejoint Inetum avant la fin du cursus."
+              es="Dos años de desarrollo full-stack, bases de datos y despliegue. Me incorporé a Inetum antes de terminar el ciclo."
+              en="Two years of full-stack development, databases and deployment. I joined Inetum before finishing the programme."
+              fr="Deux ans de développement full-stack, bases de données et déploiement. J'ai rejoint Inetum avant la fin du cursus."
             />
           </article>
 

@@ -37,30 +37,23 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 as="p"
-                es="Empecé en un laboratorio: secuenciando datos, midiendo biodiversidad y defendiendo cada conclusión con evidencia. Hoy diseño APIs, modelo bases de datos y despliego contenedores en producción. El método apenas cambió."
-                en="I started in a lab: sequencing data, measuring biodiversity, defending every conclusion with evidence. Today I design APIs, model databases and deploy containers to production. The method barely changed."
-                fr="J'ai commencé dans un laboratoire : à séquencer des données, mesurer la biodiversité et défendre chaque conclusion par des preuves. Aujourd'hui je conçois des API, modélise des bases de données et déploie des conteneurs en production. La méthode n'a presque pas changé."
+                es="De la investigación me quedó un reflejo: no me fío de un resultado que no sé reproducir. En el laboratorio eso era repetir la medición; aquí es un log que confirma lo que creo que ha pasado, o un test que falla cuando tiene que fallar."
+                en="Research left me with a reflex I never dropped: I don't trust a result I can't reproduce. In the lab that meant running the measurement again; here it's a log confirming what I think happened, or a test that fails when it should."
+                fr="De la recherche j'ai gardé un réflexe : je ne me fie pas à un résultat que je ne sais pas reproduire. Au laboratoire, cela voulait dire refaire la mesure ; ici, c'est un log qui confirme ce que je crois avoir vu, ou un test qui échoue quand il doit échouer."
               />
               <T
                 locale={locale}
                 as="p"
-                es="Mi base científica (un Grado en Biología, investigación y tres publicaciones revisadas por pares) es la lente con la que abordo el desarrollo: rigor, lectura crítica de los datos y la disciplina de medir antes de decidir."
-                en="My scientific background (a Biology degree, research, and three peer-reviewed publications) is the lens I bring to development: rigour, critical reading of the data, and the discipline of measuring before deciding."
-                fr="Ma formation scientifique (une licence de Biologie, de la recherche et trois publications évaluées par les pairs) est le prisme avec lequel j'aborde le développement : rigueur, lecture critique des données et la discipline de mesurer avant de décider."
+                es="Soy <strong>backend-first</strong>. En frontend me defiendo, pero donde aporto de verdad es una capa por debajo: en cómo se modelan los datos y en qué pasa cuando llega más carga de la prevista."
+                en="I'm <strong>backend-first</strong>. I can hold my own on the frontend, but I earn my keep a layer below it: in how the data is modelled and in what happens when more load turns up than anyone planned for."
+                fr="Je suis <strong>backend-first</strong>. En frontend je m'en sors très bien, mais je suis vraiment utile une couche plus bas : dans la façon dont les données sont modélisées et dans ce qui se passe quand la charge dépasse ce qui était prévu."
               />
               <T
                 locale={locale}
                 as="p"
-                es="Soy <strong>backend-first</strong>. Me defiendo bien en frontend, pero donde de verdad aporto es en el backend: arquitectura, modelo de datos y que el sistema aguante en producción."
-                en="I'm <strong>backend-first</strong>. I can hold my own on the frontend, but where I really add value is the backend: architecture, the data model, and a system that holds up in production."
-                fr="Je suis <strong>backend-first</strong>. Je me débrouille bien côté frontend, mais c'est sur le backend que j'apporte le plus : l'architecture, le modèle de données et un système qui tient en production."
-              />
-              <T
-                locale={locale}
-                as="p"
-                es="Con IA agéntica (Claude Code, MCP) no improviso: especifico, el agente ejecuta y el código pasa por mis puertas de verificación (tests, revisión, monitorización). He montado un sistema de trabajo donde <strong>la IA acelera y la evidencia decide</strong>."
-                en="With agentic AI (Claude Code, MCP) I don't improvise: I specify, the agent executes, and the code passes through my verification gates (tests, review, monitoring). I've built a way of working where <strong>AI accelerates and evidence decides</strong>."
-                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas : je spécifie, l'agent exécute, et le code passe par mes garde-fous de vérification (tests, revue, supervision). J'ai bâti une façon de travailler où <strong>l'IA accélère et la preuve décide</strong>."
+                es="Con IA agéntica (Claude Code, MCP) no improviso. La especificación la escribo yo, casos límite incluidos, y el agente ejecuta contra ella. Después el código pasa por las puertas de siempre: tests, revisión, monitorización. Lo que no las pasa, se reescribe."
+                en="With agentic AI (Claude Code, MCP) I don't improvise. I write the spec myself, edge cases included, and the agent works against it. The code then goes through the same gates as anything else: tests, review, monitoring. Whatever doesn't clear them gets rewritten."
+                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas. C'est moi qui écris la spec, cas limites compris, et l'agent exécute contre elle. Ensuite le code passe par les garde-fous habituels : tests, revue, supervision. Ce qui ne passe pas, je le réécris."
               />
             </div>
           </div>
