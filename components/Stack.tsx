@@ -67,6 +67,32 @@ export default function Stack({ locale = "es" }: { locale?: Locale }) {
               </div>
             </div>
           ))}
+
+          {/* Map key for the dashed tags. They mark tools shipped with AI
+              rather than written by hand — a deliberate honesty signal that,
+              undecoded, was reading as "disabled / broken". States the two
+              cases and stops: justifying the boundary would turn it into an
+              excuse, and the reader draws the stronger conclusion unaided. */}
+          <div className="stack__legend">
+            <span className="stack__legend-item">
+              <span className="key" aria-hidden="true" />
+              <T
+                locale={locale}
+                es="sólido · lo escribo a mano"
+                en="solid · I write it by hand"
+                fr="plein · je l'écris à la main"
+              />
+            </span>
+            <span className="stack__legend-item">
+              <span className="key key--dashed" aria-hidden="true" />
+              <T
+                locale={locale}
+                es="punteado · lo uso con IA"
+                en="dashed · I use it with AI"
+                fr="pointillé · je l'utilise avec l'IA"
+              />
+            </span>
+          </div>
         </div>
 
         {GROUPS.filter((g) => g.feature).map((g) => (

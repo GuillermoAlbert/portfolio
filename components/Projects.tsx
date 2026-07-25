@@ -1,6 +1,30 @@
 import { T, type Locale } from "@/lib/i18n";
 import { MamsDiagram, HomelabDiagram } from "@/components/ProjectDiagrams";
 
+// The dashed tags appear here too, two sections away from the Stack legend
+// that decodes them (and these cards are deep-linkable), so each tag group
+// carries the meaning in its accessible name. aria-labels can't be live-
+// swapped by the language toggle — it only rewrites innerHTML — so they're
+// set per locale at build time. See STYLING.md.
+const tagsLabel = (locale: Locale) =>
+  locale === "en"
+    ? "Stack — dashed marks tools I use with AI"
+    : locale === "fr"
+      ? "Stack — le pointillé indique les outils que j'utilise avec l'IA"
+      : "Stack — el punteado indica herramientas que uso con IA";
+
+// Visible three-word echo of the Stack legend. aria-hidden because the group
+// label above already says it: one announcement per card beats the same
+// sentence being read out on every dashed tag.
+function TagsNote({ locale }: { locale: Locale }) {
+  return (
+    <span className="tags__note" aria-hidden="true">
+      <span className="key key--dashed" />
+      <T locale={locale} es="con IA" en="with AI" fr="avec l'IA" />
+    </span>
+  );
+}
+
 export default function Projects({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section" id="work">
@@ -70,7 +94,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               />
             </p>
             <MamsDiagram locale={locale} />
-            <div className="tags" aria-label="Stack">
+            <div className="tags" aria-label={tagsLabel(locale)}>
               <span className="tag">Spring Boot</span>
               <span className="tag">Java 21</span>
               <span className="tag">Spring Security</span>
@@ -79,6 +103,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               <span className="tag tag--db">Liquibase</span>
               <span className="tag tag--mut">React</span>
             </div>
+            <TagsNote locale={locale} />
             <div className="card__actions">
               <a
                 className="btn"
@@ -136,7 +161,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               />
             </p>
             <HomelabDiagram locale={locale} />
-            <div className="tags" aria-label="Stack">
+            <div className="tags" aria-label={tagsLabel(locale)}>
               <span className="tag tag--infra">Proxmox VE</span>
               <span className="tag tag--infra">Docker</span>
               <span className="tag tag--infra">LXC</span>
@@ -145,6 +170,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               <span className="tag tag--mut">Python · ETL</span>
               <span className="tag tag--mut">LLM</span>
             </div>
+            <TagsNote locale={locale} />
             <div className="card__actions">
               <a
                 className="btn"

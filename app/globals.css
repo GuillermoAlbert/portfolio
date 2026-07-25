@@ -30,9 +30,65 @@
   --display: var(--font-display), var(--sans);
 }
 
+/* ============================================================
+   DARK ISLAND — the page's only value anchor
+   ------------------------------------------------------------
+   The site had no dark mass anywhere: everything sat between 92% and 100%
+   luminosity, so it read flat no matter how good the type was. `.island`
+   fixes that by *re-declaring the token set* on a section instead of
+   restyling its components — every descendant already resolves through
+   these variables, so linkmono, cvbtn, sec-index, sec-note, the ghost
+   numeral and the email underline all re-theme for free.
+
+   Two rules, both load-bearing:
+   1. NEVER `background: var(--navy)`. --navy is a foreground token and it
+      inverts to near-white in dark mode; using it as a surface breaks the
+      system's semantics and the dark theme at once.
+   2. This is a LIGHT-THEME feature. In dark mode the whole page is already
+      the dark mass, so the island has nothing to anchor — it steps up to
+      --surface-hi and lets its hairlines do the separating. That's the
+      designed behaviour, not a degradation.
+   Hex is allowed here for the same reason it is in [data-theme="dark"]:
+   this block *defines* tokens, it doesn't consume them.
+   ============================================================ */
+.island {
+  --navy:        #eef2f8;
+  --blue:        #6ea6e6;   /* 6.2:1 on the island bg; #2563a8 would be 2.5:1 */
+  --ink:         #e7ecf4;
+  --ink-soft:    #c3ccdb;
+  --muted:       #98a4b9;
+  --muted-2:     #818ea4;
+  --pg:          #6fa9d2;
+  --ok:          #46c683;
+  --ai:          #de9573;
+  --bg:          #0d1a31;
+  --surface-hi:  #15294a;
+  --on-navy:     #0d1a31;
+  --line:        rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.30);
+  --grid:        rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+  /* Same 34px graph paper as .section--sand, inverted. The dark blocks are the
+     same material as the light ones, not a foreign slab dropped on the page. */
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+/* Already dark: step up a surface and keep the hairline rules doing the work. */
+[data-theme="dark"] .island {
+  --bg: #15294a;
+  --surface-hi: #1b3157;
+  --on-navy: #15294a;
+  border-block: 1px solid var(--line);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* scroll-padding, not per-section scroll-margin: one declaration covers every
+   anchor (#top included) and keeps headings clear of the 60px sticky topbar. */
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -231,6 +287,31 @@ a { color: inherit; text-decoration: none; }
   .section-head { grid-template-columns: auto 1fr; }
   .sec-note { display: none; }
 }
+
+/* ============================================================
+   STATEMENT BAND — the rhythm breaker
+   ------------------------------------------------------------
+   Six sections all opened the same way (section-head + grid of hairline
+   boxes), so scroll velocity never changed. This band sits between §03 and
+   §04 with NO section-head, no ghost numeral and no grid — the page's
+   structure stutters on purpose. It also carries the site's thesis, which
+   used to be buried as the last clause of the fourth About paragraph.
+   Value rhythm becomes: white · sand · white · DARK · white · sand · DARK.
+   ============================================================ */
+.band { padding-block: clamp(46px, 7vw, 84px); }
+.band__k {
+  display: block; margin-bottom: clamp(14px, 2vw, 20px);
+  font-family: var(--mono); font-size: 0.74rem;
+  letter-spacing: 0.06em; color: var(--blue);
+}
+.band__line {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 4.6vw, 3.05rem);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
+  color: var(--muted);        /* ~7:1 on the island — the setup, spoken quietly */
+  max-width: 24ch; text-wrap: balance;
+}
+.band__line .hi { color: var(--navy); }   /* the half that carries the weight */
 
 /* ============================================================
    HERO
@@ -434,6 +515,46 @@ a { color: inherit; text-decoration: none; }
 .diag-note--end   { text-anchor: end; }
 .diag-accent { fill: var(--blue); }
 
+/* ---------- the idle instrument (motion layer 4 — see STYLING.md) ----------
+   The hero's MethodDiagram runs on its own: each leg of the loop lights blue
+   in sequence, so the sketch performs the process it describes instead of
+   merely naming it. One long deterministic CSS timeline — no JS, no random,
+   nothing injected into the <text> nodes (which the language toggle rewrites).
+
+   Only ONE thing on this site is allowed to move at rest, and this is it.
+   It starts at 4.5s so it never shares the stage with the hero typewriter.
+   -18 is exactly 3 periods of the 3-3 dash, so the loop restarts seamlessly. */
+@keyframes diag-run {
+  0%,   5%  { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  8%        { stroke: var(--blue); }
+  17%       { stroke: var(--blue);        stroke-dashoffset: -18; }
+  24%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
+}
+@keyframes diag-run-head {
+  0%,   8%  { stroke: var(--line-strong); }
+  12%, 20%  { stroke: var(--blue); }
+  27%, 100% { stroke: var(--line-strong); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* The delay travels as a custom property on purpose: the `animation`
+     shorthand resets animation-delay, and it out-specifies a bare
+     [data-run="n"] selector — so a plain delay rule would silently lose and
+     all four legs would fire at once. Custom properties inherit instead. */
+  .diag-run .diag-wire[data-run] {
+    animation: diag-run 9s linear infinite;
+    animation-delay: var(--run-delay);
+  }
+  .diag-run .diag-head[data-run] {
+    animation: diag-run-head 9s linear infinite;
+    animation-delay: var(--run-delay);
+  }
+  /* Sequence = the story: stated → built → verified → sent back → shipped. */
+  .diag-run [data-run="1"] { --run-delay: 4.50s; }
+  .diag-run [data-run="2"] { --run-delay: 5.35s; }
+  .diag-run [data-run="3"] { --run-delay: 6.20s; }
+  .diag-run [data-run="4"] { --run-delay: 7.05s; }
+}
+
 .tags {
   margin-top: 22px; display: flex; flex-wrap: wrap; gap: 7px;
 }
@@ -456,6 +577,16 @@ a { color: inherit; text-decoration: none; }
 .tag--infra{ --tag-c: var(--ok); }
 .tag--ai   { --tag-c: var(--ai); }
 .tag--mut  { color: var(--muted-2); border-style: dashed; }
+
+/* The dashed tags also appear two sections away from the Stack legend, so the
+   cards carry a three-word echo of the key. aria-hidden because the meaning is
+   already in the tag group's aria-label — one announcement per card beats the
+   same sentence read out on every fourth tag. */
+.tags__note {
+  margin-top: 10px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--muted-2);
+}
 
 .card__actions {
   margin-top: auto; padding-top: 26px;
@@ -615,6 +746,28 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 620px) { .stack { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 940px) { .stack { grid-template-columns: 1fr 1fr 1fr; } }
 
+/* Legend — a map key, not a manifesto.
+   The dashed tags (.tag--mut) are a deliberate honesty signal: tools shipped
+   with AI rather than written by hand. Undecoded, a dashed border reads as
+   "disabled / broken / placeholder" — the CSS was contradicting the message.
+   The key states the two states and stops; explaining *why* would turn a
+   boundary into an excuse, and the reader draws the stronger conclusion
+   on their own. Blueprints have keys; this one belongs to the drawing. */
+.stack__legend {
+  grid-column: 1 / -1;
+  background: var(--bg);
+  padding: clamp(13px, 1.8vw, 16px) clamp(18px, 2.5vw, 26px);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 7px 26px;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--muted-2);
+}
+.stack__legend-item { display: inline-flex; align-items: center; gap: 9px; }
+/* Swatches drawn the way the tags are: a rule, solid or dashed. */
+.key {
+  display: inline-block; width: 18px; flex-shrink: 0;
+  border-top: 1.5px solid var(--line-strong);
+}
+.key--dashed { border-top-style: dashed; }
+
 .stack__group { background: var(--bg); padding: clamp(18px, 2.5vw, 26px); }
 .stack__k {
   display: block; margin-bottom: 13px;
@@ -685,6 +838,21 @@ a { color: inherit; text-decoration: none; }
 /* Interactive but simple: light the node on hover. */
 .xp__item:hover .xp__period::before {
   background: var(--blue); border-color: var(--blue);
+}
+/* The pivot (biology → software) is the hinge of the whole narrative and used
+   to render like any other row. Its node turns 45° — on a rail of squares, the
+   one that turns is where the career turned. Told once, structurally, instead
+   of four times in prose. */
+.xp__item--pivot .xp__period::before {
+  transform: rotate(45deg);
+  border-color: var(--blue);
+}
+/* Inline-block so the chip sits on the period's line instead of below it. */
+.xp__item--pivot .xp__period { display: inline-block; margin-right: 10px; }
+.xp__pivot {
+  font-size: 0.7rem; letter-spacing: 0.05em; color: var(--blue);
+  border: 1px dashed color-mix(in srgb, var(--blue) 50%, transparent);
+  border-radius: 2px; padding: 1px 7px;
 }
 .xp__role {
   font-size: clamp(1.1rem, 2.2vw, 1.32rem); font-weight: 700;
@@ -805,4 +973,65 @@ a { color: inherit; text-decoration: none; }
 
 .topbar, .spec, .section--sand, .facts__row, .footer {
   transition: background-color 0.32s ease, border-color 0.32s ease, color 0.32s ease;
+}
+
+/* ============================================================
+   PRINT
+   ------------------------------------------------------------
+   The page used to print BLANK. `.reveal` starts at opacity 0 and is only
+   cleared by a scroll handler, so everything below the fold reached paper
+   invisible — and recruiters print portfolios to PDF. Everything here exists
+   to make that one thing true; the rest is ink economy.
+   ============================================================ */
+@media print {
+  /* 1. THE BUG: reveals never ran. Force every one of them visible. */
+  html .reveal,
+  html .reveal[data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+
+  /* 2. Print on white whatever the screen theme is, and drop the graph paper
+        (a full-page 34px grid is a lot of toner for nothing). */
+  :root, [data-theme="dark"] {
+    --navy: #11203a; --blue: #1c4a80; --ink: #111111; --ink-soft: #333333;
+    --muted: #444444; --muted-2: #555555;
+    --pg: #2b5675; --ok: #0f5a30; --ai: #8a3a1d;
+    --bg: #ffffff; --sand: #ffffff; --surface-hi: #ffffff; --on-navy: #ffffff;
+    --line: rgba(17, 32, 58, 0.35); --line-strong: rgba(17, 32, 58, 0.60);
+    --grid: transparent;
+  }
+  /* .island re-declares the token set, so it needs its own reset — otherwise
+     white-on-navy prints as white-on-white (browsers strip backgrounds) and
+     the contact email, the one thing worth keeping, vanishes. */
+  [data-theme] .island {
+    --navy: #11203a; --blue: #1c4a80; --ink: #111111; --ink-soft: #333333;
+    --muted: #444444; --muted-2: #555555; --on-navy: #ffffff;
+    --bg: #ffffff; --surface-hi: #ffffff;
+    --line: rgba(17, 32, 58, 0.35); --line-strong: rgba(17, 32, 58, 0.60);
+    --grid: transparent;
+    color: var(--ink);
+  }
+  .section--sand, .island { background-image: none; }
+
+  /* 3. Screen-only furniture. */
+  .topbar, .skip, .topbar__progress, .cvbtn,
+  .footer a[href="#top"] { display: none !important; }
+
+  /* 4. Paper needs the URLs the screen gets from hovering. */
+  .linkmono[href^="http"]::after,
+  .pub__doi[href^="http"]::after,
+  .card__actions .btn[href^="http"]::after {
+    content: " " attr(href);
+    font-size: 0.82em; color: var(--muted-2); word-break: break-all;
+  }
+  .arr, .dl { display: none; }
+
+  /* 5. Don't guillotine a project card or a publication across two pages. */
+  .card, .pub, .xp__item, .stack__group, .stack-feature, .band { break-inside: avoid; }
+  .sec-title, .card__title, .pub__title, .xp__role { break-after: avoid; }
+  .section { padding-block: 26px; }
+  .band { padding-block: 22px; }
+  @page { margin: 14mm; }
 }
