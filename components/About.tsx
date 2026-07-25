@@ -89,9 +89,9 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 className="facts__v"
-                es={'Full Stack Developer @ Inetum<span class="sub">France AgriMer · sector público</span>'}
-                en={'Full Stack Developer @ Inetum<span class="sub">France AgriMer · public sector</span>'}
-                fr={'Full Stack Developer @ Inetum<span class="sub">France AgriMer · secteur public</span>'}
+                es={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · sector público</span>'}
+                en={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · public sector</span>'}
+                fr={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · secteur public</span>'}
               />
             </div>
             <div className="facts__row">

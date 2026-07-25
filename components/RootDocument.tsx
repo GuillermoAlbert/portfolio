@@ -59,7 +59,8 @@ const personLd = {
   sameAs: [
     "https://github.com/GuillermoAlbert",
     "https://www.linkedin.com/in/guillermo-albert-garcia",
-    "https://scholar.google.com/citations?hl=fr&user=Xo9Er0sAAAAJ",
+    // No hl= parameter: hardcoding hl=fr forced a French UI on every visitor.
+    "https://scholar.google.com/citations?user=Xo9Er0sAAAAJ",
   ],
 };
 

@@ -43,17 +43,17 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="xp__meta"
-              es="France AgriMer · sector público"
-              en="France AgriMer · public sector"
-              fr="France AgriMer · secteur public"
+              es="FranceAgriMer · sector público"
+              en="FranceAgriMer · public sector"
+              fr="FranceAgriMer · secteur public"
             />
             <T
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Dos plataformas para el Ministerio France AgriMer, que gestionan ayudas, subvenciones y pagos a agricultores de toda Francia."
-              en="Two platforms for the French Ministry France AgriMer, managing aid, subsidies and payments to farmers across France."
-              fr="Deux plateformes pour le ministère France AgriMer, gérant aides, subventions et paiements aux agriculteurs de toute la France."
+              es="Dos plataformas para FranceAgriMer, el organismo público bajo el Ministerio de Agricultura francés, que gestionan ayudas, subvenciones y pagos a agricultores de toda Francia."
+              en="Two platforms for FranceAgriMer, the French public agency under the Ministry of Agriculture, managing aid, subsidies and payments to farmers across France."
+              fr="Deux plateformes pour FranceAgriMer, établissement public sous tutelle du ministère de l'Agriculture, gérant aides, subventions et paiements aux agriculteurs de toute la France."
             />
             <ul className="xp__bullets">
               <T
