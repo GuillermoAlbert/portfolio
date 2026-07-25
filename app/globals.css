@@ -53,7 +53,7 @@
    ============================================================ */
 .island {
   --navy:        #eef2f8;
-  --blue:        #6ea6e6;   /* 6.2:1 on the island bg; #2563a8 would be 2.5:1 */
+  --blue:        #6ea6e6;   /* 6.83:1 on the island bg; #2563a8 would be 2.84:1 */
   --ink:         #e7ecf4;
   --ink-soft:    #c3ccdb;
   --muted:       #98a4b9;
@@ -76,11 +76,15 @@
     linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
   background-size: 34px 34px;
 }
-/* Already dark: step up a surface and keep the hairline rules doing the work. */
+/* Already dark: step up a surface and keep the hairline rules doing the work.
+   Stepping the surface up costs contrast, so --muted-2 is re-tuned for it:
+   #818ea4 lands at 4.38:1 here, which fails AA for small text (.sec-note,
+   .footer__inner). Measured, not guessed — #8b98ae clears it at ~4.97:1. */
 [data-theme="dark"] .island {
   --bg: #15294a;
   --surface-hi: #1b3157;
   --on-navy: #15294a;
+  --muted-2: #8b98ae;
   border-block: 1px solid var(--line);
 }
 

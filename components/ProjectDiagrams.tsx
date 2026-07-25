@@ -114,13 +114,19 @@ export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
 }
 
 // Homelab, drawn in axonometric projection so the "10× LXC" claim becomes a
-// countable object: ten slabs in a rack, four of them named. Consistent 2:1
-// dimetric (26.57°) — every depth edge runs ±(2,1), every height edge stays
+// countable object: ten slabs in a rack, four of them named. Consistent 4:1
+// dimetric (14.04°) — every depth edge runs ±(4,1), every height edge stays
 // vertical, including the connectors. Hidden edges are omitted the way an ink
 // technical drawing does it: only the top unit shows its top face, the nine
 // below show the visible front band, and the base plate's top face is dropped
 // because the stack covers it. Static by design — no animation beyond the
 // dash-flow the card's hover already gives .diag-wire.
+//
+// The angle is the shallow end of the dimetric range on purpose. A top face
+// costs exactly slope × width in height, so at 2:1 this 152-wide rack would
+// spend 76 units on its lid alone and the stack could not fit under 130. At
+// 4:1 the lid costs 38 and the height freed goes into slab pitch, which is
+// what makes the units countable at the ~400px the card actually renders.
 export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
   return (
     <figure className="card__diagram" aria-hidden="true">
@@ -131,56 +137,63 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         en="// architecture"
         fr="// architecture"
       />
-      <svg viewBox="0 0 360 144" strokeWidth="1">
-        {/* header rule: host on the left, container count on the right */}
-        <text className="diag-note diag-note--start" x="132" y="7">PROXMOX VE</text>
-        <text className="diag-note diag-note--end diag-accent" x="358" y="7">10× LXC</text>
+      <svg viewBox="0 0 360 130" strokeWidth="1">
+        {/* header rule, spanning exactly the rack it names */}
+        <text className="diag-note diag-note--start" x="92" y="6">PROXMOX VE</text>
+        <text className="diag-note diag-note--end diag-accent" x="244" y="6">10× LXC</text>
 
-        {/* access edge — dashed = outside the host, as in the other sketches */}
-        <text className="diag-label" x="34" y="24">Tailscale</text>
-        <line className="diag-box diag-box--soft" x1="34" y1="26" x2="34" y2="36" />
-        <path className="diag-box diag-box--dashed" d="M22 30 L62 50 L46 58 L6 38 Z" />
-        <path className="diag-box diag-box--dashed" d="M6 38 V41 L46 61 L62 53 V50 M46 58 V61" />
+        {/* access edge — a small dashed node, not a second rack: it sits
+            outside the host, so it gets the least ink that still reads. */}
+        <text className="diag-label" x="32" y="28">Tailscale</text>
+        <line className="diag-box diag-box--soft" x1="32" y1="30" x2="32" y2="36" />
+        <path className="diag-box diag-box--dashed" d="M24 34 L56 42 L40 46 L8 38 Z" />
+        <path className="diag-box diag-box--dashed" d="M8 38 V41 L40 49 L56 45 V42 M40 46 V49" />
 
-        {/* Tailscale → host, running down the +u axis like every other edge */}
-        <line className="diag-wire" x1="64" y1="51" x2="122" y2="80" />
-        <path className="diag-head" d="M128.2 79.2 L132 85 L125 85.4" />
+        {/* Tailscale → host, down the +u axis. It lands in the air gap between
+            two units so it reads as entering the chassis, not one container. */}
+        <line className="diag-wire" x1="60" y1="43" x2="84" y2="49" />
+        <path className="diag-head" d="M87 46.1 L92 51 L85.3 52.9" />
 
         {/* rack frame = the Proxmox VE enclosure: two corner posts + base rim */}
-        <line className="diag-box" x1="132" y1="14" x2="132" y2="93" />
-        <line className="diag-box" x1="204" y1="30" x2="204" y2="109" />
-        <path className="diag-box" d="M132 93 L184 119 L204 109" />
+        <line className="diag-box" x1="92" y1="10" x2="92" y2="100" />
+        <line className="diag-box" x1="244" y1="24" x2="244" y2="114" />
+        <path className="diag-box" d="M92 100 L196 126 L244 114" />
 
-        {/* ten LXC slabs, 7px pitch. Named ones carry the full stroke, the six
-            anonymous ones the soft stroke — 1·2·1·2·1·2·1 also aids counting. */}
-        <path className="diag-box" d="M132 22 L152 12 L204 38" />
-        <path className="diag-box" d="M132 22 L184 48 L204 38 M132 25 L184 51 L204 41 M184 48 V51" />
-        <path className="diag-box diag-box--soft" d="M132 29 L184 55 L204 45 M132 32 L184 58 L204 48 M184 55 V58" />
-        <path className="diag-box diag-box--soft" d="M132 36 L184 62 L204 52 M132 39 L184 65 L204 55 M184 62 V65" />
-        <path className="diag-box" d="M132 43 L184 69 L204 59 M132 46 L184 72 L204 62 M184 69 V72" />
-        <path className="diag-box diag-box--soft" d="M132 50 L184 76 L204 66 M132 53 L184 79 L204 69 M184 76 V79" />
-        <path className="diag-box diag-box--soft" d="M132 57 L184 83 L204 73 M132 60 L184 86 L204 76 M184 83 V86" />
-        <path className="diag-box" d="M132 64 L184 90 L204 80 M132 67 L184 93 L204 83 M184 90 V93" />
-        <path className="diag-box diag-box--soft" d="M132 71 L184 97 L204 87 M132 74 L184 100 L204 90 M184 97 V100" />
-        <path className="diag-box diag-box--soft" d="M132 78 L184 104 L204 94 M132 81 L184 107 L204 97 M184 104 V107" />
-        <path className="diag-box" d="M132 85 L184 111 L204 101 M132 88 L184 114 L204 104 M184 111 V114" />
+        {/* ten LXC slabs: 8-unit pitch, 2-unit band, so the air between units
+            is 3× the band and the stack cannot collapse into hatching at the
+            ~400px this actually renders. Named units carry the full stroke,
+            the six anonymous ones the soft stroke. */}
+        <path className="diag-box" d="M92 22 L140 10 L244 36" />
+        <path className="diag-box" d="M92 22 L196 48 L244 36 M92 24 L196 50 L244 38 M196 48 V50" />
+        <path className="diag-box diag-box--soft" d="M92 30 L196 56 L244 44 M92 32 L196 58 L244 46 M196 56 V58" />
+        <path className="diag-box diag-box--soft" d="M92 38 L196 64 L244 52 M92 40 L196 66 L244 54 M196 64 V66" />
+        <path className="diag-box" d="M92 46 L196 72 L244 60 M92 48 L196 74 L244 62 M196 72 V74" />
+        <path className="diag-box diag-box--soft" d="M92 54 L196 80 L244 68 M92 56 L196 82 L244 70 M196 80 V82" />
+        <path className="diag-box diag-box--soft" d="M92 62 L196 88 L244 76 M92 64 L196 90 L244 78 M196 88 V90" />
+        <path className="diag-box" d="M92 70 L196 96 L244 84 M92 72 L196 98 L244 86 M196 96 V98" />
+        <path className="diag-box diag-box--soft" d="M92 78 L196 104 L244 92 M92 80 L196 106 L244 94 M196 104 V106" />
+        <path className="diag-box diag-box--soft" d="M92 86 L196 112 L244 100 M92 88 L196 114 L244 102 M196 112 V114" />
+        <path className="diag-box" d="M92 94 L196 120 L244 108 M92 96 L196 122 L244 110 M196 120 V122" />
 
-        {/* callouts: leader lines share the +u angle, lighter than object lines
-            so they read as annotation. Label x = left edge + half the mono
-            advance (5.7px/char), which left-aligns centre-anchored text. */}
-        <line className="diag-box diag-box--soft" x1="204" y1="39" x2="240" y2="57" />
-        <text className="diag-label" x="281" y="60">Docker · apps</text>
-        <line className="diag-box diag-box--soft" x1="204" y1="60" x2="240" y2="78" />
-        <text className="diag-label" x="272.5" y="81">PostgreSQL</text>
-        <line className="diag-box diag-box--soft" x1="204" y1="81" x2="240" y2="99" />
-        <text className="diag-label" x="270" y="102">ETL · LLM</text>
-        <line className="diag-box diag-box--soft" x1="204" y1="102" x2="240" y2="120" />
-        <text className="diag-label" x="272.5" y="123">monitoring</text>
+        {/* callouts: each leader starts 4 units clear of the corner post, on
+            the +u line through its own slab's right corner, so it points at
+            the unit without touching structure. Label x = left edge + half the
+            mono advance (5.7px/char), left-aligning centre-anchored text. */}
+        <line className="diag-box diag-box--soft" x1="248" y1="37" x2="272" y2="43" />
+        <text className="diag-label" x="313" y="46">Docker · apps</text>
+        <line className="diag-box diag-box--soft" x1="248" y1="61" x2="272" y2="67" />
+        <text className="diag-label" x="304.5" y="70">PostgreSQL</text>
+        <line className="diag-box diag-box--soft" x1="248" y1="85" x2="272" y2="91" />
+        <text className="diag-label" x="301.7" y="94">ETL · LLM</text>
+        <line className="diag-box diag-box--soft" x1="248" y1="109" x2="272" y2="115" />
+        <text className="diag-label" x="304.5" y="118">monitoring</text>
 
-        {/* off-site backups */}
-        <line className="diag-wire" x1="184" y1="119" x2="184" y2="125" />
-        <path className="diag-head" d="M180 125 l4 6 4 -6" />
-        <text className="diag-note" x="184" y="140">backups · off-site</text>
+        {/* off-site backups: leaves the base rim's left corner down the +v
+            axis, so it hangs off the bottom of the host without costing the
+            height a straight drop below the rack would. */}
+        <line className="diag-wire" x1="88" y1="101" x2="64" y2="107" />
+        <path className="diag-head" d="M61 104.1 L56 109 L62.7 110.9" />
+        <text className="diag-note" x="46" y="120">backups · off-site</text>
       </svg>
     </figure>
   );
