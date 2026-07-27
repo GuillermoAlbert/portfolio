@@ -178,22 +178,30 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         {/* callouts: each leader starts 4 units clear of the corner post, on
             the +u line through its own slab's right corner, so it points at
             the unit without touching structure. Label x = left edge + half the
-            mono advance (5.7px/char), left-aligning centre-anchored text. */}
+            mono advance, left-aligning centre-anchored text. JetBrains Mono
+            advances 0.65em, so at the .diag-label size of 9.8px that is
+            6.37px/char, and all four x values hold the same 276 left edge (4
+            clear of the leader's end at 272). `Docker · apps` is what caps the
+            font size: 13 chars need 82.8 of the 84 units between 276 and the
+            viewBox edge. Recompute these if that size ever moves again. */}
         <line className="diag-box diag-box--soft" x1="248" y1="37" x2="272" y2="43" />
-        <text className="diag-label" x="313" y="46">Docker · apps</text>
+        <text className="diag-label" x="317.4" y="46">Docker · apps</text>
         <line className="diag-box diag-box--soft" x1="248" y1="61" x2="272" y2="67" />
-        <text className="diag-label" x="304.5" y="70">PostgreSQL</text>
+        <text className="diag-label" x="307.9" y="70">PostgreSQL</text>
         <line className="diag-box diag-box--soft" x1="248" y1="85" x2="272" y2="91" />
-        <text className="diag-label" x="301.7" y="94">ETL · LLM</text>
+        <text className="diag-label" x="304.7" y="94">ETL · LLM</text>
         <line className="diag-box diag-box--soft" x1="248" y1="109" x2="272" y2="115" />
-        <text className="diag-label" x="304.5" y="118">monitoring</text>
+        <text className="diag-label" x="307.9" y="118">monitoring</text>
 
         {/* off-site backups: leaves the base rim's left corner down the +v
             axis, so it hangs off the bottom of the host without costing the
             height a straight drop below the rack would. */}
         <line className="diag-wire" x1="88" y1="101" x2="64" y2="107" />
         <path className="diag-head" d="M61 104.1 L56 109 L62.7 110.9" />
-        <text className="diag-note" x="46" y="120">backups · off-site</text>
+        {/* x=50, not 46: centre-anchored over 18 chars at the .diag-note
+            advance of 5.46px/char, the label reaches 49.1 units either side,
+            so 46 started at -3.1 and the viewBox clipped its first letter. */}
+        <text className="diag-note" x="50" y="120">backups · off-site</text>
       </svg>
     </figure>
   );

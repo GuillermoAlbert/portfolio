@@ -556,17 +556,49 @@ a { color: inherit; text-decoration: none; }
   .card:hover .diag-wire { animation: diag-flow 1.2s linear infinite; }
 }
 .diag-head { fill: none; stroke: var(--line-strong); }
+/* Sizes are in viewBox units, so the rendered size is declared × (painted
+   width / viewBox width). At 9.5/8 that scale factor put real text at
+   9.37/7.89px in the hero, 10.89/9.17px in desktop cards and 7.23/6.09px in
+   the homelab card at 390px — `backups · off-site` at 6.09px is below reading
+   size on a 1× screen. 9.8/8.4 lifts every case; the phone case is fixed by
+   giving the sketch its natural width instead (see the 620px rule below).
+
+   These two values are ceilings, not preferences. JetBrains Mono advances
+   0.65em per character (measured off getBBox, not assumed), and the labels are
+   centre-anchored, so the size decides the half-width that has to fit. The
+   binding constraint is the homelab's `Docker · apps`: 13 chars between the
+   leader end at 272 and the 360 viewBox edge is 84 units of room, and 13 ×
+   0.65 × 9.8 = 82.8. At 10px it needs 84.5 and clips. `tests · revisión ·
+   monitorización` in the hero sketch is the same story at 8.4/8.8. Raise
+   either number and text goes outside the viewBox, where the SVG clips it. */
 .diag-label {
-  font-family: var(--mono); font-size: 9.5px;
+  font-family: var(--mono); font-size: 9.8px;
   fill: var(--navy); text-anchor: middle;
 }
 .diag-note {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 0.05em;
+  font-family: var(--mono); font-size: 8.4px; letter-spacing: 0.05em;
   fill: var(--muted-2); text-anchor: middle;
 }
 .diag-note--start { text-anchor: start; }
 .diag-note--end   { text-anchor: end; }
 .diag-accent { fill: var(--blue); }
+
+/* On a phone the card was spending 48px of its 350px on padding the sketch
+   didn't need: a 360-unit viewBox painted at 274px (×0.761), which is what
+   made the labels sub-legible AND collapsed the rack's 8-unit slab pitch to
+   6.1px — the two findings had one cause. Letting the diagram span the card's
+   padding takes it to 326px (×0.906): pitch 7.25px, so the ten units count
+   again, and every coordinate in the SVG stays exactly as drawn. The side
+   borders go with it so the dashed top and bottom read as full-width rules
+   rather than a box with its sides cut off. 24px is not a guess — the card's
+   `clamp(24px, 3.4vw, 38px)` is pinned to its 24px floor below 706px. */
+@media (max-width: 620px) {
+  .card .card__diagram {
+    margin-inline: -24px;
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
 
 /* ---------- the idle instrument (motion layer 4 — see STYLING.md) ----------
    The hero's MethodDiagram runs on its own: each leg of the loop lights blue
@@ -719,6 +751,32 @@ a { color: inherit; text-decoration: none; }
 .pub__doi .arr { transition: transform 0.18s ease; }
 .pub__doi:hover .arr { transform: translate(2px, -2px); }
 
+/* §05 was the one section that drew a full-width rule and then didn't use it:
+   at 1440px each .pub ruled 1032px while year, authors and the DOI button all
+   ended before x=700 — the flattest passage on the page, sitting second-to-last
+   where the scroll most needs to still be going somewhere. Splitting the record
+   into a citation rail (year, tag, venue, volume) and the entry proper spends
+   the width the rule already promised, and it's the shape a publications list
+   has anyway. Below 860px it stays the stacked flex row it was — the rail has
+   nowhere to go on a phone, and there the rule is short enough to be honest. */
+@media (min-width: 860px) {
+  .pub {
+    display: grid;
+    grid-template-columns: minmax(190px, 240px) minmax(0, 1fr);
+    column-gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .pub__bar {
+    grid-column: 1; grid-row: 1 / span 3;
+    flex-direction: column; align-items: flex-start;
+    gap: 9px; margin-bottom: 0;
+  }
+  .pub__venue-wrap { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .pub__title, .pub__authors, .pub__doi { grid-column: 2; }
+  /* inline-flex becomes a stretched grid item unless it is told otherwise */
+  .pub__doi { justify-self: start; }
+}
+
 /* ============================================================
    ABOUT
    ============================================================ */
@@ -818,10 +876,18 @@ a { color: inherit; text-decoration: none; }
 .stack__legend {
   grid-column: 1 / -1;
   background: var(--bg);
+  /* Source order is legend-first so the single-column phone layout meets the
+     key BEFORE the `Python` tag it decodes (as the last child it sat about six
+     screens below it), and so it takes stagger index 0 rather than fading in
+     after the rows it introduces. From 620px up the grid has more than one
+     column, the key is visible in the same glance as the tags, and it goes
+     back to closing the drawing. */
+  order: 1;
   padding: clamp(13px, 1.8vw, 16px) clamp(18px, 2.5vw, 26px);
   display: flex; flex-wrap: wrap; align-items: center; gap: 7px 26px;
   font-family: var(--mono); font-size: 0.72rem; color: var(--muted-2);
 }
+@media (max-width: 619px) { .stack__legend { order: -1; } }
 .stack__legend-item { display: inline-flex; align-items: center; gap: 9px; }
 /* Swatches drawn the way the tags are: a rule, solid or dashed. */
 .key {
@@ -840,7 +906,17 @@ a { color: inherit; text-decoration: none; }
 
 /* AI/agents spotlight: lives OUTSIDE the grid so the 6 groups stay a complete
    3×2 — no odd cell falling to a lone row. Reads as a deliberate banner; the
-   coral accent ties it to the tag--ai family. */
+   coral accent ties it to the tag--ai family.
+
+   The surface is plain --bg, not the 5% coral wash it used to carry. This is
+   the last block of §03 and the dark .band comes immediately after it, so a
+   warm tint at banner scale put the page's two loudest objects back to back
+   and they competed. The band's whole job is to be the interruption, and a
+   noisy neighbour spends that. The 3px coral rail and the coral label still
+   mark the group; what went was the tinted mass, not the identity — and on
+   plain --bg the label's contrast goes up rather than down (6.18:1 light,
+   7.18:1 dark). It now shares its surface with the .stack__group cells above,
+   so it reads as the grid continuing rather than a foreign slab. */
 .stack-feature {
   margin-top: 14px;
   display: flex; flex-wrap: wrap; align-items: center;
@@ -848,7 +924,7 @@ a { color: inherit; text-decoration: none; }
   padding: clamp(14px, 2vw, 18px) clamp(18px, 2.5vw, 26px);
   border: 1px solid var(--line);
   border-left: 3px solid var(--ai);
-  background: color-mix(in srgb, var(--ai) 5%, var(--bg));
+  background: var(--bg);
 }
 .stack-feature .stack__k { margin-bottom: 0; flex-shrink: 0; color: var(--ai); }
 

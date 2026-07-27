@@ -22,9 +22,15 @@ export default function Statement({ locale = "es" }: { locale?: Locale }) {
           en="// method"
           fr="// méthode"
         />
+        {/* An h2, not a p: the band drops the section-head scaffold on purpose,
+            and the side effect was that the site's thesis appeared in no
+            heading — a screen-reader user tabbing through headings went from
+            §03 straight to §04 and never met it. The class carries every visual
+            property (and `* { margin: 0 }` handles the rest), so the element
+            changes and the design does not. Still no § index, no ghost numeral. */}
         <T
           locale={locale}
-          as="p"
+          as="h2"
           className="band__line"
           es={'La IA acelera. <span class="hi">La evidencia decide.</span>'}
           en={'AI accelerates. <span class="hi">Evidence decides.</span>'}
