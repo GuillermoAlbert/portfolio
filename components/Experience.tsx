@@ -34,7 +34,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               className="xp__period mono"
               es="mar. 2024 — Presente"
               en="Mar 2024 — Present"
-              fr="mars 2024 — Présent"
+              fr="mars 2024 — Aujourd'hui"
             />
             <h3 className="xp__role">
               Full Stack Developer <span className="xp__org">· Inetum</span>
@@ -78,6 +78,52 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
                 fr="Qualité continue avec SonarQube, JUnit et tests de composants Angular, au sein d'une équipe internationale (~10 pers.) en méthodologie Agile."
               />
             </ul>
+          </article>
+
+          {/* The teaching year is in all three CVs and was missing here, so the
+              two documents disagreed about a whole year of the timeline. It
+              sits between Inetum and DAW because it overlapped both. */}
+          <article className="xp__item">
+            <T
+              locale={locale}
+              as="p"
+              className="xp__period mono"
+              es="sept. 2023 — sept. 2024"
+              en="Sep 2023 — Sep 2024"
+              fr="sept. 2023 — sept. 2024"
+            />
+            <h3 className="xp__role">
+              <T
+                locale={locale}
+                es="Profesor de Ciencias"
+                en="Science Teacher"
+                fr="Professeur de Sciences"
+              />{" "}
+              <T
+                locale={locale}
+                as="span"
+                className="xp__org"
+                es="· Liceo Francés de Alicante"
+                en="· Lycée Français d'Alicante"
+                fr="· Lycée Français d'Alicante"
+              />
+            </h3>
+            <T
+              locale={locale}
+              as="p"
+              className="xp__meta"
+              es="Bachillerato · bilingüe francés/español"
+              en="Upper secondary · bilingual French/Spanish"
+              fr="Lycée · bilingue français/espagnol"
+            />
+            <T
+              locale={locale}
+              as="p"
+              className="xp__desc"
+              es="Docencia de ciencias en bachillerato (baccalauréat francés), en entorno bilingüe francés/español y compatibilizada con el inicio en Inetum."
+              en="Taught science at upper-secondary level (French baccalauréat) in a bilingual French/Spanish environment, alongside starting at Inetum."
+              fr="Enseignement des sciences au lycée (baccalauréat français) dans un environnement bilingue français/espagnol, en parallèle du début chez Inetum."
+            />
           </article>
 
           <article className="xp__item xp__item--pivot">
@@ -125,23 +171,30 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
                 en="Research &amp; Biology"
                 fr="Recherche &amp; Biologie"
               />{" "}
-              <span className="xp__org">· Universidad de Alicante</span>
+              {/* Not "· Universidad de Alicante" alone: the row's own copy names
+                  a València master and research at CSIC and Helsinki, so a
+                  single-institution label misattributed three of the four. */}
+              {/* Luomus, not "the Helsinki museum": it is the Finnish Museum of
+                  Natural History, part of the University of Helsinki, and the
+                  vague version invited the wrong guess. Its own name needs no
+                  translation, so this stays a plain span in all three. */}
+              <span className="xp__org">· UA · CSIC · Luomus (Helsinki)</span>
             </h3>
             <T
               locale={locale}
               as="p"
               className="xp__meta"
-              es="Grado + Máster · investigación"
-              en="BSc + MSc · research"
-              fr="Licence + Master · recherche"
+              es="Grado + 2 másteres · investigación"
+              en="BSc + 2 MScs · research"
+              fr="Licence + 2 masters · recherche"
             />
             <T
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Investigación en el CSIC (Estación Biológica de Doñana) y en el Museo de Historia Natural de Helsinki, con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones revisadas por pares."
-              en="Research at CSIC (Doñana Biological Station) and the Helsinki Natural History Museum, with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 peer-reviewed publications."
-              fr="Recherche au CSIC (Station biologique de Doñana) et au Muséum d'histoire naturelle d'Helsinki, avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications évaluées par les pairs."
+              es="Investigación en el CSIC (Estación Biológica de Doñana) y en Luomus, el Museo de Historia Natural de Finlandia (Univ. de Helsinki), con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones, una de ellas en revista revisada por pares."
+              en="Research at CSIC (Doñana Biological Station) and at Luomus, the Finnish Museum of Natural History (Univ. of Helsinki), with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 publications, one of them in a peer-reviewed journal."
+              fr="Recherche au CSIC (Station biologique de Doñana) et au Luomus, le Muséum finlandais d'histoire naturelle (Univ. d'Helsinki), avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications, dont une en revue à comité de lecture."
             />
           </article>
         </div>

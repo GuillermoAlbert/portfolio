@@ -14,12 +14,17 @@ export default function Publications({ locale = "es" }: { locale?: Locale }) {
             en="Publications"
             fr="Publications"
           />
+          {/* Not "// peer-reviewed" over all three: the second entry carries a
+              `conf.` chip right below (INTED2022 are conference proceedings)
+              and Iberromyrmex nº 7 is a society bulletin, so the old note was
+              contradicted on the same screen. Only Ibis is a peer-reviewed
+              journal, and that is what the note now claims. */}
           <T
             locale={locale}
             className="sec-note mono"
-            es="// revisadas por pares"
-            en="// peer-reviewed"
-            fr="// évalué par les pairs"
+            es="// 1 en revista revisada por pares"
+            en="// 1 in a peer-reviewed journal"
+            fr="// 1 en revue à comité de lecture"
           />
         </div>
 

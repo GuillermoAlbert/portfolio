@@ -77,7 +77,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
                 className="card__year"
                 es="2025 — Presente"
                 en="2025 — Present"
-                fr="2025 — Présent"
+                fr="2025 — Aujourd'hui"
               />
             </div>
             <h3 className="card__title">MAMS — My Athlete Monitoring System</h3>
@@ -93,16 +93,22 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="card__desc"
-              es="SaaS backend-first para clubes y academias semi-profesionales: modelo de permisos multinivel, diseño de esquema con Liquibase e ingesta de datos GPS mediante un pipeline ETL incremental con upserts idempotentes."
-              en="A backend-first SaaS for semi-pro clubs and academies: multi-level permissions model, schema design with Liquibase, and GPS data ingested through an incremental ETL pipeline with idempotent upserts."
-              fr="SaaS backend-first pour clubs et académies semi-professionnels : modèle de permissions multi-niveaux, conception du schéma avec Liquibase et ingestion de données GPS via un pipeline ETL incrémental avec upserts idempotents."
+              es="SaaS backend-first para clubes y academias semi-profesionales: diseño de esquema con Liquibase e ingesta de datos GPS mediante un pipeline ETL incremental con upserts idempotentes."
+              en="A backend-first SaaS for semi-pro clubs and academies: schema design with Liquibase, and GPS data ingested through an incremental ETL pipeline with idempotent upserts."
+              fr="SaaS backend-first pour clubs et académies semi-professionnels : conception du schéma avec Liquibase et ingestion de données GPS via un pipeline ETL incrémental avec upserts idempotents."
             />
+            {/* The "5 transactional entities" figure belongs to the Inetum role
+                and only there — the CVs attribute it to that project alone. A
+                recycled number costs more than no number to the one reader who
+                has the CV and this page open at once. The permissions model is
+                the claim that is true of MAMS specifically, so it moves up from
+                the description rather than being said twice. */}
             <p className="card__metrics">
               <T
                 locale={locale}
-                es="<b>5</b> entidades transaccionales end-to-end"
-                en="<b>5</b> transactional entities end-to-end"
-                fr="<b>5</b> entités transactionnelles end-to-end"
+                es="<b>Permisos</b> multinivel"
+                en="<b>Multi-level</b> permissions"
+                fr="<b>Permissions</b> multi-niveaux"
               />
               <T
                 locale={locale}
@@ -144,7 +150,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
                 className="card__year"
                 es="2024 — Presente"
                 en="2024 — Present"
-                fr="2024 — Présent"
+                fr="2024 — Aujourd'hui"
               />
             </div>
             <h3 className="card__title">Proxmox Home Server + Tailscale</h3>
