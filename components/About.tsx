@@ -52,7 +52,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                 locale={locale}
                 as="p"
                 es="Con IA agéntica (Claude Code, MCP) no improviso. La especificación la escribo yo, casos límite incluidos, y el agente ejecuta contra ella. Después el código pasa por las puertas de siempre: tests, revisión, monitorización. Lo que no las pasa, se reescribe."
-                en="With agentic AI (Claude Code, MCP) I don't improvise. I write the spec myself, edge cases included, and the agent works against it. The code then goes through the same gates as anything else: tests, review, monitoring. Whatever doesn't clear them gets rewritten."
+                en="With agentic AI (Claude Code, MCP) I don't improvise. I write the spec myself, edge cases included, and the agent builds against it. The code then goes through the same gates as anything else: tests, review, monitoring. Whatever doesn't clear them gets rewritten."
                 fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas. C'est moi qui écris la spec, cas limites compris, et l'agent exécute contre elle. Ensuite le code passe par les garde-fous habituels : tests, revue, supervision. Ce qui ne passe pas, je le réécris."
               />
             </div>
@@ -67,55 +67,36 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
             data-aria-en="Facts"
             data-aria-fr="Repères"
           >
+            {/* This aside used to carry five rows, four of which the page
+                already said elsewhere: ENFOQUE and IDIOMAS repeated the hero
+                spec card's FOCUS and LANGS, EXPERIENCIA repeated §02's first
+                entry, and INVESTIGACIÓN repeated §05 verbatim. A column that
+                restates the page reads as filler and taints the substance next
+                to it. What is left is what lives nowhere else: the full set of
+                qualifications (the Teacher Training master appears in no other
+                place on the site) and a link that makes §05 checkable. */}
             <div className="facts__row">
               <span className="facts__k">EDUCATION</span>
               <T
                 locale={locale}
                 className="facts__v"
-                es="Grado en Biología (UA) · DAW"
-                en="BSc Biology (UA) · Web App Dev (DAW)"
-                fr="Licence de Biologie (UA) · DAW"
+                es={'Grado en Biología (UA) · DAW<span class="sub">Máster en Profesorado · Máster en Biodiversidad (Univ. de València)</span>'}
+                en={'BSc Biology (UA) · Web App Dev (DAW)<span class="sub">MSc in Teacher Training · MSc in Biodiversity (Univ. of Valencia)</span>'}
+                fr={'Licence de Biologie (UA) · DAW<span class="sub">Master en enseignement · Master en Biodiversité (Univ. de Valence)</span>'}
               />
             </div>
             <div className="facts__row">
-              <span className="facts__k">RESEARCH</span>
-              <T
-                locale={locale}
-                className="facts__v"
-                es={'3 publicaciones revisadas por pares<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
-                en={'3 peer-reviewed publications<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
-                fr={'3 publications évaluées par les pairs<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
-              />
-            </div>
-            <div className="facts__row">
-              <span className="facts__k">EXPERIENCE</span>
-              <T
-                locale={locale}
-                className="facts__v"
-                es={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · sector público</span>'}
-                en={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · public sector</span>'}
-                fr={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · secteur public</span>'}
-              />
-            </div>
-            <div className="facts__row">
-              <span className="facts__k">LANGS</span>
-              <T
-                locale={locale}
-                className="facts__v"
-                es="ES nativo · FR bilingüe · EN C1"
-                en="ES native · FR bilingual · EN C1"
-                fr="ES natif · FR bilingue · EN C1"
-              />
-            </div>
-            <div className="facts__row">
-              <span className="facts__k">FOCUS</span>
-              <T
-                locale={locale}
-                className="facts__v"
-                es="Backend &amp; arquitectura"
-                en="Backend &amp; architecture"
-                fr="Backend &amp; architecture"
-              />
+              <span className="facts__k">SCHOLAR</span>
+              <span className="facts__v">
+                <a
+                  className="linkmono"
+                  href="https://scholar.google.com/citations?user=Xo9Er0sAAAAJ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google Scholar <span className="arr" aria-hidden="true">↗</span>
+                </a>
+              </span>
             </div>
           </aside>
         </div>
