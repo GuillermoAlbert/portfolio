@@ -76,9 +76,10 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                 it is the job. Two things it does NOT repeat: the two masters
                 (the Teacher Training one appears nowhere else on the site) and
                 the Scholar link, which makes §05 checkable in one click and sits
-                next to the claim it backs. Keep RESEARCH phrased exactly as §05
-                — "1 en revista revisada por pares", never "3 revisadas por
-                pares" — or the summary contradicts the section it summarises. */}
+                next to the claim it backs. RESEARCH states the count and lets
+                the three venues in the sub do the qualifying — never "3
+                revisadas por pares" (only Ibis is a journal) and never "con
+                DOI" (Iberomyrmex has none, it is a direct PDF). */}
             <div className="facts__row">
               <span className="facts__k">EDUCATION</span>
               <T
@@ -94,9 +95,9 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 className="facts__v"
-                es={'3 publicaciones · 1 en revista revisada por pares<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
-                en={'3 publications · 1 in a peer-reviewed journal<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
-                fr={'3 publications · 1 en revue à comité de lecture<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
+                es={'3 publicaciones<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
+                en={'3 publications<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
+                fr={'3 publications<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
               />
             </div>
             <div className="facts__row">
