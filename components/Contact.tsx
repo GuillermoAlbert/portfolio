@@ -3,7 +3,11 @@ import { T, cvFile, contactEmail, type Locale } from "@/lib/i18n";
 export default function Contact({ locale = "es" }: { locale?: Locale }) {
   const email = contactEmail(locale);
   return (
-    <section className="section" id="contact">
+    // `island` re-declares the dark token set on this section, so every child
+    // (email, ghost numeral, ghost buttons, social links) re-themes for free.
+    // It gives the page its only value anchor and a real ending instead of a
+    // fade-out. In dark mode it steps up a surface — see globals.css.
+    <section className="section island" id="contact">
       <div className="container">
         <div className="section-head reveal" data-num="06">
           <span className="sec-index">§ 06</span>
@@ -18,7 +22,7 @@ export default function Contact({ locale = "es" }: { locale?: Locale }) {
           <T
             locale={locale}
             className="sec-note mono"
-            es="// hablamos?"
+            es="// ¿hablamos?"
             en="// let's talk"
             fr="// on en parle ?"
           />
@@ -28,9 +32,9 @@ export default function Contact({ locale = "es" }: { locale?: Locale }) {
           locale={locale}
           as="p"
           className="contact__lead reveal"
-          es="¿Un backend que diseñar, un sistema que mantener en pie o un proyecto del que hablar? Escríbeme."
-          en="Got a backend that needs designing, a system that needs to stay up, or a project to talk through? Write to me."
-          fr="Un backend à concevoir, un système à garder debout ou un projet à discuter ? Écrivez-moi."
+          es="Si tienes un backend que diseñar o un sistema que hay que mantener en pie, escríbeme."
+          en="If you've got a backend to design, or a system that has to stay up, get in touch."
+          fr="Si vous avez un backend à concevoir ou un système à garder debout, écrivez-moi."
         />
 
         <T

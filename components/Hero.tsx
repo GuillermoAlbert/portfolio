@@ -174,6 +174,9 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
           <aside
             className="spec"
             aria-label={locale === "en" ? "Summary" : locale === "fr" ? "Résumé" : "Resumen"}
+            data-aria-es="Resumen"
+            data-aria-en="Summary"
+            data-aria-fr="Résumé"
           >
             <div className="spec__bar">
             <span className="b" aria-hidden="true"></span>

@@ -55,12 +55,56 @@ export default function Stack({ locale = "es" }: { locale?: Locale }) {
         </div>
 
         <div className="stack reveal" data-d="1" data-stagger>
+          {/* Map key for the dashed tags. They mark tools shipped with AI
+              rather than written by hand — a deliberate honesty signal that,
+              undecoded, was reading as "disabled / broken". It keys the two
+              *tags*, not the dashed stroke in general: the conf. chip, the
+              pivot chip, the email underline and the diagram borders are all
+              dashed and mean something else entirely. States the two cases
+              and stops: justifying the boundary would turn it into an excuse,
+              and the reader draws the stronger conclusion unaided.
+
+              It is FIRST in the DOM and pushed last by `order` on wide
+              screens. Below 620px the grid is a single column, so as the last
+              child the key landed roughly six screens below the `Python` tag
+              it decodes — the reader met the dashed border with no way to read
+              it. First in source also means it takes stagger index 0 instead
+              of 6, so on a phone it does not fade in after the rows it is
+              supposed to introduce. */}
+          <div className="stack__legend">
+            <span className="stack__legend-item">
+              <span className="key" aria-hidden="true" />
+              <T
+                locale={locale}
+                es="etiqueta sólida · lo escribo a mano"
+                en="solid tag · I write it by hand"
+                fr="étiquette pleine · je l'écris à la main"
+              />
+            </span>
+            <span className="stack__legend-item">
+              <span className="key key--dashed" aria-hidden="true" />
+              <T
+                locale={locale}
+                es="etiqueta punteada · lo uso con IA"
+                en="dashed tag · I use it with AI"
+                fr="étiquette pointillée · je l'utilise avec l'IA"
+              />
+            </span>
+          </div>
+
           {GROUPS.filter((g) => !g.feature).map((g) => (
             <div className="stack__group" key={g.es}>
               <T locale={locale} className="stack__k" es={g.es} en={g.en} fr={g.fr} />
-              <div className="stack__tags" aria-label={g[locale]}>
+              <div
+                className="stack__tags"
+                role="list"
+                aria-label={g[locale]}
+                data-aria-es={g.es}
+                data-aria-en={g.en}
+                data-aria-fr={g.fr}
+              >
                 {g.items.map((t) => (
-                  <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} key={t.label}>
+                  <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} role="listitem" key={t.label}>
                     {t.label}
                   </span>
                 ))}
@@ -72,9 +116,16 @@ export default function Stack({ locale = "es" }: { locale?: Locale }) {
         {GROUPS.filter((g) => g.feature).map((g) => (
           <div className="stack-feature reveal" data-d="2" key={g.es}>
             <T locale={locale} className="stack__k" es={g.es} en={g.en} fr={g.fr} />
-            <div className="stack__tags" aria-label={g[locale]}>
+            <div
+              className="stack__tags"
+              role="list"
+              aria-label={g[locale]}
+              data-aria-es={g.es}
+              data-aria-en={g.en}
+              data-aria-fr={g.fr}
+            >
               {g.items.map((t) => (
-                <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} key={t.label}>
+                <span className={`tag${t.cls ? ` ${t.cls}` : ""}`} role="listitem" key={t.label}>
                   {t.label}
                 </span>
               ))}

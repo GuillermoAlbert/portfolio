@@ -14,12 +14,25 @@ export default function Publications({ locale = "es" }: { locale?: Locale }) {
             en="Publications"
             fr="Publications"
           />
+          {/* Two notes were rejected here, both for being contradicted on the
+              same screen. "// revisadas por pares" over all three: the second
+              entry carries a `conf.` chip right below it (INTED2022 are
+              conference proceedings) and Iberomyrmex nº 7 is a society
+              bulletin. Then "// 1 en revista revisada por pares", which was
+              accurate but counted downwards — it invites "and the other two?"
+              and a section note is not the place to be defensive. And "// con
+              DOI verificable" is out for the same reason as the first: only
+              Ibis and INTED2022 have DOIs, Iberomyrmex is a direct PDF.
+
+              What is true of all three is that each one resolves: two DOIs and
+              a PDF, every entry one click from its source. That claims no rank
+              and no count, and it is the section's actual argument. */}
           <T
             locale={locale}
             className="sec-note mono"
-            es="// revisadas por pares"
-            en="// peer-reviewed"
-            fr="// évalué par les pairs"
+            es="// verificable en un clic"
+            en="// verifiable in one click"
+            fr="// vérifiable en un clic"
           />
         </div>
 
@@ -32,8 +45,8 @@ export default function Publications({ locale = "es" }: { locale?: Locale }) {
                 locale={locale}
                 className="pub__ai-tag mono"
                 es="IA aplicada"
-                en="applied ML"
-                fr="ML appliqué"
+                en="applied AI"
+                fr="IA appliquée"
               />
               <span className="pub__venue-wrap">
                 <em className="pub__venue">Ibis</em>

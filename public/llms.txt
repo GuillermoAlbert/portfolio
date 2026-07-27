@@ -1,20 +1,20 @@
 # Guillermo Albert García — Backend-first Full Stack Developer
 
 > Java · Spring · Angular · PostgreSQL · Docker. Ex-biólogo (Grado en Biología, UA),
-> 3 publicaciones revisadas por pares incl. un paper de detección por IA con cámaras-trampa.
+> 3 publicaciones (1 en revista revisada por pares) incl. un paper de detección por IA con cámaras-trampa.
 > Trabaja con herramientas de IA agéntica (Claude Code, MCP) como una herramienta más.
 > Con base en La Nucía, Alicante (España). Actualmente Full Stack Developer en Inetum
-> (proyecto del sector público, France AgriMer).
+> (proyecto del sector público, FranceAgriMer).
 
 ## Páginas clave
 - [Inicio — español](https://guillermoalbert.dev/): sobre mí, experiencia, stack, trabajo, publicaciones y contacto
 - [Home — English](https://guillermoalbert.dev/en): full portfolio in English
 - [Accueil — français](https://guillermoalbert.dev/fr): portfolio complet en français
 
-## Publicaciones revisadas por pares
-- [Semi-automated detection of tagged animals from camera trap images using artificial intelligence — Ibis 164(4), 2022](https://onlinelibrary.wiley.com/doi/10.1111/ibi.13099): detección por IA sobre imágenes de cámara-trampa (doi:10.1111/ibi.13099)
-- [Teaching Parasitology in Biology Degrees: From Subjects to Principles — INTED2022 Proceedings](https://doi.org/10.21125/inted.2022.0726): doi:10.21125/inted.2022.0726
-- [Hormigas del Parque Natural de Serra Gelada (Hymenoptera, Formicidae) — Iberomyrmex nº 7, 2015](https://mirmiberica.org/mirmiadmin/wp-content/uploads/2025/04/Iberomyrmex_7_2015.pdf): PDF
+## Publicaciones
+- [Semi-automated detection of tagged animals from camera trap images using artificial intelligence — Ibis 164(4), 2022](https://onlinelibrary.wiley.com/doi/10.1111/ibi.13099): revista revisada por pares; detección por IA sobre imágenes de cámara-trampa (doi:10.1111/ibi.13099)
+- [Teaching Parasitology in Biology Degrees: From Subjects to Principles — INTED2022 Proceedings](https://doi.org/10.21125/inted.2022.0726): actas de congreso (doi:10.21125/inted.2022.0726)
+- [Hormigas del Parque Natural de Serra Gelada (Hymenoptera, Formicidae) — Iberomyrmex nº 7, 2015](https://mirmiberica.org/mirmiadmin/wp-content/uploads/2025/04/Iberomyrmex_7_2015.pdf): boletín de sociedad científica, PDF
 
 ## Currículum (PDF)
 - [CV en español](https://guillermoalbert.dev/cv/Guillermo_Albert_CV_ES.pdf)
@@ -24,5 +24,5 @@
 ## Contacto y perfiles
 - [LinkedIn](https://www.linkedin.com/in/guillermo-albert-garcia): perfil profesional
 - [GitHub](https://github.com/GuillermoAlbert): código y proyectos
-- [Google Scholar](https://scholar.google.com/citations?hl=fr&user=Xo9Er0sAAAAJ): publicaciones científicas
+- [Google Scholar](https://scholar.google.com/citations?user=Xo9Er0sAAAAJ): publicaciones científicas
 - [Email](mailto:hola@guillermoalbert.dev): hola@guillermoalbert.dev

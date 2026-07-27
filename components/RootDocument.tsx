@@ -35,7 +35,7 @@ const personLd = {
   jobTitle: "Backend-first Full Stack Developer",
   email: "hola@guillermoalbert.dev",
   description:
-    "Desarrollador Full Stack (backend-first) especializado en Java, Spring Boot, Angular y PostgreSQL. Graduado en Biología por la Universidad de Alicante con 3 publicaciones revisadas por pares. Actualmente en Inetum, desarrollando un proyecto del sector público. Residente en La Nucía, Alicante.",
+    "Desarrollador Full Stack (backend-first) especializado en Java, Spring Boot, Angular y PostgreSQL. Graduado en Biología por la Universidad de Alicante con 3 publicaciones, una de ellas en revista revisada por pares. Actualmente en Inetum, desarrollando un proyecto del sector público. Residente en La Nucía, Alicante.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "La Nucía",
@@ -59,7 +59,8 @@ const personLd = {
   sameAs: [
     "https://github.com/GuillermoAlbert",
     "https://www.linkedin.com/in/guillermo-albert-garcia",
-    "https://scholar.google.com/citations?hl=fr&user=Xo9Er0sAAAAJ",
+    // No hl= parameter: hardcoding hl=fr forced a French UI on every visitor.
+    "https://scholar.google.com/citations?user=Xo9Er0sAAAAJ",
   ],
 };
 

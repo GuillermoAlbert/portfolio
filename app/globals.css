@@ -30,9 +30,86 @@
   --display: var(--font-display), var(--sans);
 }
 
+/* ============================================================
+   DARK ISLAND — the page's only value anchor
+   ------------------------------------------------------------
+   The site had no dark mass anywhere: everything sat between 92% and 100%
+   luminosity, so it read flat no matter how good the type was. `.island`
+   fixes that by *re-declaring the token set* on a section instead of
+   restyling its components — every descendant already resolves through
+   these variables, so linkmono, cvbtn, sec-index, sec-note, the ghost
+   numeral and the email underline all re-theme for free.
+
+   Two rules, both load-bearing:
+   1. NEVER `background: var(--navy)`. --navy is a foreground token and it
+      inverts to near-white in dark mode; using it as a surface breaks the
+      system's semantics and the dark theme at once.
+   2. The island is the DARKEST surface in both themes — never an elevated
+      one. In dark mode that means going *below* the page background, not
+      above it; the block after this one has the measurements and the trap
+      (stepping up costs small-text contrast and produces a smaller value
+      event than the routine section alternation).
+   Hex is allowed here for the same reason it is in [data-theme="dark"]:
+   this block *defines* tokens, it doesn't consume them.
+   ============================================================ */
+.island {
+  --navy:        #eef2f8;
+  --blue:        #6ea6e6;   /* 6.83:1 on the island bg; #2563a8 would be 2.84:1 */
+  --ink:         #e7ecf4;
+  --ink-soft:    #c3ccdb;
+  --muted:       #98a4b9;
+  --muted-2:     #818ea4;
+  --pg:          #6fa9d2;
+  --ok:          #46c683;
+  --ai:          #de9573;
+  --bg:          #0d1a31;
+  --surface-hi:  #15294a;
+  --on-navy:     #0d1a31;
+  --line:        rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.30);
+  --grid:        rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+  /* Same 34px graph paper as .section--sand, inverted. The dark blocks are the
+     same material as the light ones, not a foreign slab dropped on the page. */
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+/* A dark page has no headroom above it, so dark mode can never stage the
+   15.83:1 sand→band event the light theme gets. The old answer here was to
+   step the island UP to --surface-hi and let the hairlines separate it —
+   that measured 1.058:1 against --sand, i.e. a SMALLER event than the routine
+   bg/sand alternation (1.130:1). The page's declared value anchor was the
+   quietest transition on it. Both directions were measured before choosing:
+     up   #1e3a68 → 1.36:1 vs sand, but --muted-2 lands at 3.87:1 → fails AA
+                    for small text (.sec-note, .footer__inner)
+     down #070d1a → 1.26:1 vs sand, the largest value step on the dark page,
+                    and every text contrast improves for free
+   So the island goes DARKER than the page, never lighter: it stays the darkest
+   surface in both themes instead of turning into an elevated panel that
+   contradicts its own name. Three consequences, all deliberate:
+   · No --muted-2 override any more. It only ever existed to pay for the step
+     up; the token default #818ea4 measures 5.86:1 on #070d1a, comfortably AA.
+   · --on-navy MUST equal --bg here — it's the text colour on inverted --navy
+     fills (.cvbtn:hover, .btn:hover, ::selection), i.e. the surface showing
+     through the ink.
+   · A 1.26:1 step leans harder on the border and the graph paper to say where
+     the block starts, so --grid is nudged up a notch. A notch, not a grid. */
+[data-theme="dark"] .island {
+  --bg: #070d1a;
+  --surface-hi: #0e1a2e;   /* one step up, still at/below the page --bg */
+  --on-navy: #070d1a;
+  --grid: rgba(255, 255, 255, 0.07);
+  border-block: 1px solid var(--line);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* scroll-padding, not per-section scroll-margin: one declaration covers every
+   anchor (#top included) and keeps headings clear of the 60px sticky topbar. */
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -84,6 +161,11 @@ a { color: inherit; text-decoration: none; }
 .topbar {
   position: sticky; top: 0; z-index: 50;
   background: var(--topbar-bg);
+  /* Sanctioned exception to "no gradients · no shadows · no blobs": the bar is
+     translucent on purpose so the page keeps visibly moving under it, and the
+     blur is what stops body copy and the 34px grid from crawling through the
+     nav type. Functional, not decorative — at 0.86 alpha without it the bar is
+     unreadable over a section boundary. */
   backdrop-filter: saturate(140%) blur(6px);
   border-bottom: 1px solid var(--line);
 }
@@ -105,6 +187,9 @@ a { color: inherit; text-decoration: none; }
   color: var(--navy);
   display: inline-flex; align-items: center; gap: 9px;
 }
+/* Round in a square language, deliberately: this is an indicator light, not a
+   box. Only two circles exist on the site — this and .status-dot — and both
+   are LEDs; a square one would read as a tag with no text in it. */
 .brand__dot {
   width: 7px; height: 7px; background: var(--blue);
   border-radius: 50%; display: inline-block;
@@ -147,9 +232,20 @@ a { color: inherit; text-decoration: none; }
     flex-direction: column; align-items: stretch; gap: 0;
     min-width: 210px; padding: 6px;
     background: var(--bg); border: 1px solid var(--line-strong);
+    /* The only shadow in the stylesheet, and a deliberate exception: this is a
+       popover floating over live content, not a block of the page. Elevation
+       is the one thing that says "above"; with a border alone the menu reads
+       as part of whatever section it happens to land on. Known limit: in dark
+       mode a navy shadow at 0.16 is invisible against the page, so there the
+       border carries the elevation on its own. */
     border-radius: 5px; box-shadow: 0 14px 34px rgba(17, 32, 58, 0.16);
     display: none;
   }
+  /* The navy shadow above is invisible over a dark page, so on dark the popover
+     borrows the island's logic instead of gaining a second shadow: elevation as
+     a *value step*. A lighter surface floating over a darker page needs no new
+     primitive, and --line-strong still draws the edge. */
+  [data-theme="dark"] .nav__sections { background: var(--surface-hi); }
   .nav__sections.is-open { display: flex; }
   .nav__sections .navlink { padding: 10px 12px; }
   .nav__sections .navlink.is-active::after { display: none; }
@@ -233,6 +329,40 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
+   STATEMENT BAND — the rhythm breaker
+   ------------------------------------------------------------
+   Six sections all opened the same way (section-head + grid of hairline
+   boxes), so scroll velocity never changed. This band sits between §03 and
+   §04 with NO section-head, no ghost numeral and no grid — the page's
+   structure stutters on purpose. It also carries the site's thesis, which
+   used to be buried as the last clause of the fourth About paragraph.
+   Value rhythm becomes: white · sand · white · DARK · white · sand · DARK.
+   ============================================================ */
+.band { padding-block: clamp(46px, 7vw, 84px); }
+.band__k {
+  display: block; margin-bottom: clamp(14px, 2vw, 20px);
+  font-family: var(--mono); font-size: 0.74rem;
+  letter-spacing: 0.06em; color: var(--blue);
+}
+.band__line {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 4.6vw, 3.05rem);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
+  color: var(--muted);        /* ~7:1 on the island — the setup, spoken quietly */
+  max-width: 24ch; text-wrap: balance;
+}
+.band__line .hi { color: var(--navy); }   /* the half that carries the weight */
+/* Two sentences, and the second one carries the weight — so it must not lend
+   its article to the first line. At 390px ES breaks as "La IA acelera. La" /
+   "evidencia decide."; FR does the same. EN only looks safe because it has no
+   article, so the layout was validated on the one string that happens to work.
+   text-wrap: balance cannot express "never break inside .hi", so don't try to
+   solve it there: below the fold-over width, .hi simply owns its own line. */
+@media (max-width: 620px) {
+  .band__line .hi { display: block; }
+}
+
+/* ============================================================
    HERO
    ============================================================ */
 .hero { padding-top: clamp(48px, 8vw, 96px); padding-bottom: clamp(48px, 8vw, 100px); }
@@ -251,18 +381,22 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex; align-items: center; gap: 9px;
   margin-bottom: clamp(20px, 3.5vw, 30px);
 }
+/* Static, and it has to stay static. The pulse that used to live here was a
+   second thing moving at rest, ~330px above the hero's MethodDiagram and in
+   the same viewport — motion layer 4 is singular by construction (STYLING.md),
+   so the diagram loses its meaning the moment anything else idles beside it.
+   It was also a box-shadow in a borders-only language, and quietly broken: the
+   dark override further down swaps only the fill, so the expanding ring kept
+   firing in light-theme green over a dark page. A dot that just sits there
+   still reads as a status LED — the copy next to it does the talking.
+   Round by exception, like .brand__dot (see there).
+   The green is a literal and not --ok on purpose: --ok is darkened to clear AA
+   as tag TEXT over a 7% wash, and at 8px that reads as a black dot. This is a
+   fill, not type, so it can stay bright enough to look alive. */
 .status-dot {
   width: 8px; height: 8px; border-radius: 50%;
-  background: #1f9d57; box-shadow: 0 0 0 0 rgba(31,157,87,0.5);
+  background: #1f9d57;
   display: inline-block;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .status-dot { animation: pulse 2.6s ease-out infinite; }
-}
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(31,157,87,0.45); }
-  70%  { box-shadow: 0 0 0 7px rgba(31,157,87,0); }
-  100% { box-shadow: 0 0 0 0 rgba(31,157,87,0); }
 }
 
 .hero__name {
@@ -422,17 +556,89 @@ a { color: inherit; text-decoration: none; }
   .card:hover .diag-wire { animation: diag-flow 1.2s linear infinite; }
 }
 .diag-head { fill: none; stroke: var(--line-strong); }
+/* Sizes are in viewBox units, so the rendered size is declared × (painted
+   width / viewBox width). At 9.5/8 that scale factor put real text at
+   9.37/7.89px in the hero, 10.89/9.17px in desktop cards and 7.23/6.09px in
+   the homelab card at 390px — `backups · off-site` at 6.09px is below reading
+   size on a 1× screen. 9.8/8.4 lifts every case; the phone case is fixed by
+   giving the sketch its natural width instead (see the 620px rule below).
+
+   These two values are ceilings, not preferences. JetBrains Mono advances
+   0.65em per character (measured off getBBox, not assumed), and the labels are
+   centre-anchored, so the size decides the half-width that has to fit. The
+   binding constraint is the homelab's `Docker · apps`: 13 chars between the
+   leader end at 272 and the 360 viewBox edge is 84 units of room, and 13 ×
+   0.65 × 9.8 = 82.8. At 10px it needs 84.5 and clips. `tests · revisión ·
+   monitorización` in the hero sketch is the same story at 8.4/8.8. Raise
+   either number and text goes outside the viewBox, where the SVG clips it. */
 .diag-label {
-  font-family: var(--mono); font-size: 9.5px;
+  font-family: var(--mono); font-size: 9.8px;
   fill: var(--navy); text-anchor: middle;
 }
 .diag-note {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 0.05em;
+  font-family: var(--mono); font-size: 8.4px; letter-spacing: 0.05em;
   fill: var(--muted-2); text-anchor: middle;
 }
 .diag-note--start { text-anchor: start; }
 .diag-note--end   { text-anchor: end; }
 .diag-accent { fill: var(--blue); }
+
+/* On a phone the card was spending 48px of its 350px on padding the sketch
+   didn't need: a 360-unit viewBox painted at 274px (×0.761), which is what
+   made the labels sub-legible AND collapsed the rack's 8-unit slab pitch to
+   6.1px — the two findings had one cause. Letting the diagram span the card's
+   padding takes it to 326px (×0.906): pitch 7.25px, so the ten units count
+   again, and every coordinate in the SVG stays exactly as drawn. The side
+   borders go with it so the dashed top and bottom read as full-width rules
+   rather than a box with its sides cut off. 24px is not a guess — the card's
+   `clamp(24px, 3.4vw, 38px)` is pinned to its 24px floor below 706px. */
+@media (max-width: 620px) {
+  .card .card__diagram {
+    margin-inline: -24px;
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
+
+/* ---------- the idle instrument (motion layer 4 — see STYLING.md) ----------
+   The hero's MethodDiagram runs on its own: each leg of the loop lights blue
+   in sequence, so the sketch performs the process it describes instead of
+   merely naming it. One long deterministic CSS timeline — no JS, no random,
+   nothing injected into the <text> nodes (which the language toggle rewrites).
+
+   Only ONE thing on this site is allowed to move at rest, and this is it.
+   It starts at 4.5s so it never shares the stage with the hero typewriter.
+   -18 is exactly 3 periods of the 3-3 dash, so the loop restarts seamlessly. */
+@keyframes diag-run {
+  0%,   5%  { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  8%        { stroke: var(--blue); }
+  17%       { stroke: var(--blue);        stroke-dashoffset: -18; }
+  24%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
+}
+@keyframes diag-run-head {
+  0%,   8%  { stroke: var(--line-strong); }
+  12%, 20%  { stroke: var(--blue); }
+  27%, 100% { stroke: var(--line-strong); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* The delay travels as a custom property on purpose: the `animation`
+     shorthand resets animation-delay, and it out-specifies a bare
+     [data-run="n"] selector — so a plain delay rule would silently lose and
+     all four legs would fire at once. Custom properties inherit instead. */
+  .diag-run .diag-wire[data-run] {
+    animation: diag-run 9s linear infinite;
+    animation-delay: var(--run-delay);
+  }
+  .diag-run .diag-head[data-run] {
+    animation: diag-run-head 9s linear infinite;
+    animation-delay: var(--run-delay);
+  }
+  /* Sequence = the story: stated → built → verified → sent back → shipped. */
+  .diag-run [data-run="1"] { --run-delay: 4.50s; }
+  .diag-run [data-run="2"] { --run-delay: 5.35s; }
+  .diag-run [data-run="3"] { --run-delay: 6.20s; }
+  .diag-run [data-run="4"] { --run-delay: 7.05s; }
+}
 
 .tags {
   margin-top: 22px; display: flex; flex-wrap: wrap; gap: 7px;
@@ -456,6 +662,16 @@ a { color: inherit; text-decoration: none; }
 .tag--infra{ --tag-c: var(--ok); }
 .tag--ai   { --tag-c: var(--ai); }
 .tag--mut  { color: var(--muted-2); border-style: dashed; }
+
+/* The dashed tags also appear two sections away from the Stack legend, so the
+   cards carry a three-word echo of the key. aria-hidden because the meaning is
+   already in the tag group's aria-label — one announcement per card beats the
+   same sentence read out on every fourth tag. */
+.tags__note {
+  margin-top: 10px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--muted-2);
+}
 
 .card__actions {
   margin-top: auto; padding-top: 26px;
@@ -535,6 +751,32 @@ a { color: inherit; text-decoration: none; }
 .pub__doi .arr { transition: transform 0.18s ease; }
 .pub__doi:hover .arr { transform: translate(2px, -2px); }
 
+/* §05 was the one section that drew a full-width rule and then didn't use it:
+   at 1440px each .pub ruled 1032px while year, authors and the DOI button all
+   ended before x=700 — the flattest passage on the page, sitting second-to-last
+   where the scroll most needs to still be going somewhere. Splitting the record
+   into a citation rail (year, tag, venue, volume) and the entry proper spends
+   the width the rule already promised, and it's the shape a publications list
+   has anyway. Below 860px it stays the stacked flex row it was — the rail has
+   nowhere to go on a phone, and there the rule is short enough to be honest. */
+@media (min-width: 860px) {
+  .pub {
+    display: grid;
+    grid-template-columns: minmax(190px, 240px) minmax(0, 1fr);
+    column-gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .pub__bar {
+    grid-column: 1; grid-row: 1 / span 3;
+    flex-direction: column; align-items: flex-start;
+    gap: 9px; margin-bottom: 0;
+  }
+  .pub__venue-wrap { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .pub__title, .pub__authors, .pub__doi { grid-column: 2; }
+  /* inline-flex becomes a stretched grid item unless it is told otherwise */
+  .pub__doi { justify-self: start; }
+}
+
 /* ============================================================
    ABOUT
    ============================================================ */
@@ -602,7 +844,16 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 768px) {
   .contact__row { flex-direction: column; align-items: flex-start; }
-  .contact__social { flex-wrap: nowrap; }
+  /* No `flex-wrap: nowrap` here. It used to be, mirroring .hero__socials — but
+     one of these three items is a phone number, so forcing a single row made
+     the flex items shrink until the TEXT wrapped inside "(+34) 640 347 624":
+     56px tall against 35px neighbours at 375px (SE 2/3, 13 mini), split as
+     "(+34) 640" / "347 624" at 320px. Inheriting the base `wrap` breaks the
+     ROW between items instead, which is where a break belongs. Nothing moves
+     at 768px or on desktop: all three fit on one line there, so wrap never
+     fires — that's why the row wraps rather than .linkmono getting
+     `white-space: nowrap`, which would have kept the one-line rule and pushed
+     the overflow sideways off the viewport instead. */
 }
 
 /* ============================================================
@@ -615,6 +866,36 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 620px) { .stack { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 940px) { .stack { grid-template-columns: 1fr 1fr 1fr; } }
 
+/* Legend — a map key, not a manifesto.
+   The dashed tags (.tag--mut) are a deliberate honesty signal: tools shipped
+   with AI rather than written by hand. Undecoded, a dashed border reads as
+   "disabled / broken / placeholder" — the CSS was contradicting the message.
+   The key states the two states and stops; explaining *why* would turn a
+   boundary into an excuse, and the reader draws the stronger conclusion
+   on their own. Blueprints have keys; this one belongs to the drawing. */
+.stack__legend {
+  grid-column: 1 / -1;
+  background: var(--bg);
+  /* Source order is legend-first so the single-column phone layout meets the
+     key BEFORE the `Python` tag it decodes (as the last child it sat about six
+     screens below it), and so it takes stagger index 0 rather than fading in
+     after the rows it introduces. From 620px up the grid has more than one
+     column, the key is visible in the same glance as the tags, and it goes
+     back to closing the drawing. */
+  order: 1;
+  padding: clamp(13px, 1.8vw, 16px) clamp(18px, 2.5vw, 26px);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 7px 26px;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--muted-2);
+}
+@media (max-width: 619px) { .stack__legend { order: -1; } }
+.stack__legend-item { display: inline-flex; align-items: center; gap: 9px; }
+/* Swatches drawn the way the tags are: a rule, solid or dashed. */
+.key {
+  display: inline-block; width: 18px; flex-shrink: 0;
+  border-top: 1.5px solid var(--line-strong);
+}
+.key--dashed { border-top-style: dashed; }
+
 .stack__group { background: var(--bg); padding: clamp(18px, 2.5vw, 26px); }
 .stack__k {
   display: block; margin-bottom: 13px;
@@ -625,7 +906,17 @@ a { color: inherit; text-decoration: none; }
 
 /* AI/agents spotlight: lives OUTSIDE the grid so the 6 groups stay a complete
    3×2 — no odd cell falling to a lone row. Reads as a deliberate banner; the
-   coral accent ties it to the tag--ai family. */
+   coral accent ties it to the tag--ai family.
+
+   The surface is plain --bg, not the 5% coral wash it used to carry. This is
+   the last block of §03 and the dark .band comes immediately after it, so a
+   warm tint at banner scale put the page's two loudest objects back to back
+   and they competed. The band's whole job is to be the interruption, and a
+   noisy neighbour spends that. The 3px coral rail and the coral label still
+   mark the group; what went was the tinted mass, not the identity — and on
+   plain --bg the label's contrast goes up rather than down (6.18:1 light,
+   7.18:1 dark). It now shares its surface with the .stack__group cells above,
+   so it reads as the grid continuing rather than a foreign slab. */
 .stack-feature {
   margin-top: 14px;
   display: flex; flex-wrap: wrap; align-items: center;
@@ -633,7 +924,7 @@ a { color: inherit; text-decoration: none; }
   padding: clamp(14px, 2vw, 18px) clamp(18px, 2.5vw, 26px);
   border: 1px solid var(--line);
   border-left: 3px solid var(--ai);
-  background: color-mix(in srgb, var(--ai) 5%, var(--bg));
+  background: var(--bg);
 }
 .stack-feature .stack__k { margin-bottom: 0; flex-shrink: 0; color: var(--ai); }
 
@@ -686,6 +977,21 @@ a { color: inherit; text-decoration: none; }
 .xp__item:hover .xp__period::before {
   background: var(--blue); border-color: var(--blue);
 }
+/* The pivot (biology → software) is the hinge of the whole narrative and used
+   to render like any other row. Its node turns 45° — on a rail of squares, the
+   one that turns is where the career turned. Told once, structurally, instead
+   of four times in prose. */
+.xp__item--pivot .xp__period::before {
+  transform: rotate(45deg);
+  border-color: var(--blue);
+}
+/* Inline-block so the chip sits on the period's line instead of below it. */
+.xp__item--pivot .xp__period { display: inline-block; margin-right: 10px; }
+.xp__pivot {
+  font-size: 0.7rem; letter-spacing: 0.05em; color: var(--blue);
+  border: 1px dashed color-mix(in srgb, var(--blue) 50%, transparent);
+  border-radius: 2px; padding: 1px 7px;
+}
 .xp__role {
   font-size: clamp(1.1rem, 2.2vw, 1.32rem); font-weight: 700;
   color: var(--navy); letter-spacing: -0.015em; line-height: 1.2;
@@ -716,6 +1022,13 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    SCROLL REVEAL
    ============================================================ */
+/* Same 0.5s fade + 12px rise the staggered children used to get from a
+   transition — as an animation, so it stops competing with their hover
+   transitions. See the trap note below. */
+@keyframes reveal-stagger {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
 @media (prefers-reduced-motion: no-preference) {
   html.reveal-armed .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
   html.reveal-armed .reveal.is-in { opacity: 1; transform: none; }
@@ -725,14 +1038,35 @@ a { color: inherit; text-decoration: none; }
 
   /* Staggered reveal: a [data-stagger] container stops animating as one slab —
      its direct children cascade in instead, 60ms apart. The --i index is set
-     per child in Interactions.tsx. Same trigger (.is-in), just dosed. */
+     per child in Interactions.tsx. Same trigger (.is-in), just dosed.
+
+     Two traps, both about which layer owns which property:
+     · :where() on the child rules is load-bearing. Unwrapped they scored
+       (0,3,1) and out-specified `.card { transition: background }` and
+       `.pub { transition: border-left-color }`, so the computed
+       transition-property on both was `opacity, transform` and nothing else —
+       the project-card hover and the blue publication rail SNAPPED. Motion
+       layer 3 was dead on the two most interactive components on the page
+       (and on .facts__row, .stack__group, .xp__item the same way).
+     · Which is why the cascade rides `animation` and no longer `transition`:
+       with the specificity gone the components rightly win `transition`, and a
+       transition-driven reveal would then pop in with no fade and no stagger
+       (their shorthands reset transition-delay to 0s too). Layer 2 owns
+       `animation` on these children, layer 3 owns `transition`, and neither
+       can eat the other again. As with diag-run, the delay must be declared
+       AFTER the shorthand, which resets it.
+     The container rule below is deliberately NOT wrapped: it has to keep
+     beating `html.reveal-armed .reveal { opacity: 0 }` above it, and zeroing
+     it would leave every staggered block invisible. */
   html.reveal-armed .reveal[data-stagger] { opacity: 1; transform: none; }
-  html.reveal-armed .reveal[data-stagger] > * {
+  :where(html.reveal-armed .reveal[data-stagger]) > * {
     opacity: 0; transform: translateY(12px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transition-delay: calc(var(--i, 0) * 60ms);
   }
-  html.reveal-armed .reveal.is-in[data-stagger] > * { opacity: 1; transform: none; }
+  :where(html.reveal-armed .reveal.is-in[data-stagger]) > * {
+    opacity: 1; transform: none;
+    animation: reveal-stagger 0.5s ease both;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
 }
 
 /* ============================================================
@@ -799,10 +1133,84 @@ a { color: inherit; text-decoration: none; }
   --on-navy:     #0d1a31;
   --line:        rgba(255, 255, 255, 0.14);
   --line-strong: rgba(255, 255, 255, 0.30);
+  /* Was missing: --grid stayed at the light theme's navy-on-white value, so
+     .section--sand drew navy hairlines at 5% over #142540 and the graph paper
+     — a signature of the whole design — simply didn't exist in dark mode.
+     Invisible enough that it went unnoticed until .island got its own (white)
+     grid and the dark blocks ended up textured while the sand ones weren't. */
+  --grid:        rgba(255, 255, 255, 0.05);
   --topbar-bg:   rgba(13, 26, 49, 0.85);
 }
+/* Lifted for a dark page. With the pulse ring gone this override is the whole
+   story again — it used to leave the ring behind in light-theme green. */
 [data-theme="dark"] .status-dot { background: #34c27a; }
 
-.topbar, .spec, .section--sand, .facts__row, .footer {
+/* A theme change is one event, so every themed surface has to cross-fade on
+   the same 0.32s clock as body. .island was missing from this list: body and
+   .section--sand faded while the band, #contact and the footer snapped at 0s.
+   Contact and Footer are vertically adjacent and identically coloured, so one
+   of them fading while the other jumped put a visible seam between them. */
+.topbar, .spec, .section--sand, .facts__row, .footer, .island {
   transition: background-color 0.32s ease, border-color 0.32s ease, color 0.32s ease;
+}
+
+/* ============================================================
+   PRINT
+   ------------------------------------------------------------
+   The page used to print BLANK. `.reveal` starts at opacity 0 and is only
+   cleared by a scroll handler, so everything below the fold reached paper
+   invisible — and recruiters print portfolios to PDF. Everything here exists
+   to make that one thing true; the rest is ink economy.
+   ============================================================ */
+@media print {
+  /* 1. THE BUG: reveals never ran. Force every one of them visible. */
+  html .reveal,
+  html .reveal[data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+
+  /* 2. Print on white whatever the screen theme is, and drop the graph paper
+        (a full-page 34px grid is a lot of toner for nothing). */
+  :root, [data-theme="dark"] {
+    --navy: #11203a; --blue: #1c4a80; --ink: #111111; --ink-soft: #333333;
+    --muted: #444444; --muted-2: #555555;
+    --pg: #2b5675; --ok: #0f5a30; --ai: #8a3a1d;
+    --bg: #ffffff; --sand: #ffffff; --surface-hi: #ffffff; --on-navy: #ffffff;
+    --line: rgba(17, 32, 58, 0.35); --line-strong: rgba(17, 32, 58, 0.60);
+    --grid: transparent;
+  }
+  /* .island re-declares the token set, so it needs its own reset — otherwise
+     white-on-navy prints as white-on-white (browsers strip backgrounds) and
+     the contact email, the one thing worth keeping, vanishes. */
+  [data-theme] .island {
+    --navy: #11203a; --blue: #1c4a80; --ink: #111111; --ink-soft: #333333;
+    --muted: #444444; --muted-2: #555555; --on-navy: #ffffff;
+    --bg: #ffffff; --surface-hi: #ffffff;
+    --line: rgba(17, 32, 58, 0.35); --line-strong: rgba(17, 32, 58, 0.60);
+    --grid: transparent;
+    color: var(--ink);
+  }
+  .section--sand, .island { background-image: none; }
+
+  /* 3. Screen-only furniture. */
+  .topbar, .skip, .topbar__progress, .cvbtn,
+  .footer a[href="#top"] { display: none !important; }
+
+  /* 4. Paper needs the URLs the screen gets from hovering. */
+  .linkmono[href^="http"]::after,
+  .pub__doi[href^="http"]::after,
+  .card__actions .btn[href^="http"]::after {
+    content: " " attr(href);
+    font-size: 0.82em; color: var(--muted-2); word-break: break-all;
+  }
+  .arr, .dl { display: none; }
+
+  /* 5. Don't guillotine a project card or a publication across two pages. */
+  .card, .pub, .xp__item, .stack__group, .stack-feature, .band { break-inside: avoid; }
+  .sec-title, .card__title, .pub__title, .xp__role { break-after: avoid; }
+  .section { padding-block: 26px; }
+  .band { padding-block: 22px; }
+  @page { margin: 14mm; }
 }

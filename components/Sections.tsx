@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Stack from "@/components/Stack";
+import Statement from "@/components/Statement";
 import Projects from "@/components/Projects";
 import Publications from "@/components/Publications";
 import Contact from "@/components/Contact";
@@ -30,6 +31,9 @@ export default function Sections({ locale = "es" }: { locale?: Locale }) {
         <About locale={locale} />
         <Experience locale={locale} />
         <Stack locale={locale} />
+        {/* Not a numbered section — a divider that breaks the six-section
+            rhythm and carries the thesis. See components/Statement.tsx. */}
+        <Statement locale={locale} />
         <Projects locale={locale} />
         <Publications locale={locale} />
         <Contact locale={locale} />

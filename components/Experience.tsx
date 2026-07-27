@@ -34,7 +34,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               className="xp__period mono"
               es="mar. 2024 — Presente"
               en="Mar 2024 — Present"
-              fr="mars 2024 — Présent"
+              fr="mars 2024 — Aujourd'hui"
             />
             <h3 className="xp__role">
               Full Stack Developer <span className="xp__org">· Inetum</span>
@@ -43,17 +43,17 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="xp__meta"
-              es="France AgriMer · sector público"
-              en="France AgriMer · public sector"
-              fr="France AgriMer · secteur public"
+              es="FranceAgriMer · sector público"
+              en="FranceAgriMer · public sector"
+              fr="FranceAgriMer · secteur public"
             />
             <T
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Dos plataformas para el Ministerio France AgriMer, que gestionan ayudas, subvenciones y pagos a agricultores de toda Francia."
-              en="Two platforms for the French Ministry France AgriMer, managing aid, subsidies and payments to farmers across France."
-              fr="Deux plateformes pour le ministère France AgriMer, gérant aides, subventions et paiements aux agriculteurs de toute la France."
+              es="Dos plataformas para FranceAgriMer, el organismo público bajo el Ministerio de Agricultura francés, que gestionan ayudas, subvenciones y pagos a agricultores de toda Francia."
+              en="Two platforms for FranceAgriMer, the French public agency under the Ministry of Agriculture, managing aid, subsidies and payments to farmers across France."
+              fr="Deux plateformes pour FranceAgriMer, établissement public sous tutelle du ministère de l'Agriculture, gérant aides, subventions et paiements aux agriculteurs de toute la France."
             />
             <ul className="xp__bullets">
               <T
@@ -80,8 +80,61 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
             </ul>
           </article>
 
+          {/* The teaching year is in all three CVs and was missing here, so the
+              two documents disagreed about a whole year of the timeline. It
+              sits between Inetum and DAW because it overlapped both. */}
           <article className="xp__item">
+            <T
+              locale={locale}
+              as="p"
+              className="xp__period mono"
+              es="sept. 2023 — sept. 2024"
+              en="Sep 2023 — Sep 2024"
+              fr="sept. 2023 — sept. 2024"
+            />
+            <h3 className="xp__role">
+              <T
+                locale={locale}
+                es="Profesor de Ciencias"
+                en="Science Teacher"
+                fr="Professeur de Sciences"
+              />{" "}
+              <T
+                locale={locale}
+                as="span"
+                className="xp__org"
+                es="· Liceo Francés de Alicante"
+                en="· Lycée Français d'Alicante"
+                fr="· Lycée Français d'Alicante"
+              />
+            </h3>
+            <T
+              locale={locale}
+              as="p"
+              className="xp__meta"
+              es="Bachillerato · bilingüe francés/español"
+              en="Upper secondary · bilingual French/Spanish"
+              fr="Lycée · bilingue français/espagnol"
+            />
+            <T
+              locale={locale}
+              as="p"
+              className="xp__desc"
+              es="Docencia de ciencias en bachillerato (baccalauréat francés), en entorno bilingüe francés/español y compatibilizada con el inicio en Inetum."
+              en="Taught science at upper-secondary level (French baccalauréat) in a bilingual French/Spanish environment, alongside starting at Inetum."
+              fr="Enseignement des sciences au lycée (baccalauréat français) dans un environnement bilingue français/espagnol, en parallèle du début chez Inetum."
+            />
+          </article>
+
+          <article className="xp__item xp__item--pivot">
             <p className="xp__period mono">2022 — 2024</p>
+            <T
+              locale={locale}
+              className="xp__pivot mono"
+              es="el giro"
+              en="the turn"
+              fr="le virage"
+            />
             <h3 className="xp__role">
               <T
                 locale={locale}
@@ -103,9 +156,9 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Mi transición formal al software: dos años de desarrollo full-stack, bases de datos y despliegue. Me incorporé a Inetum antes de terminar el ciclo."
-              en="My formal switch into software: two years of full-stack development, databases and deployment. I joined Inetum before finishing the programme."
-              fr="Ma transition formelle vers le logiciel : deux ans de développement full-stack, bases de données et déploiement. J'ai rejoint Inetum avant la fin du cursus."
+              es="Dos años de desarrollo full-stack, bases de datos y despliegue. Me incorporé a Inetum antes de terminar el ciclo."
+              en="Two years of full-stack development, databases and deployment. I joined Inetum before finishing the programme."
+              fr="Deux ans de développement full-stack, bases de données et déploiement. J'ai rejoint Inetum avant la fin du cursus."
             />
           </article>
 
@@ -118,23 +171,30 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
                 en="Research &amp; Biology"
                 fr="Recherche &amp; Biologie"
               />{" "}
-              <span className="xp__org">· Universidad de Alicante</span>
+              {/* Not "· Universidad de Alicante" alone: the row's own copy names
+                  a València master and research at CSIC and Helsinki, so a
+                  single-institution label misattributed three of the four. */}
+              {/* Luomus, not "the Helsinki museum": it is the Finnish Museum of
+                  Natural History, part of the University of Helsinki, and the
+                  vague version invited the wrong guess. Its own name needs no
+                  translation, so this stays a plain span in all three. */}
+              <span className="xp__org">· UA · CSIC · Luomus (Helsinki)</span>
             </h3>
             <T
               locale={locale}
               as="p"
               className="xp__meta"
-              es="Grado + Máster · investigación"
-              en="BSc + MSc · research"
-              fr="Licence + Master · recherche"
+              es="Grado + 2 másteres · investigación"
+              en="BSc + 2 MScs · research"
+              fr="Licence + 2 masters · recherche"
             />
             <T
               locale={locale}
               as="p"
               className="xp__desc"
-              es="Investigación en el CSIC (Estación Biológica de Doñana) y en el Museo de Historia Natural de Helsinki, con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones revisadas por pares. Ahí nació mi enfoque basado en la evidencia."
-              en="Research at CSIC (Doñana Biological Station) and the Helsinki Natural History Museum, with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 peer-reviewed publications. That's where my evidence-based approach to engineering began."
-              fr="Recherche au CSIC (Station biologique de Doñana) et au Muséum d'histoire naturelle d'Helsinki, avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications évaluées par les pairs. C'est là qu'est née mon approche fondée sur les preuves."
+              es="Investigación en el CSIC (Estación Biológica de Doñana) y en Luomus, el Museo de Historia Natural de Finlandia (Univ. de Helsinki), con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones, una de ellas en revista revisada por pares."
+              en="Research at CSIC (Doñana Biological Station) and at Luomus, the Finnish Museum of Natural History (Univ. of Helsinki), with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 publications, one of them in a peer-reviewed journal."
+              fr="Recherche au CSIC (Station biologique de Doñana) et au Luomus, le Muséum finlandais d'histoire naturelle (Univ. d'Helsinki), avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications, dont une en revue à comité de lecture."
             />
           </article>
         </div>
