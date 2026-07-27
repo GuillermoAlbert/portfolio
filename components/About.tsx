@@ -67,14 +67,18 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
             data-aria-en="Facts"
             data-aria-fr="Repères"
           >
-            {/* This aside used to carry five rows, four of which the page
-                already said elsewhere: ENFOQUE and IDIOMAS repeated the hero
-                spec card's FOCUS and LANGS, EXPERIENCIA repeated §02's first
-                entry, and INVESTIGACIÓN repeated §05 verbatim. A column that
-                restates the page reads as filler and taints the substance next
-                to it. What is left is what lives nowhere else: the full set of
-                qualifications (the Teacher Training master appears in no other
-                place on the site) and a link that makes §05 checkable. */}
+            {/* Deliberately a summary, and deliberately redundant. Four of these
+                rows say something the page says again later — FOCUS and LANGS
+                also sit in the hero spec card, EXPERIENCE opens §02, RESEARCH
+                lists what §05 lists — and that is the point: it lets someone who
+                will not read three paragraphs leave with the whole picture in
+                one glance. Judged as prose it is repetition; judged as an index
+                it is the job. Two things it does NOT repeat: the two masters
+                (the Teacher Training one appears nowhere else on the site) and
+                the Scholar link, which makes §05 checkable in one click and sits
+                next to the claim it backs. Keep RESEARCH phrased exactly as §05
+                — "1 en revista revisada por pares", never "3 revisadas por
+                pares" — or the summary contradicts the section it summarises. */}
             <div className="facts__row">
               <span className="facts__k">EDUCATION</span>
               <T
@@ -83,6 +87,16 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                 es={'Grado en Biología (UA) · DAW<span class="sub">Máster en Profesorado · Máster en Biodiversidad (Univ. de València)</span>'}
                 en={'BSc Biology (UA) · Web App Dev (DAW)<span class="sub">MSc in Teacher Training · MSc in Biodiversity (Univ. of Valencia)</span>'}
                 fr={'Licence de Biologie (UA) · DAW<span class="sub">Master en enseignement · Master en Biodiversité (Univ. de Valence)</span>'}
+              />
+            </div>
+            <div className="facts__row">
+              <span className="facts__k">RESEARCH</span>
+              <T
+                locale={locale}
+                className="facts__v"
+                es={'3 publicaciones · 1 en revista revisada por pares<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
+                en={'3 publications · 1 in a peer-reviewed journal<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
+                fr={'3 publications · 1 en revue à comité de lecture<span class="sub">Ibis 2022 · INTED2022 · Iberomyrmex 2015</span>'}
               />
             </div>
             <div className="facts__row">
@@ -97,6 +111,36 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                   Google Scholar <span className="arr" aria-hidden="true">↗</span>
                 </a>
               </span>
+            </div>
+            <div className="facts__row">
+              <span className="facts__k">EXPERIENCE</span>
+              <T
+                locale={locale}
+                className="facts__v"
+                es={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · sector público</span>'}
+                en={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · public sector</span>'}
+                fr={'Full Stack Developer @ Inetum<span class="sub">FranceAgriMer · secteur public</span>'}
+              />
+            </div>
+            <div className="facts__row">
+              <span className="facts__k">LANGS</span>
+              <T
+                locale={locale}
+                className="facts__v"
+                es="ES nativo · FR bilingüe · EN C1"
+                en="ES native · FR bilingual · EN C1"
+                fr="ES natif · FR bilingue · EN C1"
+              />
+            </div>
+            <div className="facts__row">
+              <span className="facts__k">FOCUS</span>
+              <T
+                locale={locale}
+                className="facts__v"
+                es="Backend &amp; arquitectura"
+                en="Backend &amp; architecture"
+                fr="Backend &amp; architecture"
+              />
             </div>
           </aside>
         </div>
