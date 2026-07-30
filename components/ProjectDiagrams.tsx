@@ -16,35 +16,34 @@ export function MamsDiagram({ locale = "es" }: { locale?: Locale }) {
         fr="// architecture"
       />
       <svg viewBox="0 0 360 86" strokeWidth="1">
-        {/* row 1: ingestion */}
-        <rect className="diag-box diag-box--dashed" x="2" y="2" width="92" height="24" rx="2" />
-        <text className="diag-label" x="48" y="17">Catapult GPS</text>
+        {/* row 1: the daily check-in coming in. The dashed box is the actor
+            outside the system (the player on their phone), same convention as
+            the method sketch's "problema real". */}
+        <rect className="diag-box diag-box--dashed" x="2" y="2" width="104" height="24" rx="2" />
+        <text className="diag-label" x="54" y="17">check-in · RPE</text>
 
-        <line className="diag-wire" x1="94" y1="14" x2="120" y2="14" />
-        <path className="diag-head" d="M121 10 l6 4 -6 4" />
+        <line className="diag-wire" x1="106" y1="14" x2="128" y2="14" />
+        <path className="diag-head" d="M129 10 l6 4 -6 4" />
 
-        <rect className="diag-box" x="128" y="2" width="92" height="24" rx="2" />
-        <text className="diag-label" x="174" y="17">ETL · upserts</text>
+        <rect className="diag-box" x="136" y="2" width="108" height="24" rx="2" />
+        <text className="diag-label" x="190" y="17">Spring Boot API</text>
 
-        <line className="diag-wire" x1="220" y1="14" x2="246" y2="14" />
-        <path className="diag-head" d="M247 10 l6 4 -6 4" />
+        <line className="diag-wire" x1="244" y1="14" x2="266" y2="14" />
+        <path className="diag-head" d="M267 10 l6 4 -6 4" />
 
-        <rect className="diag-box" x="254" y="2" width="104" height="24" rx="2" />
-        <text className="diag-label" x="306" y="17">PostgreSQL</text>
+        <rect className="diag-box" x="274" y="2" width="84" height="24" rx="2" />
+        <text className="diag-label" x="316" y="17">PostgreSQL</text>
 
-        {/* elbow down from PostgreSQL into the API */}
-        <path className="diag-wire" d="M306 26 v14 h-116 v12" />
-        <path className="diag-head" d="M186 52 l4 6 4 -6" />
+        {/* elbow down from PostgreSQL into the coach dashboard */}
+        <path className="diag-wire" d="M316 26 v14 h-120 v12" />
+        <path className="diag-head" d="M192 52 l4 6 4 -6" />
 
-        {/* row 2: serving */}
-        <rect className="diag-box diag-box--accent" x="128" y="58" width="124" height="24" rx="2" />
-        <text className="diag-label" x="190" y="73">Spring Boot API</text>
+        {/* row 2: serving the coach */}
+        <rect className="diag-box diag-box--accent" x="134" y="58" width="124" height="24" rx="2" />
+        <text className="diag-label" x="196" y="73">dashboard · React</text>
 
-        <line className="diag-wire" x1="254" y1="70" x2="290" y2="70" />
-        <path className="diag-head" d="M291 66 l6 4 -6 4" />
-
-        <rect className="diag-box" x="296" y="58" width="62" height="24" rx="2" />
-        <text className="diag-label" x="327" y="73">React</text>
+        <T locale={locale} as="text" className="diag-note" x="300" y="73"
+           es="alertas" en="alerts" fr="alertes" />
       </svg>
     </figure>
   );
@@ -113,11 +112,11 @@ export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
   );
 }
 
-// Homelab, drawn in axonometric projection so the "10× LXC" claim becomes a
-// countable object: ten slabs in a rack, four of them named. Consistent 4:1
+// Homelab, drawn in axonometric projection so the "9× LXC" claim becomes a
+// countable object: nine slabs in a rack, four of them named. Consistent 4:1
 // dimetric (14.04°) — every depth edge runs ±(4,1), every height edge stays
 // vertical, including the connectors. Hidden edges are omitted the way an ink
-// technical drawing does it: only the top unit shows its top face, the nine
+// technical drawing does it: only the top unit shows its top face, the eight
 // below show the visible front band, and the base plate's top face is dropped
 // because the stack covers it. Static by design — no animation beyond the
 // dash-flow the card's hover already gives .diag-wire.
@@ -137,10 +136,10 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         en="// architecture"
         fr="// architecture"
       />
-      <svg viewBox="0 0 360 130" strokeWidth="1">
+      <svg viewBox="0 0 360 122" strokeWidth="1">
         {/* header rule, spanning exactly the rack it names */}
         <text className="diag-note diag-note--start" x="92" y="6">PROXMOX VE</text>
-        <text className="diag-note diag-note--end diag-accent" x="244" y="6">10× LXC</text>
+        <text className="diag-note diag-note--end diag-accent" x="244" y="6">9× LXC</text>
 
         {/* access edge — a small dashed node, not a second rack: it sits
             outside the host, so it gets the least ink that still reads. */}
@@ -155,14 +154,14 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         <path className="diag-head" d="M87 46.1 L92 51 L85.3 52.9" />
 
         {/* rack frame = the Proxmox VE enclosure: two corner posts + base rim */}
-        <line className="diag-box" x1="92" y1="10" x2="92" y2="100" />
-        <line className="diag-box" x1="244" y1="24" x2="244" y2="114" />
-        <path className="diag-box" d="M92 100 L196 126 L244 114" />
+        <line className="diag-box" x1="92" y1="10" x2="92" y2="92" />
+        <line className="diag-box" x1="244" y1="24" x2="244" y2="106" />
+        <path className="diag-box" d="M92 92 L196 118 L244 106" />
 
-        {/* ten LXC slabs: 8-unit pitch, 2-unit band, so the air between units
+        {/* nine LXC slabs: 8-unit pitch, 2-unit band, so the air between units
             is 3× the band and the stack cannot collapse into hatching at the
             ~400px this actually renders. Named units carry the full stroke,
-            the six anonymous ones the soft stroke. */}
+            the five anonymous ones the soft stroke. */}
         <path className="diag-box" d="M92 22 L140 10 L244 36" />
         <path className="diag-box" d="M92 22 L196 48 L244 36 M92 24 L196 50 L244 38 M196 48 V50" />
         <path className="diag-box diag-box--soft" d="M92 30 L196 56 L244 44 M92 32 L196 58 L244 46 M196 56 V58" />
@@ -172,8 +171,7 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         <path className="diag-box diag-box--soft" d="M92 62 L196 88 L244 76 M92 64 L196 90 L244 78 M196 88 V90" />
         <path className="diag-box" d="M92 70 L196 96 L244 84 M92 72 L196 98 L244 86 M196 96 V98" />
         <path className="diag-box diag-box--soft" d="M92 78 L196 104 L244 92 M92 80 L196 106 L244 94 M196 104 V106" />
-        <path className="diag-box diag-box--soft" d="M92 86 L196 112 L244 100 M92 88 L196 114 L244 102 M196 112 V114" />
-        <path className="diag-box" d="M92 94 L196 120 L244 108 M92 96 L196 122 L244 110 M196 120 V122" />
+        <path className="diag-box" d="M92 86 L196 112 L244 100 M92 88 L196 114 L244 102 M196 112 V114" />
 
         {/* callouts: each leader starts 4 units clear of the corner post, on
             the +u line through its own slab's right corner, so it points at
@@ -190,18 +188,18 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         <text className="diag-label" x="307.9" y="70">PostgreSQL</text>
         <line className="diag-box diag-box--soft" x1="248" y1="85" x2="272" y2="91" />
         <text className="diag-label" x="304.7" y="94">ETL · LLM</text>
-        <line className="diag-box diag-box--soft" x1="248" y1="109" x2="272" y2="115" />
-        <text className="diag-label" x="307.9" y="118">monitoring</text>
+        <line className="diag-box diag-box--soft" x1="248" y1="101" x2="272" y2="107" />
+        <text className="diag-label" x="307.9" y="110">monitoring</text>
 
         {/* off-site backups: leaves the base rim's left corner down the +v
             axis, so it hangs off the bottom of the host without costing the
             height a straight drop below the rack would. */}
-        <line className="diag-wire" x1="88" y1="101" x2="64" y2="107" />
-        <path className="diag-head" d="M61 104.1 L56 109 L62.7 110.9" />
+        <line className="diag-wire" x1="88" y1="93" x2="64" y2="99" />
+        <path className="diag-head" d="M61 96.1 L56 101 L62.7 102.9" />
         {/* x=50, not 46: centre-anchored over 18 chars at the .diag-note
             advance of 5.46px/char, the label reaches 49.1 units either side,
             so 46 started at -3.1 and the viewBox clipped its first letter. */}
-        <text className="diag-note" x="50" y="120">backups · off-site</text>
+        <text className="diag-note" x="50" y="112">backups · off-site</text>
       </svg>
     </figure>
   );

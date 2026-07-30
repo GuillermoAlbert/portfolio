@@ -60,9 +60,9 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
           <T
             locale={locale}
             className="sec-note mono"
-            es="// proyectos en producción"
-            en="// projects in production"
-            fr="// projets en production"
+            es="// proyectos propios"
+            en="// personal projects"
+            fr="// projets personnels"
           />
         </div>
 
@@ -85,17 +85,17 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="card__kicker"
-              es="SaaS de monitorización de carga deportiva"
-              en="Sports-load monitoring SaaS"
-              fr="SaaS de suivi de charge sportive"
+              es="Plataforma de monitorización de atletas (AMS)"
+              en="Athlete monitoring platform (AMS)"
+              fr="Plateforme de suivi d'athlètes (AMS)"
             />
             <T
               locale={locale}
               as="p"
               className="card__desc"
-              es="SaaS backend-first para clubes y academias semi-profesionales: diseño de esquema con Liquibase e ingesta de datos GPS mediante un pipeline ETL incremental con upserts idempotentes."
-              en="A backend-first SaaS for semi-pro clubs and academies: schema design with Liquibase, and GPS data ingested through an incremental ETL pipeline with idempotent upserts."
-              fr="SaaS backend-first pour clubs et académies semi-professionnels : conception du schéma avec Liquibase et ingestion de données GPS via un pipeline ETL incrémental avec upserts idempotents."
+              es="Plataforma backend-first para clubes y academias semi-profesionales: check-in diario de wellness y RPE con mapa corporal de dolor, dashboard de entrenador con alertas, e integridad del dato garantizada en la propia base de datos (CHECK, UNIQUE, columnas generadas)."
+              en="A backend-first platform for semi-pro clubs and academies: daily wellness and RPE check-ins with a body pain map, a coach dashboard with alerts, and data integrity enforced by the database itself (CHECK, UNIQUE, generated columns)."
+              fr="Plateforme backend-first pour clubs et académies semi-professionnels : check-in quotidien de wellness et RPE avec carte corporelle de douleur, tableau de bord entraîneur avec alertes, et intégrité des données garantie par la base elle-même (CHECK, UNIQUE, colonnes générées)."
             />
             {/* The "5 transactional entities" figure belongs to the Inetum role
                 and only there — the CVs attribute it to that project alone. A
@@ -112,9 +112,9 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               />
               <T
                 locale={locale}
-                es="<b>Catapult</b> GPS"
-                en="<b>Catapult</b> GPS"
-                fr="<b>Catapult</b> GPS"
+                es="<b>21</b> endpoints REST"
+                en="<b>21</b> REST endpoints"
+                fr="<b>21</b> endpoints REST"
               />
             </p>
             <MamsDiagram locale={locale} />
@@ -166,22 +166,22 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               as="p"
               className="card__desc"
-              es="Infraestructura propia corriendo en producción: 10 contenedores LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un panel de monitorización propio, un pipeline asistido por LLM que clasifica facturas y extrae sus datos, y gestión real de incidentes con backups cifrados externos."
-              en="My own infrastructure running in production: 10 LXC containers, Python ETL pipelines (Catapult → PostgreSQL + Power BI), a self-built monitoring dashboard, an LLM-assisted pipeline that classifies invoices and extracts their data, and hands-on incident management with encrypted off-site backups."
-              fr="Mon infrastructure en production : 10 conteneurs LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un tableau de bord de supervision maison, un pipeline assisté par LLM qui classe les factures et en extrait les données, et une gestion réelle des incidents avec sauvegardes chiffrées externes."
+              es="Infraestructura propia corriendo en producción: 9 contenedores LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un panel de monitorización propio, un pipeline asistido por LLM que clasifica facturas y extrae sus datos, y gestión real de incidentes con backups cifrados externos."
+              en="My own infrastructure running in production: 9 LXC containers, Python ETL pipelines (Catapult → PostgreSQL + Power BI), a self-built monitoring dashboard, an LLM-assisted pipeline that classifies invoices and extracts their data, and hands-on incident management with encrypted off-site backups."
+              fr="Mon infrastructure en production : 9 conteneurs LXC, pipelines ETL en Python (Catapult → PostgreSQL + Power BI), un tableau de bord de supervision maison, un pipeline assisté par LLM qui classe les factures et en extrait les données, et une gestion réelle des incidents avec sauvegardes chiffrées externes."
             />
             <p className="card__metrics">
               <T
                 locale={locale}
-                es="<b>10</b> contenedores LXC"
-                en="<b>10</b> LXC containers"
-                fr="<b>10</b> conteneurs LXC"
+                es="<b>9</b> contenedores LXC"
+                en="<b>9</b> LXC containers"
+                fr="<b>9</b> conteneurs LXC"
               />
               <T
                 locale={locale}
-                es="<b>77</b> tests pytest"
-                en="<b>77</b>-test pytest suite"
-                fr="<b>77</b> tests pytest"
+                es="<b>115</b> tests pytest"
+                en="<b>115</b>-test pytest suite"
+                fr="<b>115</b> tests pytest"
               />
             </p>
             <HomelabDiagram locale={locale} />
