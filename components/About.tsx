@@ -31,7 +31,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
               className="about__quote"
               es={'Abordo el backend como antes abordaba el laboratorio: <span class="accent">hipótesis, medir, iterar.</span>'}
               en={'I treat backend the way I once treated the lab: <span class="accent">hypothesis, measure, iterate.</span>'}
-              fr={'J\'aborde le backend comme j\'abordais le laboratoire : <span class="accent">hypothèse, mesurer, itérer.</span>'}
+              fr={'J\'aborde le backend comme j\'abordais le laboratoire : <span class="accent">hypothèse, mesure, itération.</span>'}
             />
             <div className="about__body">
               <T
@@ -53,7 +53,7 @@ export default function About({ locale = "es" }: { locale?: Locale }) {
                 as="p"
                 es="Con IA agéntica (Claude Code, MCP) no improviso. La especificación la escribo yo, casos límite incluidos, y el agente ejecuta contra ella. Después el código pasa por las puertas de siempre: tests, revisión, monitorización. Lo que no las pasa, se reescribe."
                 en="With agentic AI (Claude Code, MCP) I don't improvise. I write the spec myself, edge cases included, and the agent builds against it. The code then goes through the same gates as anything else: tests, review, monitoring. Whatever doesn't clear them gets rewritten."
-                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas. C'est moi qui écris la spec, cas limites compris, et l'agent exécute contre elle. Ensuite le code passe par les garde-fous habituels : tests, revue, supervision. Ce qui ne passe pas, je le réécris."
+                fr="Avec l'IA agentique (Claude Code, MCP) je n'improvise pas. C'est moi qui écris la spec, cas limites compris, et l'agent construit à partir d'elle. Ensuite le code passe par les garde-fous habituels : tests, revue, supervision. Ce qui ne passe pas, je le réécris."
               />
             </div>
           </div>

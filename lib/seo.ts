@@ -17,7 +17,7 @@ const TITLE = "Guillermo Albert García — Backend-first Full Stack Developer";
 const DESCRIPTION: Record<Locale, string> = {
   es: "Guillermo Albert García — Desarrollador Full Stack backend-first. Antes secuenciaba datos en un laboratorio; hoy despliego contenedores en producción.",
   en: "Guillermo Albert García — Backend-first Full Stack Developer. I used to sequence data in a lab; now I deploy containers to production.",
-  fr: "Guillermo Albert García — Développeur Full Stack backend-first. Avant je séquençais des données en laboratoire ; aujourd'hui je déploie des conteneurs en production.",
+  fr: "Guillermo Albert García — Développeur Full Stack backend-first. Avant, je séquençais des données en laboratoire ; aujourd'hui je déploie des conteneurs en production.",
 };
 
 const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_GB", fr: "fr_FR" };

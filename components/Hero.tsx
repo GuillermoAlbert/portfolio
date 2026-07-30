@@ -190,7 +190,7 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
                 className="spec__v"
                 es="La Nucía, Alicante · Híbrido / Remoto"
                 en="La Nucía, Alicante · Hybrid / Remote"
-                fr="La Nucía, Alicante · Hybride / À distance"
+                fr="La Nucía, Alicante · Hybride / Télétravail"
               />
             </div>
             <div className="spec__row">

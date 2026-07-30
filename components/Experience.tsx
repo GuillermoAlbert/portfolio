@@ -60,21 +60,21 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
                 locale={locale}
                 as="li"
                 es="Proyecto nuevo (Angular / Spring / JPA): 5 entidades transaccionales end-to-end hasta producción, lógica de negocio compleja y evolución del esquema con Liquibase."
-                en="New project (Angular / Spring / JPA): 5 transactional entities developed end-to-end into production, complex business logic and schema evolution with Liquibase."
+                en="New project (Angular / Spring / JPA): 5 transactional entities developed end-to-end through to production, complex business logic and schema evolution with Liquibase."
                 fr="Nouveau projet (Angular / Spring / JPA) : 5 entités transactionnelles développées end-to-end jusqu'à la production, logique métier complexe et évolution du schéma avec Liquibase."
               />
               <T
                 locale={locale}
                 as="li"
                 es="Proyecto legacy (JSF / Java 8 / Oracle): mantenimiento evolutivo, 10+ plantillas JasperReports y 15+ scripts correctivos PL/SQL sobre base de datos productiva."
-                en="Legacy project (JSF / Java 8 / Oracle): evolutive maintenance, 10+ JasperReports templates and 15+ corrective PL/SQL scripts on a production database."
+                en="Legacy project (JSF / Java 8 / Oracle): maintenance and evolution, 10+ JasperReports templates and 15+ corrective PL/SQL scripts on a production database."
                 fr="Projet legacy (JSF / Java 8 / Oracle) : maintenance évolutive, 10+ modèles JasperReports et 15+ scripts correctifs PL/SQL sur une base de données en production."
               />
               <T
                 locale={locale}
                 as="li"
                 es="Calidad continua con SonarQube, JUnit y tests de componentes Angular, en un equipo internacional (~10 pers.) bajo metodología Agile."
-                en="Continuous quality with SonarQube, JUnit and Angular component tests, in an international team (~10 people) under Agile methodology."
+                en="Continuous quality with SonarQube, JUnit and Angular component tests, in an international team (~10 people) using Agile."
                 fr="Qualité continue avec SonarQube, JUnit et tests de composants Angular, au sein d'une équipe internationale (~10 pers.) en méthodologie Agile."
               />
             </ul>
@@ -122,7 +122,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               className="xp__desc"
               es="Docencia de ciencias en bachillerato (baccalauréat francés), en entorno bilingüe francés/español y compatibilizada con el inicio en Inetum."
               en="Taught science at upper-secondary level (French baccalauréat) in a bilingual French/Spanish environment, alongside starting at Inetum."
-              fr="Enseignement des sciences au lycée (baccalauréat français) dans un environnement bilingue français/espagnol, en parallèle du début chez Inetum."
+              fr="Enseignement des sciences au lycée (baccalauréat français) dans un environnement bilingue français/espagnol, en parallèle de mes débuts chez Inetum."
             />
           </article>
 
@@ -132,7 +132,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               locale={locale}
               className="xp__pivot mono"
               es="el giro"
-              en="the turn"
+              en="the pivot"
               fr="le virage"
             />
             <h3 className="xp__role">
@@ -194,7 +194,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               className="xp__desc"
               es="Investigación en el CSIC (Estación Biológica de Doñana) y en Luomus, el Museo de Historia Natural de Finlandia (Univ. de Helsinki), con un Máster en Biodiversidad (Univ. de València). Secuenciación de datos, medición de biodiversidad y 3 publicaciones, una de ellas en revista revisada por pares."
               en="Research at CSIC (Doñana Biological Station) and at Luomus, the Finnish Museum of Natural History (Univ. of Helsinki), with an MSc in Biodiversity (Univ. of Valencia). Sequencing data, measuring biodiversity, and 3 publications, one of them in a peer-reviewed journal."
-              fr="Recherche au CSIC (Station biologique de Doñana) et au Luomus, le Muséum finlandais d'histoire naturelle (Univ. d'Helsinki), avec un Master en Biodiversité (Univ. de Valence). Séquencer des données, mesurer la biodiversité et 3 publications, dont une en revue à comité de lecture."
+              fr="Recherche au CSIC (Station biologique de Doñana) et au Luomus, le Muséum finlandais d'histoire naturelle (Univ. d'Helsinki), avec un Master en Biodiversité (Univ. de Valence). Séquençage de données, mesure de la biodiversité et 3 publications, dont une en revue à comité de lecture."
             />
           </article>
         </div>
