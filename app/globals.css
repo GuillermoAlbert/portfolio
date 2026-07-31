@@ -556,6 +556,21 @@ a { color: inherit; text-decoration: none; }
   .card:hover .diag-wire { animation: diag-flow 1.2s linear infinite; }
 }
 .diag-head { fill: none; stroke: var(--line-strong); }
+/* Micro-feedback (motion layer 3): the node under the cursor lights blue, so
+   the sketch reads as inspectable, not just printed. The rects are fill:none,
+   so without pointer-events:all only the 1px stroke itself would be hoverable.
+   Gated to hover-capable pointers: on touch, a tap would leave a node stuck
+   blue with no way to un-hover it. A colour transition is not motion, so this
+   needs no prefers-reduced-motion guard. */
+@media (hover: hover) {
+  .card__diagram { cursor: crosshair; }
+  .card__diagram .diag-box { pointer-events: all; transition: stroke 0.18s ease; }
+  .card__diagram .diag-label { transition: fill 0.18s ease; }
+  .card__diagram .diag-box:hover { stroke: var(--blue); }
+  /* Every boxed label sits right after its rect in the SVG source, which is
+     what lets the sibling combinator carry the highlight onto the text. */
+  .card__diagram .diag-box:hover + .diag-label { fill: var(--blue); }
+}
 /* Sizes are in viewBox units, so the rendered size is declared × (painted
    width / viewBox width). At 9.5/8 that scale factor put real text at
    9.37/7.89px in the hero, 10.89/9.17px in desktop cards and 7.23/6.09px in
@@ -1095,13 +1110,27 @@ a { color: inherit; text-decoration: none; }
   width: 34px; height: 30px; padding: 0;
   border: 1px solid var(--line-strong); border-radius: 3px;
   background: transparent; cursor: pointer; color: var(--navy);
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.12s ease;
 }
 .iconbtn:hover { border-color: var(--navy); color: var(--blue); }
+.iconbtn:active { transform: scale(0.92); }
 .iconbtn svg { width: 16px; height: 16px; display: block; }
 .themetoggle .ic-sun { display: none; }
 [data-theme="dark"] .themetoggle .ic-sun { display: block; }
 [data-theme="dark"] .themetoggle .ic-moon { display: none; }
+/* Micro-feedback (motion layer 3): the incoming sun/moon rotates in on the
+   flip. The icons swap via display, and display:none → block restarts a CSS
+   animation — but that also fires on page load, so the animation only exists
+   under .is-swapping, which Interactions.tsx adds on click and removes after
+   the beat. The theme change itself keeps its 0.32s surface cross-fade. */
+@media (prefers-reduced-motion: no-preference) {
+  .themetoggle.is-swapping .ic { animation: ic-swap 0.35s ease; }
+}
+@keyframes ic-swap {
+  from { transform: rotate(-90deg) scale(0.4); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
 
 .cvbtn {
   font-family: var(--mono); font-size: 0.8rem;

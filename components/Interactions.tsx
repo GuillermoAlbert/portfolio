@@ -1,6 +1,10 @@
 "use client";
 import { useEffect } from "react";
 
+// Module-level, not per-mount: React Strict Mode runs the effect twice in dev
+// and the greeting would print double.
+let consoleGreeted = false;
+
 export default function Interactions() {
   useEffect(() => {
     /* ---------- CV files per language ---------- */
@@ -125,10 +129,37 @@ export default function Interactions() {
     }
     setTheme(savedTheme);
 
+    // .is-swapping arms the icon-swap animation in CSS (see .themetoggle) so
+    // the sun/moon only rotates in on a click, never on page load. Rapid
+    // clicks reuse one timer — an expiring old timer must not strip the class
+    // out from under a newer flip's animation.
+    let swapTimer: number | undefined;
     themeBtn?.addEventListener("click", () => {
       const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      themeBtn.classList.add("is-swapping");
+      window.clearTimeout(swapTimer);
+      swapTimer = window.setTimeout(() => themeBtn.classList.remove("is-swapping"), 400);
       setTheme(next);
     });
+
+    /* ---------- Console greeting ---------- */
+    // For the visitor who opens DevTools — the same terminal metaphor as the
+    // spec card. Facts only: name, links, and the working method as a comment.
+    if (!consoleGreeted) {
+      consoleGreeted = true;
+      const mono = "font-family:'JetBrains Mono',ui-monospace,monospace;";
+      console.log(
+        "%c~ $ whoami\n%cGuillermo Albert · full stack developer\n\n" +
+          "%c~ $ cat contact\n%cgithub.com/GuillermoAlbert\nhola@guillermoalbert.dev\n\n" +
+          "%c~ $ %c# mirar debajo del capó es justo el método: verificar antes de fiarse.",
+        mono + "color:#4d8ed6;font-weight:700;",
+        mono,
+        mono + "color:#4d8ed6;font-weight:700;",
+        mono,
+        mono + "color:#4d8ed6;font-weight:700;",
+        mono + "color:#8a94a6;font-style:italic;"
+      );
+    }
 
     /* ---------- Scroll reveal ---------- */
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
