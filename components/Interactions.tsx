@@ -138,7 +138,7 @@ export default function Interactions() {
       const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
       themeBtn.classList.add("is-swapping");
       window.clearTimeout(swapTimer);
-      swapTimer = window.setTimeout(() => themeBtn.classList.remove("is-swapping"), 400);
+      swapTimer = window.setTimeout(() => themeBtn.classList.remove("is-swapping"), 600);
       setTheme(next);
     });
 

@@ -1125,10 +1125,16 @@ a { color: inherit; text-decoration: none; }
    under .is-swapping, which Interactions.tsx adds on click and removes after
    the beat. The theme change itself keeps its 0.32s surface cross-fade. */
 @media (prefers-reduced-motion: no-preference) {
-  .themetoggle.is-swapping .ic { animation: ic-swap 0.35s ease; }
+  /* Half turn from scale 0 with a springy overshoot. The first cut (quarter
+     turn, 0.35s, plain ease) fired but was imperceptible: at 16px, and with
+     the whole page changing colour in the same instant, the icon has to
+     overshoot to register in peripheral vision. */
+  .themetoggle.is-swapping .ic {
+    animation: ic-swap 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 }
 @keyframes ic-swap {
-  from { transform: rotate(-90deg) scale(0.4); opacity: 0; }
+  from { transform: rotate(-180deg) scale(0); opacity: 0; }
   to   { transform: rotate(0deg) scale(1); opacity: 1; }
 }
 
