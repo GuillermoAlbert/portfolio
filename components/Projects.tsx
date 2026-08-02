@@ -97,12 +97,11 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
               en="A backend-first platform for semi-pro clubs and academies: daily wellness and RPE check-ins with a body pain map, a coach dashboard with alerts, and data integrity enforced by the database itself (CHECK, UNIQUE, generated columns)."
               fr="Plateforme backend-first pour clubs et académies semi-professionnels : check-in quotidien de wellness et RPE avec carte corporelle de douleur, tableau de bord entraîneur avec alertes, et intégrité des données garantie par la base elle-même (CHECK, UNIQUE, colonnes générées)."
             />
-            {/* The "5 transactional entities" figure belongs to the Inetum role
-                and only there — the CVs attribute it to that project alone. A
-                recycled number costs more than no number to the one reader who
-                has the CV and this page open at once. The permissions model is
-                the claim that is true of MAMS specifically, so it moves up from
-                the description rather than being said twice. */}
+            {/* No Inetum numbers here — a recycled number costs more than no
+                number to the one reader who has the CV and this page open at
+                once. The permissions model is the claim that is true of MAMS
+                specifically, so it moves up from the description rather than
+                being said twice. */}
             <p className="card__metrics">
               <T
                 locale={locale}

@@ -59,16 +59,16 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 as="li"
-                es="Proyecto nuevo (Angular / Spring / JPA): 5 entidades transaccionales end-to-end hasta producción, lógica de negocio compleja y evolución del esquema con Liquibase."
-                en="New project (Angular / Spring / JPA): 5 transactional entities developed end-to-end through to production, complex business logic and schema evolution with Liquibase."
-                fr="Nouveau projet (Angular / Spring / JPA) : 5 entités transactionnelles développées end-to-end jusqu'à la production, logique métier complexe et évolution du schéma avec Liquibase."
+                es="Proyecto nuevo (Angular / Spring / JPA): flujos transaccionales end-to-end hasta producción, del modelo de datos al controlador, lógica de negocio compleja y evolución del esquema con Liquibase."
+                en="New project (Angular / Spring / JPA): end-to-end transactional flows through to production, from data model to controller, complex business logic and schema evolution with Liquibase."
+                fr="Nouveau projet (Angular / Spring / JPA) : flux transactionnels end-to-end jusqu'à la production, du modèle de données au contrôleur, logique métier complexe et évolution du schéma avec Liquibase."
               />
               <T
                 locale={locale}
                 as="li"
-                es="Proyecto legacy (JSF / Java 8 / Oracle): mantenimiento evolutivo, 10+ plantillas JasperReports y 15+ scripts correctivos PL/SQL sobre base de datos productiva."
-                en="Legacy project (JSF / Java 8 / Oracle): maintenance and evolution, 10+ JasperReports templates and 15+ corrective PL/SQL scripts on a production database."
-                fr="Projet legacy (JSF / Java 8 / Oracle) : maintenance évolutive, 10+ modèles JasperReports et 15+ scripts correctifs PL/SQL sur une base de données en production."
+                es="Proyecto legacy (JSF / Java 8 / Oracle): mantenimiento evolutivo, plantillas JasperReports para documentos oficiales y 15+ scripts correctivos PL/SQL sobre base de datos productiva."
+                en="Legacy project (JSF / Java 8 / Oracle): maintenance and evolution, JasperReports templates for official documents and 15+ corrective PL/SQL scripts on a production database."
+                fr="Projet legacy (JSF / Java 8 / Oracle) : maintenance évolutive, modèles JasperReports pour les documents officiels et 15+ scripts correctifs PL/SQL sur une base de données en production."
               />
               <T
                 locale={locale}
