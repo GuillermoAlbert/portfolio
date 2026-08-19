@@ -76,10 +76,15 @@ export default function Interactions() {
       try { localStorage.setItem("ga-lang", lang); } catch (_) {}
       // Keep the URL on the matching static route (/, /en, /fr) so a refresh or
       // a shared link lands on the right language and hreflang stays coherent.
-      const url = new URL(location.href);
-      url.searchParams.delete("lang");
-      url.pathname = lang === "es" ? "/" : `/${lang}`;
-      history.replaceState(null, "", url.toString());
+      // Only on the language routes themselves: the 404 must keep its URL —
+      // rewriting it to a route that exists turns a refresh into the home and
+      // hides the typo'd path the visitor might want to fix.
+      if (/^\/(?:(?:en|fr)\/?)?$/.test(location.pathname)) {
+        const url = new URL(location.href);
+        url.searchParams.delete("lang");
+        url.pathname = lang === "es" ? "/" : `/${lang}`;
+        history.replaceState(null, "", url.toString());
+      }
     }
 
     document.querySelectorAll("[data-setlang]").forEach((btn) => {
