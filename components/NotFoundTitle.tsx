@@ -1,5 +1,21 @@
 "use client";
 import { useEffect, useRef } from "react";
+import localFont from "next/font/local";
+
+// Departure Mono (--pixel voice): terminal artifacts only — this title is one
+// of its two sanctioned uses (the other is the OG card). Single weight, so
+// never pair it with font-weight > 400, and size it in multiples of 11px or
+// the pixel grid lands on fractional device pixels.
+const pixel = localFont({
+  src: "./fonts/DepartureMono-Regular.woff2",
+  weight: "400",
+  display: "swap",
+  // No preload: the @font-face lands in the shared CSS, and without this every
+  // page would <link rel="preload"> 22KB of a font only the 404 renders.
+  preload: false,
+  fallback: ["ui-monospace", "monospace"],
+  adjustFontFallback: false,
+});
 
 // The hero's typewriter, miniaturized for the 404: "404" types itself out and
 // the cursor keeps blinking — a prompt waiting for input fits a page that
@@ -51,7 +67,13 @@ export default function NotFoundTitle() {
   }, []);
 
   return (
-    <h1 ref={ref} aria-label="404" style={{ fontSize: "3.5rem", margin: 0, lineHeight: 1 }}>
+    // 55px = 5 × 11px, Departure Mono's native grid (was 3.5rem ≈ 56px).
+    <h1
+      ref={ref}
+      aria-label="404"
+      className={pixel.className}
+      style={{ fontSize: "55px", margin: 0, lineHeight: 1 }}
+    >
       404
     </h1>
   );
