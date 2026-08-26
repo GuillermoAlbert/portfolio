@@ -29,7 +29,7 @@ const OG_LOCALE: Record<Locale, string> = { es: "es_ES", en: "en_GB", fr: "fr_FR
 // The ?v= busts social CDN caches (LinkedIn keeps the image cached by URL for
 // days; re-inspecting refreshes the tags but not the image) — bump it whenever
 // the card changes visibly.
-const OG_IMAGE = "/opengraph-image?v=2";
+const OG_IMAGE = "/opengraph-image?v=3";
 
 // Per-locale metadata shared by the language routes. Relative URLs resolve
 // against `metadataBase` (set in each root layout via rootMetadata).

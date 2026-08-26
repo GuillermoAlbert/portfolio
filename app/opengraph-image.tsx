@@ -13,17 +13,14 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  // Departure Mono (--pixel voice), same file the 404 title uses — on the
-  // NAME only, sized on the font's 11px grid. Social feeds show this card at
-  // ~0.3–0.5× and re-encode it as JPEG; hard pixel edges turn to mush at
-  // non-integer scales, so only the one text block big enough to survive
-  // gets the pixel voice. Everything smaller stays antialiased sans.
-  const pixel = await readFile(
-    join(process.cwd(), "components/fonts/DepartureMono-Regular.otf")
+  // The card mirrors the site's own type system so it reads as a capture of
+  // the page: Space Grotesk Bold on the name (the hero's --display face) and
+  // Hanken Grotesk for everything else (the body face). All statically
+  // instanced because Satori doesn't do variable fonts, and passing a fonts
+  // array drops Satori's built-in default sans anyway.
+  const display = await readFile(
+    join(process.cwd(), "components/fonts/SpaceGrotesk-Bold.ttf")
   );
-  // Passing a fonts array makes Satori drop its built-in default sans, so the
-  // card must carry its own: Hanken Grotesk (the site's body face), statically
-  // instanced at 400/600 because Satori doesn't do variable fonts.
   const hanken = await readFile(
     join(process.cwd(), "components/fonts/HankenGrotesk-Regular.ttf")
   );
@@ -52,10 +49,10 @@ export default async function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: "Departure Mono", fontSize: 88, lineHeight: 1 }}>
+          <div style={{ fontFamily: "Space Grotesk", fontSize: 92, fontWeight: 700, letterSpacing: -2.8, lineHeight: 1 }}>
             Guillermo
           </div>
-          <div style={{ fontFamily: "Departure Mono", fontSize: 88, lineHeight: 1, marginTop: 11 }}>
+          <div style={{ fontFamily: "Space Grotesk", fontSize: 92, fontWeight: 700, letterSpacing: -2.8, lineHeight: 1.05 }}>
             Albert García
           </div>
           <div style={{ marginTop: 28, fontSize: 38, fontWeight: 600, color: "#6ea6e6" }}>
@@ -72,7 +69,7 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Departure Mono", data: pixel, style: "normal", weight: 400 },
+        { name: "Space Grotesk", data: display, style: "normal", weight: 700 },
         { name: "Hanken Grotesk", data: hanken, style: "normal", weight: 400 },
         { name: "Hanken Grotesk", data: hankenSemi, style: "normal", weight: 600 },
       ],
