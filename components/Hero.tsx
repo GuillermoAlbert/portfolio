@@ -104,9 +104,9 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
             <span className="status-dot" aria-hidden="true"></span>
             <T
               locale={locale}
-              es="Abierto a oportunidades · La Nucía, Alicante (ES)"
-              en="Available for opportunities · La Nucía, Alicante (ES)"
-              fr="Ouvert aux opportunités · La Nucía, Alicante (ES)"
+              es="Abierto a oportunidades · Daroca, Zaragoza (ES)"
+              en="Available for opportunities · Daroca, Zaragoza (ES)"
+              fr="Ouvert aux opportunités · Daroca, Zaragoza (ES)"
             />
           </p>
 
@@ -188,9 +188,9 @@ export default function Hero({ locale = "es" }: { locale?: Locale }) {
               <T
                 locale={locale}
                 className="spec__v"
-                es="La Nucía, Alicante · Híbrido / Remoto"
-                en="La Nucía, Alicante · Hybrid / Remote"
-                fr="La Nucía, Alicante · Hybride / Télétravail"
+                es="Daroca, Zaragoza · Híbrido / Remoto"
+                en="Daroca, Zaragoza · Hybrid / Remote"
+                fr="Daroca, Zaragoza · Hybride / Télétravail"
               />
             </div>
             <div className="spec__row">

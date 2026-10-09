@@ -35,11 +35,11 @@ const personLd = {
   jobTitle: "Backend-first Full Stack Developer",
   email: "hola@guillermoalbert.dev",
   description:
-    "Desarrollador Full Stack (backend-first) especializado en Java, Spring Boot, Angular y PostgreSQL. Graduado en Biología por la Universidad de Alicante con 3 publicaciones, una de ellas en revista revisada por pares. Actualmente en CGI, desarrollando con Java y Angular para el sector bancario. Residente en La Nucía, Alicante.",
+    "Desarrollador Full Stack (backend-first) especializado en Java, Spring Boot, Angular y PostgreSQL. Graduado en Biología por la Universidad de Alicante con 3 publicaciones, una de ellas en revista revisada por pares. Actualmente en CGI, desarrollando con Java y Angular para el sector bancario. Residente en Daroca, Zaragoza.",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "La Nucía",
-    addressRegion: "Alicante",
+    addressLocality: "Daroca",
+    addressRegion: "Zaragoza",
     addressCountry: "ES",
   },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Universidad de Alicante" },

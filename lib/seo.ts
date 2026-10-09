@@ -73,7 +73,7 @@ export function rootMetadata(locale: Locale): Metadata {
       "Angular",
       "PostgreSQL",
       "Docker",
-      "Alicante",
+      "Zaragoza",
       "España",
       "remoto",
     ],

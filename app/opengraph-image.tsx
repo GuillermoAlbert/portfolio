@@ -45,7 +45,7 @@ export default async function OpengraphImage() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 26, color: "#9fb4d4" }}>
           <div style={{ width: 16, height: 16, borderRadius: 8, background: "#34c27a" }} />
-          <div>Abierto a oportunidades · Alicante (ES)</div>
+          <div>Abierto a oportunidades · Daroca (ES)</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
