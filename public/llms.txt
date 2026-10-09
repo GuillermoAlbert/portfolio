@@ -3,8 +3,8 @@
 > Java · Spring · Angular · PostgreSQL · Docker. Ex-biólogo (Grado en Biología, UA),
 > 3 publicaciones (1 en revista revisada por pares) incl. un paper de detección por IA con cámaras-trampa.
 > Trabaja con herramientas de IA agéntica (Claude Code, MCP) como una herramienta más.
-> Con base en La Nucía, Alicante (España). Actualmente Full Stack Developer en Inetum
-> (proyecto del sector público, FranceAgriMer).
+> Con base en La Nucía, Alicante (España). Actualmente Full Stack Developer en CGI
+> (Java y Angular, sector bancario). Antes, Inetum (sector público, FranceAgriMer).
 
 ## Páginas clave
 - [Inicio — español](https://guillermoalbert.dev/): sobre mí, experiencia, stack, trabajo, publicaciones y contacto

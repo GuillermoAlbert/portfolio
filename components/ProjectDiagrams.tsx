@@ -5,9 +5,12 @@ import { T, type Locale } from "@/lib/i18n";
 // variables so both themes work. The SVGs are aria-hidden — the card
 // description already carries the same information as text.
 
+// On card hover (motion layer 3) the wires light in data order — check-in →
+// API → PostgreSQL → dashboard — and the alert lamp next to `alertas` fills
+// when the reading lands. It loops while hovered: a check-in arrives every day.
 export function MamsDiagram({ locale = "es" }: { locale?: Locale }) {
   return (
-    <figure className="card__diagram" aria-hidden="true">
+    <figure className="card__diagram diag-trace" aria-hidden="true">
       <T
         locale={locale}
         className="card__diagram-k mono"
@@ -22,26 +25,31 @@ export function MamsDiagram({ locale = "es" }: { locale?: Locale }) {
         <rect className="diag-box diag-box--dashed" x="2" y="2" width="104" height="24" rx="2" />
         <text className="diag-label" x="54" y="17">check-in · RPE</text>
 
-        <line className="diag-wire" x1="106" y1="14" x2="128" y2="14" />
-        <path className="diag-head" d="M129 10 l6 4 -6 4" />
+        <line className="diag-wire" data-trace="1" x1="106" y1="14" x2="128" y2="14" />
+        <path className="diag-head" data-trace="1" d="M129 10 l6 4 -6 4" />
 
         <rect className="diag-box" x="136" y="2" width="108" height="24" rx="2" />
         <text className="diag-label" x="190" y="17">Spring Boot API</text>
 
-        <line className="diag-wire" x1="244" y1="14" x2="266" y2="14" />
-        <path className="diag-head" d="M267 10 l6 4 -6 4" />
+        <line className="diag-wire" data-trace="2" x1="244" y1="14" x2="266" y2="14" />
+        <path className="diag-head" data-trace="2" d="M267 10 l6 4 -6 4" />
 
         <rect className="diag-box" x="274" y="2" width="84" height="24" rx="2" />
         <text className="diag-label" x="316" y="17">PostgreSQL</text>
 
         {/* elbow down from PostgreSQL into the coach dashboard */}
-        <path className="diag-wire" d="M316 26 v14 h-120 v12" />
-        <path className="diag-head" d="M192 52 l4 6 4 -6" />
+        <path className="diag-wire" data-trace="3" d="M316 26 v14 h-120 v12" />
+        <path className="diag-head" data-trace="3" d="M192 52 l4 6 4 -6" />
 
         {/* row 2: serving the coach */}
         <rect className="diag-box diag-box--accent" x="134" y="58" width="124" height="24" rx="2" />
         <text className="diag-label" x="196" y="73">dashboard · React</text>
 
+        {/* alert lamp: a hollow square at rest, filled when the trace lands.
+            `alertes`/`alertas` are 7 chars × 5.88 (8.4px + 0.05em tracking)
+            = 41.2 wide centred on 300, so the text starts at 279.4 and the
+            lamp (266.5–271.5) keeps ~8 units clear of it and of the box. */}
+        <rect className="diag-lamp" x="266.5" y="67.5" width="5" height="5" />
         <T locale={locale} as="text" className="diag-note" x="300" y="73"
            es="alertas" en="alerts" fr="alertes" />
       </svg>
@@ -53,11 +61,19 @@ export function MamsDiagram({ locale = "es" }: { locale?: Locale }) {
 // verification gates everything. Same visual language as the project sketches.
 //
 // `diag-run` makes it the site's one idle instrument (motion layer 4 — see
-// STYLING.md): each leg lights blue in turn, so the sketch performs the process
-// instead of just naming it. The data-run indices are the story order —
-// stated → built → verified → sent back → shipped — and the CSS turns them into
-// delays on one deterministic 9s timeline. Nothing is injected into the <text>
-// nodes, which the language toggle rewrites; only wires and arrowheads animate.
+// STYLING.md): a packet walks the loop and each leg lights blue as it passes,
+// so the sketch performs the process instead of just naming it. The story is
+// the site's thesis — what doesn't pass gets rewritten — so the first trip
+// FAILS: a grey ✗ at verification, back up to the agent, down again, a blue ✓,
+// and only then production. One deterministic 10s CSS timeline, no JS.
+//
+// The marks are stroked paths, not glyphs: nothing is injected into the <text>
+// nodes, which the language toggle rewrites. Fail is neutral grey and pass is
+// --blue, so the one-accent rule holds and blue keeps meaning "moves forward".
+// They sit at x 274–282: `vérification`, the longest of the three labels, is
+// 12 chars × 6.37 = 76.4 wide centred on 228, so it ends at 266.2.
+// Everything new starts hidden; with reduced motion the sketch is the old
+// static one.
 export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
   return (
     <figure className="card__diagram diag-run" aria-hidden="true">
@@ -96,12 +112,20 @@ export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
         <T locale={locale} as="text" className="diag-label" x="228" y="73"
            es="verificación" en="verification" fr="vérification" />
 
+        {/* verdicts: ✗ on the first trip, ✓ on the second (hidden at rest) */}
+        <path className="diag-mark diag-mark--fail" d="M274.5 66.5 l7 7 M281.5 66.5 l-7 7" />
+        <path className="diag-mark diag-mark--pass" d="M273.5 70.5 l3 3 l6 -7" />
+
         <line className="diag-wire" data-run="4" x1="164" y1="70" x2="140" y2="70" />
         <path className="diag-head" data-run="4" d="M139 66 l-6 4 6 4" />
 
         <rect className="diag-box diag-box--accent" x="2" y="58" width="128" height="24" rx="2" />
         <T locale={locale} as="text" className="diag-label" x="66" y="73"
            es="producción" en="production" fr="production" />
+
+        {/* the packet: a 4-unit square (corners stay square — house rule),
+            moved by CSS transform along the wires; hidden inside boxes */}
+        <rect className="diag-packet" x="-2" y="-2" width="4" height="4" />
 
         <T locale={locale} as="text" className="diag-note" x="228" y="100"
            es="tests · revisión · monitorización"
@@ -112,20 +136,28 @@ export function MethodDiagram({ locale = "es" }: { locale?: Locale }) {
   );
 }
 
-// Homelab, drawn in axonometric projection so the "9× LXC" claim becomes a
-// countable object: nine slabs in a rack, four of them named. Consistent 4:1
-// dimetric (14.04°) — every depth edge runs ±(4,1), every height edge stays
-// vertical, including the connectors. Hidden edges are omitted the way an ink
-// technical drawing does it: only the top unit shows its top face, the eight
-// below show the visible front band, and the base plate's top face is dropped
-// because the stack covers it. Static by design — no animation beyond the
-// dash-flow the card's hover already gives .diag-wire.
+// Homelab, drawn flat in the same box-and-wire language as the MAMS sketch.
+// It replaced an axonometric rack whose nine stacked slabs read as hatching:
+// the claim was there, but the reader had to decode the drawing first. Here
+// the host is one frame and every container is a box you can count — four
+// named, five as small squares — so "9× LXC" checks itself at a glance.
+// Outside the frame, left column: how you get in (Tailscale, glossed as
+// "private access" for readers who don't know it) and what leaves (off-site
+// backups). Each gloss sits ABOVE its own box: between the two boxes they
+// read as one caption and nobody could tell which note was whose. Dashed boxes = outside the system, as in the other sketches.
+// The one inner wire is the real data path: ETL (Catapult) → PostgreSQL.
 //
-// The angle is the shallow end of the dimetric range on purpose. A top face
-// costs exactly slope × width in height, so at 2:1 this 152-wide rack would
-// spend 76 units on its lid alone and the stack could not fit under 130. At
-// 4:1 the lid costs 38 and the height freed goes into slab pitch, which is
-// what makes the units countable at the ~400px the card actually renders.
+// On card hover (motion layer 3) the host boots: the nine containers flash
+// blue in reading order (data-boot 1 → 9), then the backup leaves.
+//
+// Widths, at the .diag-label advance of 6.37/char and the .diag-note advance
+// of 5.88/char (8.4px + 0.05em tracking), all centre-anchored:
+//   inner boxes are 100 wide (22 between them, room for a readable arrow);
+//   the longest label, `Docker · apps`, is 82.8.
+//   left column boxes are 88 wide, centred on 46; the longest note,
+//   `private access`/`acceso privado` (14 chars), is 82.3 → 4.8 to 87.2.
+//   `+ 5 autres` (FR, 10 chars, start-anchored at 220) ends at 278.8.
+// Recompute these if a label, a font size or a box moves.
 export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
   return (
     <figure className="card__diagram" aria-hidden="true">
@@ -136,70 +168,50 @@ export function HomelabDiagram({ locale = "es" }: { locale?: Locale }) {
         en="// architecture"
         fr="// architecture"
       />
-      <svg viewBox="0 0 360 122" strokeWidth="1">
-        {/* header rule, spanning exactly the rack it names */}
-        <text className="diag-note diag-note--start" x="92" y="6">PROXMOX VE</text>
-        <text className="diag-note diag-note--end diag-accent" x="244" y="6">9× LXC</text>
+      <svg viewBox="0 0 360 126" strokeWidth="1">
+        {/* ---- outside the host: the way in ---- */}
+        <rect className="diag-box diag-box--dashed" x="2" y="34" width="88" height="24" rx="2" />
+        <text className="diag-label" x="46" y="49">Tailscale</text>
+        <T locale={locale} as="text" className="diag-note" x="46" y="28"
+           es="acceso privado" en="private access" fr="accès privé" />
 
-        {/* access edge — a small dashed node, not a second rack: it sits
-            outside the host, so it gets the least ink that still reads. */}
-        <text className="diag-label" x="32" y="28">Tailscale</text>
-        <line className="diag-box diag-box--soft" x1="32" y1="30" x2="32" y2="36" />
-        <path className="diag-box diag-box--dashed" d="M24 34 L56 42 L40 46 L8 38 Z" />
-        <path className="diag-box diag-box--dashed" d="M8 38 V41 L40 49 L56 45 V42 M40 46 V49" />
+        <line className="diag-wire" x1="90" y1="46" x2="112" y2="46" />
+        <path className="diag-head" d="M113 42 l6 4 -6 4" />
 
-        {/* Tailscale → host, down the +u axis. It lands in the air gap between
-            two units so it reads as entering the chassis, not one container. */}
-        <line className="diag-wire" x1="60" y1="43" x2="84" y2="49" />
-        <path className="diag-head" d="M87 46.1 L92 51 L85.3 52.9" />
+        {/* ---- the host ---- */}
+        <rect className="diag-box diag-box--frame" x="120" y="12" width="238" height="112" rx="2" />
+        <text className="diag-note diag-note--start" x="128" y="25">PROXMOX VE</text>
+        <text className="diag-note diag-note--end diag-accent" x="350" y="25">9× LXC</text>
 
-        {/* rack frame = the Proxmox VE enclosure: two corner posts + base rim */}
-        <line className="diag-box" x1="92" y1="10" x2="92" y2="92" />
-        <line className="diag-box" x1="244" y1="24" x2="244" y2="106" />
-        <path className="diag-box" d="M92 92 L196 118 L244 106" />
+        {/* row 1: the data path, ETL into the database */}
+        <rect className="diag-box" data-boot="1" x="128" y="32" width="100" height="24" rx="2" />
+        <text className="diag-label" x="178" y="47">ETL · LLM</text>
+        <line className="diag-wire" x1="228" y1="44" x2="242" y2="44" />
+        <path className="diag-head" d="M243 40 l6 4 -6 4" />
+        <rect className="diag-box" data-boot="2" x="250" y="32" width="100" height="24" rx="2" />
+        <text className="diag-label" x="300" y="47">PostgreSQL</text>
 
-        {/* nine LXC slabs: 8-unit pitch, 2-unit band, so the air between units
-            is 3× the band and the stack cannot collapse into hatching at the
-            ~400px this actually renders. Named units carry the full stroke,
-            the five anonymous ones the soft stroke. */}
-        <path className="diag-box" d="M92 22 L140 10 L244 36" />
-        <path className="diag-box" d="M92 22 L196 48 L244 36 M92 24 L196 50 L244 38 M196 48 V50" />
-        <path className="diag-box diag-box--soft" d="M92 30 L196 56 L244 44 M92 32 L196 58 L244 46 M196 56 V58" />
-        <path className="diag-box diag-box--soft" d="M92 38 L196 64 L244 52 M92 40 L196 66 L244 54 M196 64 V66" />
-        <path className="diag-box" d="M92 46 L196 72 L244 60 M92 48 L196 74 L244 62 M196 72 V74" />
-        <path className="diag-box diag-box--soft" d="M92 54 L196 80 L244 68 M92 56 L196 82 L244 70 M196 80 V82" />
-        <path className="diag-box diag-box--soft" d="M92 62 L196 88 L244 76 M92 64 L196 90 L244 78 M196 88 V90" />
-        <path className="diag-box" d="M92 70 L196 96 L244 84 M92 72 L196 98 L244 86 M196 96 V98" />
-        <path className="diag-box diag-box--soft" d="M92 78 L196 104 L244 92 M92 80 L196 106 L244 94 M196 104 V106" />
-        <path className="diag-box" d="M92 86 L196 112 L244 100 M92 88 L196 114 L244 102 M196 112 V114" />
+        {/* row 2 */}
+        <rect className="diag-box" data-boot="3" x="128" y="62" width="100" height="24" rx="2" />
+        <text className="diag-label" x="178" y="77">Docker · apps</text>
+        <rect className="diag-box" data-boot="4" x="250" y="62" width="100" height="24" rx="2" />
+        <text className="diag-label" x="300" y="77">monitoring</text>
 
-        {/* callouts: each leader starts 4 units clear of the corner post, on
-            the +u line through its own slab's right corner, so it points at
-            the unit without touching structure. Label x = left edge + half the
-            mono advance, left-aligning centre-anchored text. JetBrains Mono
-            advances 0.65em, so at the .diag-label size of 9.8px that is
-            6.37px/char, and all four x values hold the same 276 left edge (4
-            clear of the leader's end at 272). `Docker · apps` is what caps the
-            font size: 13 chars need 82.8 of the 84 units between 276 and the
-            viewBox edge. Recompute these if that size ever moves again. */}
-        <line className="diag-box diag-box--soft" x1="248" y1="37" x2="272" y2="43" />
-        <text className="diag-label" x="317.4" y="46">Docker · apps</text>
-        <line className="diag-box diag-box--soft" x1="248" y1="61" x2="272" y2="67" />
-        <text className="diag-label" x="307.9" y="70">PostgreSQL</text>
-        <line className="diag-box diag-box--soft" x1="248" y1="85" x2="272" y2="91" />
-        <text className="diag-label" x="304.7" y="94">ETL · LLM</text>
-        <line className="diag-box diag-box--soft" x1="248" y1="101" x2="272" y2="107" />
-        <text className="diag-label" x="307.9" y="110">monitoring</text>
+        {/* row 3: the five unnamed containers, small but countable */}
+        <rect className="diag-box diag-box--soft" data-boot="5" x="128" y="96" width="12" height="12" rx="1.5" />
+        <rect className="diag-box diag-box--soft" data-boot="6" x="146" y="96" width="12" height="12" rx="1.5" />
+        <rect className="diag-box diag-box--soft" data-boot="7" x="164" y="96" width="12" height="12" rx="1.5" />
+        <rect className="diag-box diag-box--soft" data-boot="8" x="182" y="96" width="12" height="12" rx="1.5" />
+        <rect className="diag-box diag-box--soft" data-boot="9" x="200" y="96" width="12" height="12" rx="1.5" />
+        <T locale={locale} as="text" className="diag-note diag-note--start" x="220" y="105"
+           es="+ 5 más" en="+ 5 more" fr="+ 5 autres" />
 
-        {/* off-site backups: leaves the base rim's left corner down the +v
-            axis, so it hangs off the bottom of the host without costing the
-            height a straight drop below the rack would. */}
-        <line className="diag-wire" x1="88" y1="93" x2="64" y2="99" />
-        <path className="diag-head" d="M61 96.1 L56 101 L62.7 102.9" />
-        {/* x=50, not 46: centre-anchored over 18 chars at the .diag-note
-            advance of 5.46px/char, the label reaches 49.1 units either side,
-            so 46 started at -3.1 and the viewBox clipped its first letter. */}
-        <text className="diag-note" x="50" y="112">backups · off-site</text>
+        {/* ---- outside the host: what leaves ---- */}
+        <line className="diag-wire" data-boot="out" x1="120" y1="106" x2="98" y2="106" />
+        <path className="diag-head" data-boot="out" d="M97 102 l-6 4 6 4" />
+        <rect className="diag-box diag-box--dashed" x="2" y="94" width="88" height="24" rx="2" />
+        <text className="diag-label" x="46" y="109">backups</text>
+        <text className="diag-note" x="46" y="88">off-site</text>
       </svg>
     </figure>
   );

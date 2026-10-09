@@ -2,6 +2,14 @@ import { T, type Locale } from "@/lib/i18n";
 
 // Experience timeline. Periods are real; bullets mirror the CV's quantified
 // highlights so the site carries the same weight as the PDF.
+//
+// The rail is drawn as a `git log --graph`: two lanes, newest on top. The left
+// lane is development (HEAD = the current role), the right one is science.
+// Development branches off science at the pivot (DAW, 2022) and science merges
+// back into it at Inetum (2024), when teaching ended — the biology isn't
+// abandoned, it's merged. Modifiers: --sci puts the node on the science lane,
+// --merge draws the science lane coming up into the node, and --pivot (the
+// branch point) cuts the dev lane below it. The CSS is in globals.css.
 
 export default function Experience({ locale = "es" }: { locale?: Locale }) {
   return (
@@ -27,14 +35,48 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
         </div>
 
         <div className="xp reveal" data-d="1" data-stagger>
+          {/* Client name withheld on purpose: consultancy contracts in banking
+              often bar naming the client publicly. Sector + country is what
+              can be said until that is confirmed. No bullets yet — nothing
+              here that the CV can't back (rule: no unsourced claims). */}
           <article className="xp__item">
             <T
               locale={locale}
               as="p"
               className="xp__period mono"
-              es="mar. 2024 — Presente"
-              en="Mar 2024 — Present"
-              fr="mars 2024 — Aujourd'hui"
+              es="sept. 2026 — Presente"
+              en="Sep 2026 — Present"
+              fr="sept. 2026 — Aujourd'hui"
+            />
+            <h3 className="xp__role">
+              Full Stack Developer <span className="xp__org">· CGI</span>
+            </h3>
+            <T
+              locale={locale}
+              as="p"
+              className="xp__meta"
+              es="Sector bancario · Francia"
+              en="Banking sector · France"
+              fr="Secteur bancaire · France"
+            />
+            <T
+              locale={locale}
+              as="p"
+              className="xp__desc"
+              es="Desarrollo full stack con Java y Angular para una entidad bancaria francesa."
+              en="Full-stack development with Java and Angular for a French bank."
+              fr="Développement full-stack en Java et Angular pour une banque française."
+            />
+          </article>
+
+          <article className="xp__item xp__item--merge">
+            <T
+              locale={locale}
+              as="p"
+              className="xp__period mono"
+              es="mar. 2024 — sept. 2026"
+              en="Mar 2024 — Sep 2026"
+              fr="mars 2024 — sept. 2026"
             />
             <h3 className="xp__role">
               Full Stack Developer <span className="xp__org">· Inetum</span>
@@ -83,7 +125,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
           {/* The teaching year is in all three CVs and was missing here, so the
               two documents disagreed about a whole year of the timeline. It
               sits between Inetum and DAW because it overlapped both. */}
-          <article className="xp__item">
+          <article className="xp__item xp__item--sci">
             <T
               locale={locale}
               as="p"
@@ -162,7 +204,7 @@ export default function Experience({ locale = "es" }: { locale?: Locale }) {
             />
           </article>
 
-          <article className="xp__item">
+          <article className="xp__item xp__item--sci">
             <p className="xp__period mono">2016 — 2022</p>
             <h3 className="xp__role">
               <T

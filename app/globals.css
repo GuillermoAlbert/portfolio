@@ -567,6 +567,8 @@ a { color: inherit; text-decoration: none; }
   .card__diagram .diag-box { pointer-events: all; transition: stroke 0.18s ease; }
   .card__diagram .diag-label { transition: fill 0.18s ease; }
   .card__diagram .diag-box:hover { stroke: var(--blue); }
+  /* A frame is a container, not a node: it shouldn't light up as one. */
+  .card__diagram .diag-box--frame { pointer-events: none; }
   /* Every boxed label sits right after its rect in the SVG source, which is
      what lets the sibling combinator carry the highlight onto the text. */
   .card__diagram .diag-box:hover + .diag-label { fill: var(--blue); }
@@ -580,11 +582,11 @@ a { color: inherit; text-decoration: none; }
 
    These two values are ceilings, not preferences. JetBrains Mono advances
    0.65em per character (measured off getBBox, not assumed), and the labels are
-   centre-anchored, so the size decides the half-width that has to fit. The
-   binding constraint is the homelab's `Docker · apps`: 13 chars between the
-   leader end at 272 and the 360 viewBox edge is 84 units of room, and 13 ×
-   0.65 × 9.8 = 82.8. At 10px it needs 84.5 and clips. `tests · revisión ·
-   monitorización` in the hero sketch is the same story at 8.4/8.8. Raise
+   centre-anchored, so the size decides the half-width that has to fit.
+   `Docker · apps` (13 × 0.65 × 9.8 = 82.8) set the 9.8 ceiling when it had
+   84 units between the old axonometric rack's leaders and the viewBox edge;
+   the flat redraw gives it a 100-wide box, so the binding constraint is now
+   `tests · revisión · monitorización` in the hero sketch at 8.4/8.8. Raise
    either number and text goes outside the viewBox, where the SVG clips it. */
 .diag-label {
   font-family: var(--mono); font-size: 9.8px;
@@ -599,11 +601,12 @@ a { color: inherit; text-decoration: none; }
 .diag-accent { fill: var(--blue); }
 
 /* On a phone the card was spending 48px of its 350px on padding the sketch
-   didn't need: a 360-unit viewBox painted at 274px (×0.761), which is what
-   made the labels sub-legible AND collapsed the rack's 8-unit slab pitch to
-   6.1px — the two findings had one cause. Letting the diagram span the card's
-   padding takes it to 326px (×0.906): pitch 7.25px, so the ten units count
-   again, and every coordinate in the SVG stays exactly as drawn. The side
+   didn't need: a 360-unit viewBox painted at 274px (×0.761), which made the
+   labels sub-legible (and, back when the homelab was an axonometric rack,
+   collapsed its slabs into hatching). Letting the diagram span the card's
+   padding takes it to 326px (×0.906): labels at ~8.9px, the five small
+   containers at ~11px each, and every coordinate in the SVG stays exactly as
+   drawn. The side
    borders go with it so the dashed top and bottom read as full-width rules
    rather than a box with its sides cut off. 24px is not a guess — the card's
    `clamp(24px, 3.4vw, 38px)` is pinned to its 24px floor below 706px. */
@@ -616,43 +619,170 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- the idle instrument (motion layer 4 — see STYLING.md) ----------
-   The hero's MethodDiagram runs on its own: each leg of the loop lights blue
-   in sequence, so the sketch performs the process it describes instead of
-   merely naming it. One long deterministic CSS timeline — no JS, no random,
-   nothing injected into the <text> nodes (which the language toggle rewrites).
+   The hero's MethodDiagram runs on its own: a packet walks the loop and each
+   leg lights blue as it passes, so the sketch performs the process it
+   describes. The first trip fails verification (grey ✗) and goes back up to
+   the agent; the second passes (blue ✓) and ships. One long deterministic CSS
+   timeline — no JS, no random, nothing injected into the <text> nodes (which
+   the language toggle rewrites).
 
    Only ONE thing on this site is allowed to move at rest, and this is it.
    It starts at 4.5s so it never shares the stage with the hero typewriter.
-   -18 is exactly 3 periods of the 3-3 dash, so the loop restarts seamlessly. */
-@keyframes diag-run {
-  0%,   5%  { stroke: var(--line-strong); stroke-dashoffset: 0; }
-  8%        { stroke: var(--blue); }
+
+   Timeline, 10s (1% = 100ms). Each leg is a 650ms trip; ~5s of rest at the end
+   so it reads as a cycle, not a strobe:
+     0– 8  leg 1  problem → agent
+    10–18  leg 2  agent → verification       17.5–31  ✗
+    22–30  leg 3  verification → agent ("iterate")
+    32–40  leg 2  again                      39.5–64  ✓
+    44–52  leg 4  verification → production
+   Dash offsets travel by -18 per trip: exactly 3 periods of the 3-3 dash, so
+   every loop restarts seamlessly (leg 2 makes two trips: -36). */
+.diag-packet { fill: var(--blue); opacity: 0; }
+.diag-mark { fill: none; stroke-width: 1.5; opacity: 0; }
+.diag-mark--fail { stroke: var(--muted); }
+.diag-mark--pass { stroke: var(--blue); }
+
+@keyframes diag-run-1 {
+  0%        { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  1%        { stroke: var(--blue); }
+  7%        { stroke: var(--blue);        stroke-dashoffset: -18; }
+  10%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
+}
+@keyframes diag-run-2 {
+  0%,  10%  { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  11%       { stroke: var(--blue); }
   17%       { stroke: var(--blue);        stroke-dashoffset: -18; }
-  24%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
+  20%, 32%  { stroke: var(--line-strong); stroke-dashoffset: -18; }
+  33%       { stroke: var(--blue); }
+  39%       { stroke: var(--blue);        stroke-dashoffset: -36; }
+  42%, 100% { stroke: var(--line-strong); stroke-dashoffset: -36; }
 }
-@keyframes diag-run-head {
-  0%,   8%  { stroke: var(--line-strong); }
-  12%, 20%  { stroke: var(--blue); }
-  27%, 100% { stroke: var(--line-strong); }
+@keyframes diag-run-3 {
+  0%,  22%  { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  23%       { stroke: var(--blue); }
+  29%       { stroke: var(--blue);        stroke-dashoffset: -18; }
+  32%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
 }
+@keyframes diag-run-4 {
+  0%,  44%  { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  45%       { stroke: var(--blue); }
+  51%       { stroke: var(--blue);        stroke-dashoffset: -18; }
+  54%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
+}
+/* Arrowheads light as the packet reaches them. */
+@keyframes diag-run-head-1 { 0%, 6% { stroke: var(--line-strong); } 7%, 10% { stroke: var(--blue); } 13%, 100% { stroke: var(--line-strong); } }
+@keyframes diag-run-head-2 {
+  0%, 16% { stroke: var(--line-strong); } 17%, 20% { stroke: var(--blue); }
+  23%, 38% { stroke: var(--line-strong); } 39%, 42% { stroke: var(--blue); }
+  45%, 100% { stroke: var(--line-strong); }
+}
+@keyframes diag-run-head-3 { 0%, 28% { stroke: var(--line-strong); } 29%, 32% { stroke: var(--blue); } 35%, 100% { stroke: var(--line-strong); } }
+@keyframes diag-run-head-4 { 0%, 50% { stroke: var(--line-strong); } 51%, 55% { stroke: var(--blue); } 58%, 100% { stroke: var(--line-strong); } }
+/* The packet: visible only on the wires, hidden while it is "inside" a box,
+   which is where it jumps to the next wire's start. Every stop states both
+   properties so neither interpolates across a jump it shouldn't. */
+@keyframes diag-packet {
+  0%        { transform: translate(130px, 14px); opacity: 0; }
+  0.5%      { transform: translate(130px, 14px); opacity: 1; }
+  7%        { transform: translate(156px, 14px); opacity: 1; }
+  7.5%      { transform: translate(156px, 14px); opacity: 0; }
+  10%       { transform: translate(196px, 26px); opacity: 0; }
+  10.5%     { transform: translate(196px, 26px); opacity: 1; }
+  17%       { transform: translate(196px, 54px); opacity: 1; }
+  17.5%     { transform: translate(196px, 54px); opacity: 0; }
+  22%       { transform: translate(260px, 58px); opacity: 0; }
+  22.5%     { transform: translate(260px, 58px); opacity: 1; }
+  29%       { transform: translate(260px, 30px); opacity: 1; }
+  29.5%     { transform: translate(260px, 30px); opacity: 0; }
+  32%       { transform: translate(196px, 26px); opacity: 0; }
+  32.5%     { transform: translate(196px, 26px); opacity: 1; }
+  39%       { transform: translate(196px, 54px); opacity: 1; }
+  39.5%     { transform: translate(196px, 54px); opacity: 0; }
+  44%       { transform: translate(164px, 70px); opacity: 0; }
+  44.5%     { transform: translate(164px, 70px); opacity: 1; }
+  51%       { transform: translate(136px, 70px); opacity: 1; }
+  51.5%, 100% { transform: translate(136px, 70px); opacity: 0; }
+}
+@keyframes diag-mark-fail { 0%, 17.5% { opacity: 0; } 18%, 29% { opacity: 1; } 31%, 100% { opacity: 0; } }
+@keyframes diag-mark-pass { 0%, 39.5% { opacity: 0; } 40%, 62% { opacity: 1; } 64%, 100% { opacity: 0; } }
+
 @media (prefers-reduced-motion: no-preference) {
-  /* The delay travels as a custom property on purpose: the `animation`
-     shorthand resets animation-delay, and it out-specifies a bare
-     [data-run="n"] selector — so a plain delay rule would silently lose and
-     all four legs would fire at once. Custom properties inherit instead. */
-  .diag-run .diag-wire[data-run] {
-    animation: diag-run 9s linear infinite;
-    animation-delay: var(--run-delay);
+  /* Longhands, not the shorthand: `animation` resets animation-delay, and the
+     per-leg rules below only set the name — a shorthand there would silently
+     zero the 4.5s start and fire the loop under the typewriter. */
+  .diag-run [data-run], .diag-run .diag-packet, .diag-run .diag-mark {
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 4.5s;
+    animation-fill-mode: backwards;
   }
-  .diag-run .diag-head[data-run] {
-    animation: diag-run-head 9s linear infinite;
-    animation-delay: var(--run-delay);
+  .diag-run .diag-wire[data-run="1"] { animation-name: diag-run-1; }
+  .diag-run .diag-wire[data-run="2"] { animation-name: diag-run-2; }
+  .diag-run .diag-wire[data-run="3"] { animation-name: diag-run-3; }
+  .diag-run .diag-wire[data-run="4"] { animation-name: diag-run-4; }
+  .diag-run .diag-head[data-run="1"] { animation-name: diag-run-head-1; }
+  .diag-run .diag-head[data-run="2"] { animation-name: diag-run-head-2; }
+  .diag-run .diag-head[data-run="3"] { animation-name: diag-run-head-3; }
+  .diag-run .diag-head[data-run="4"] { animation-name: diag-run-head-4; }
+  .diag-run .diag-packet     { animation-name: diag-packet; }
+  .diag-run .diag-mark--fail { animation-name: diag-mark-fail; }
+  .diag-run .diag-mark--pass { animation-name: diag-mark-pass; }
+}
+
+/* ---------- hover sequences (motion layer 3) ----------
+   The project sketches only move while their card is hovered, and only on
+   hover-capable pointers: on touch a tap would leave a sequence stuck mid-way
+   with no way to un-hover. Both replace the generic .card:hover dash-flow on
+   the elements they drive (higher specificity), and leave it on the rest.
+
+   MAMS (.diag-trace): the reading travels wire by wire in data order and the
+   alert lamp fills when it lands. 3s loop, wires 450ms apart.
+   Homelab (data-boot): the host boots once per hover — the nine containers
+   flash blue in reading order, 70ms apart, then the off-site backup leaves.
+   The flash keyframe has no from/to on purpose: each box returns to its own
+   stroke (--line-strong for named containers, --line for the five small). */
+.diag-lamp { fill: none; stroke: var(--line-strong); }
+@keyframes diag-trace {
+  0%        { stroke: var(--line-strong); stroke-dashoffset: 0; }
+  3%        { stroke: var(--blue); }
+  15%       { stroke: var(--blue);        stroke-dashoffset: -18; }
+  22%, 100% { stroke: var(--line-strong); stroke-dashoffset: -18; }
+}
+@keyframes diag-trace-head { 0%, 14% { stroke: var(--line-strong); } 15%, 24% { stroke: var(--blue); } 30%, 100% { stroke: var(--line-strong); } }
+@keyframes diag-trace-lamp {
+  0%, 45%   { fill: transparent; stroke: var(--line-strong); }
+  50%, 85%  { fill: var(--blue); stroke: var(--blue); }
+  92%, 100% { fill: transparent; stroke: var(--line-strong); }
+}
+@keyframes diag-boot { 25%, 55% { stroke: var(--blue); } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover .diag-trace [data-trace] {
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: backwards;
+    animation-delay: calc((var(--t) - 1) * 0.45s);
   }
-  /* Sequence = the story: stated → built → verified → sent back → shipped. */
-  .diag-run [data-run="1"] { --run-delay: 4.50s; }
-  .diag-run [data-run="2"] { --run-delay: 5.35s; }
-  .diag-run [data-run="3"] { --run-delay: 6.20s; }
-  .diag-run [data-run="4"] { --run-delay: 7.05s; }
+  .card:hover .diag-trace .diag-wire[data-trace] { animation-name: diag-trace; }
+  .card:hover .diag-trace .diag-head[data-trace] { animation-name: diag-trace-head; }
+  .card:hover .diag-trace .diag-lamp { animation: diag-trace-lamp 3s linear infinite; }
+  .diag-trace [data-trace="1"] { --t: 1; }
+  .diag-trace [data-trace="2"] { --t: 2; }
+  .diag-trace [data-trace="3"] { --t: 3; }
+
+  .card:hover [data-boot] {
+    animation: diag-boot 0.6s ease 1;
+    animation-delay: calc((var(--b) - 1) * 70ms);
+  }
+  .card:hover .diag-wire[data-boot="out"] {
+    animation: diag-boot 0.6s ease 0.85s 1, diag-flow 1.2s linear 0.85s infinite;
+  }
+  .card:hover .diag-head[data-boot="out"] { animation-delay: 0.85s; }
+  [data-boot="1"] { --b: 1; } [data-boot="2"] { --b: 2; } [data-boot="3"] { --b: 3; }
+  [data-boot="4"] { --b: 4; } [data-boot="5"] { --b: 5; } [data-boot="6"] { --b: 6; }
+  [data-boot="7"] { --b: 7; } [data-boot="8"] { --b: 8; } [data-boot="9"] { --b: 9; }
 }
 
 .tags {
@@ -946,28 +1076,55 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================
    EXPERIENCE
    ============================================================ */
-/* Timeline: a vertical rail with square nodes — borders only, no shadows. */
-.xp { display: flex; flex-direction: column; }
+/* Timeline: a vertical rail with square nodes — borders only, no shadows.
+   Drawn as a `git log --graph` with two lanes (see Experience.tsx): dev on the
+   left at x≈4.75 — where the single rail always was — and science at x≈22.75.
+   Text moved from 26px to 44px to make room for the second lane.
+
+   Every vertical stop is measured from the node's centre, not guessed:
+   item padding-top (--xp-pad) + the node's 0.2em offset inside .xp__period
+   (0.2 × 0.76rem = 0.152rem) + half the 9px node. Elbows are 1.5px tall, so
+   they start 0.75px above that centre. Corners stay square: on a grid of
+   square nodes, a lane turns the way a wire does in the diagrams. */
+.xp {
+  display: flex; flex-direction: column;
+  --xp-pad: clamp(22px, 3vw, 30px);
+  --xp-node-y: calc(var(--xp-pad) + 0.152rem + 4.5px);
+}
 .xp__item {
   position: relative;
-  padding-block: clamp(22px, 3vw, 30px);
-  padding-left: 26px;
+  padding-block: var(--xp-pad);
+  padding-left: 44px;
   border-bottom: 1px solid var(--line);
 }
-/* Rail segment — contiguous items render one continuous line. */
-.xp__item::before {
+/* Lanes — contiguous segments render one continuous line. ::before is the
+   dev lane, ::after the science lane (only on items it passes through). */
+.xp__item::before,
+.xp__item--sci::after,
+.xp__item--merge::after,
+.xp__item--pivot::after {
   content: "";
   position: absolute;
-  left: 4px; top: 0; bottom: 0;
+  top: 0; bottom: 0;
   width: 1.5px;
   background: var(--line);
+  transform-origin: top;
 }
+.xp__item::before { left: 4px; }
+.xp__item--sci::after,
+.xp__item--merge::after,
+.xp__item--pivot::after { left: 22px; }
 .xp__item:first-child { padding-top: 0; }
-.xp__item:first-child::before { top: 8px; }            /* begin at the first node */
-.xp__item:last-child::before {
-  bottom: auto;
-  height: calc(clamp(22px, 3vw, 30px) + 9px);          /* stop at the last node */
-}
+.xp__item:first-child::before { top: 8px; }            /* begin at the HEAD node */
+/* Merge: the science lane comes up from below and stops at the elbow. */
+.xp__item--merge::after { top: calc(var(--xp-node-y) - 0.75px); }
+/* Branch point: the dev lane is born here, so it stops at the pivot node and
+   doesn't exist on anything older. */
+.xp__item--pivot::before { bottom: auto; height: var(--xp-node-y); }
+.xp__item--pivot ~ .xp__item::before { content: none; }
+/* Root commit: the science lane starts at the oldest node. */
+.xp__item--sci:last-child::after { bottom: auto; height: var(--xp-node-y); }
+
 .xp__period {
   position: relative;
   font-family: var(--mono); font-size: 0.76rem; color: var(--blue);
@@ -977,14 +1134,33 @@ a { color: inherit; text-decoration: none; }
 .xp__period::before {
   content: "";
   position: absolute;
-  left: -26px; top: 0.2em;
+  left: -44px; top: 0.2em;
   width: 9px; height: 9px;
   border-radius: 2px;
   background: var(--bg);
   border: 1.5px solid var(--line-strong);
   transition: background 0.18s ease, border-color 0.18s ease;
+  /* Above the lanes: the science lane is the item's ::after, which paints
+     after its children and ran straight through the science nodes. */
+  z-index: 1;
 }
-/* Current role (top item) — filled node. */
+.xp__item--sci .xp__period::before { left: -26px; }   /* node on the science lane */
+/* Elbow between the lanes, level with the node: the science lane merging into
+   Inetum, and dev branching off science at the pivot. On the pivot it starts
+   at the tip of the 45°-turned node instead. Not centre 4.5 + half-diagonal
+   6.4: the 2px corner radius rounds the tip off by ~0.8, so the visible tip is
+   at ~10.1 and the elbow starts at 9.75 to touch it. */
+.xp__item--merge .xp__period::after,
+.xp__item--pivot .xp__period::after {
+  content: "";
+  position: absolute;
+  left: -35px; width: 13.75px;
+  top: calc(0.2em + 3.75px); height: 1.5px;
+  background: var(--line);
+  transform-origin: left;
+}
+.xp__item--pivot .xp__period::after { left: -34.25px; width: 13px; }
+/* Current role (top item) — filled node: HEAD. */
 .xp__item:first-child .xp__period::before {
   background: var(--blue); border-color: var(--blue);
 }
@@ -995,7 +1171,7 @@ a { color: inherit; text-decoration: none; }
 /* The pivot (biology → software) is the hinge of the whole narrative and used
    to render like any other row. Its node turns 45° — on a rail of squares, the
    one that turns is where the career turned. Told once, structurally, instead
-   of four times in prose. */
+   of four times in prose. On the graph it is also the branch point. */
 .xp__item--pivot .xp__period::before {
   transform: rotate(45deg);
   border-color: var(--blue);
@@ -1040,6 +1216,8 @@ a { color: inherit; text-decoration: none; }
 /* Same 0.5s fade + 12px rise the staggered children used to get from a
    transition — as an animation, so it stops competing with their hover
    transitions. See the trap note below. */
+@keyframes xp-draw-v { from { transform: scaleY(0); } }
+@keyframes xp-draw-h { from { transform: scaleX(0); } }
 @keyframes reveal-stagger {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }
@@ -1081,6 +1259,20 @@ a { color: inherit; text-decoration: none; }
     opacity: 1; transform: none;
     animation: reveal-stagger 0.5s ease both;
     animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  /* The experience graph draws itself as its rows arrive: each lane segment
+     grows top-down and each elbow left-to-right, 150ms behind its row's fade,
+     so the history reads as being plotted. Once — it rides the same .is-in.
+     Print and reduced motion never see the from-state (no animation there). */
+  :where(html.reveal-armed .xp.reveal.is-in) > .xp__item::before,
+  :where(html.reveal-armed .xp.reveal.is-in) > .xp__item::after {
+    animation: xp-draw-v 0.45s ease both;
+    animation-delay: calc(var(--i, 0) * 60ms + 150ms);
+  }
+  :where(html.reveal-armed .xp.reveal.is-in) > .xp__item .xp__period::after {
+    animation: xp-draw-h 0.3s ease both;
+    animation-delay: calc(var(--i, 0) * 60ms + 450ms);
   }
 }
 
