@@ -618,6 +618,56 @@ a { color: inherit; text-decoration: none; }
   }
 }
 
+/* ---------- Project 01: the wide card, with a video for a diagram ----------
+   It spans both columns of .cards. From 980px the text takes the left and the
+   video the right, top edges aligned with the card's index row; below that the
+   card stacks exactly like its siblings, because the source order already is
+   body → media → tags (the grid only re-places it on wide screens). 980, not
+   760: between the two, a 5/7 split leaves the description ~25 characters wide.
+
+   The video is media, not a drawing: a solid hairline frame (the frames of the
+   video are themselves white), square corners, and the light poster stays light
+   in the dark theme like any screenshot would. It never moves on its own, and
+   it carries no controls until the first play — see AssistantVideo in
+   Projects.tsx for both. */
+.card--wide { grid-column: 1 / -1; }
+@media (min-width: 980px) {
+  .card--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "body media" "foot media";
+    column-gap: clamp(32px, 4vw, 52px);
+  }
+  .card--wide .card__body  { grid-area: body; }
+  .card--wide .card__foot  { grid-area: foot; }
+  .card--wide .card__media { grid-area: media; margin-top: 0; align-self: start; }
+}
+.card__media { margin-top: 20px; }
+.card__video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  background: var(--surface-hi);
+  border: 1px solid var(--line);
+}
+.card__video:not([controls]) { cursor: pointer; }
+.card__media-foot {
+  margin-top: 14px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+}
+.card__media-k { font-size: 0.68rem; color: var(--muted-2); letter-spacing: 0.05em; }
+/* Same move as the diagram above: on a phone the frame spans the card's 24px
+   padding, so the video's on-screen text is ~16% larger. A replaced element
+   doesn't stretch into negative margins on its own — hence the explicit width,
+   and max-width: none because Tailwind's preflight caps every video at 100%. */
+@media (max-width: 620px) {
+  .card .card__video {
+    width: calc(100% + 48px);
+    max-width: none;
+    margin-inline: -24px;
+    border-inline: 0;
+  }
+}
+
 /* ---------- the idle instrument (motion layer 4 — see STYLING.md) ----------
    The hero's MethodDiagram runs on its own: a packet walks the loop and each
    leg lights blue as it passes, so the sketch performs the process it
@@ -1422,7 +1472,7 @@ a { color: inherit; text-decoration: none; }
   .section--sand, .island { background-image: none; }
 
   /* 3. Screen-only furniture. */
-  .topbar, .skip, .topbar__progress, .cvbtn,
+  .topbar, .skip, .topbar__progress, .cvbtn, .card__play,
   .footer a[href="#top"] { display: none !important; }
 
   /* 4. Paper needs the URLs the screen gets from hovering. */

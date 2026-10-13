@@ -43,6 +43,76 @@ function TagsNote({ locale }: { locale: Locale }) {
   );
 }
 
+// The assistant's 60-second walkthrough, one render per language (the source
+// is a HyperFrames composition kept outside this repo; the business and people
+// in it are stand-ins, so the real company stays unrecognisable). It sits where
+// the other cards carry their diagram, and it never plays on its own: the
+// hero's MethodDiagram is the only thing on this site allowed to move at rest
+// (motion layer 4), so this is click-to-play behind a poster. preload="none"
+// keeps the page weightless until someone asks for it. It starts muted because
+// it is cut to be read without sound; the soundtrack is in the native controls.
+//
+// Why a "Watch" button instead of the native controls alone: Chrome paints its
+// control bar — a dark gradient over the bottom third — on any paused video
+// with `controls`, so the poster never read clean. The static HTML keeps
+// `controls` (without JS that is how it plays); Interactions.tsx drops them on
+// mount and brings them back with the first play. The button is a link to the
+// file itself, so without JS it still opens the video. Same .btn as the other
+// cards' actions: one style per function.
+//
+// The route's language is rendered statically; the data-src/poster variants
+// let the language toggle swap the file (see components/Interactions.tsx).
+const VIDEO = (l: Locale) => `/video/asistente-operativo-${l}.mp4`;
+const POSTER = (l: Locale) => `/video/asistente-operativo-${l}.jpg`;
+const VIDEO_LABEL: Record<Locale, string> = {
+  es: "Vídeo de 1 minuto: cómo trabaja el asistente operativo",
+  en: "1-minute video: how the operations assistant works",
+  fr: "Vidéo d'une minute : le fonctionnement de l'assistant opérationnel",
+};
+
+function AssistantVideo({ locale }: { locale: Locale }) {
+  return (
+    <div className="card__media">
+      <video
+        className="card__video"
+        controls
+        muted
+        playsInline
+        preload="none"
+        width={1280}
+        height={720}
+        src={VIDEO(locale)}
+        poster={POSTER(locale)}
+        data-src-es={VIDEO("es")}
+        data-src-en={VIDEO("en")}
+        data-src-fr={VIDEO("fr")}
+        data-poster-es={POSTER("es")}
+        data-poster-en={POSTER("en")}
+        data-poster-fr={POSTER("fr")}
+        aria-label={VIDEO_LABEL[locale]}
+        data-aria-es={VIDEO_LABEL.es}
+        data-aria-en={VIDEO_LABEL.en}
+        data-aria-fr={VIDEO_LABEL.fr}
+      />
+      <div className="card__media-foot">
+        <a className="btn card__play" href={VIDEO(locale)} data-video-play>
+          <svg width="9" height="10" viewBox="0 0 9 10" aria-hidden="true">
+            <path d="M0 0 L9 5 L0 10 Z" fill="currentColor" />
+          </svg>
+          <T locale={locale} es="Ver el vídeo" en="Watch the video" fr="Voir la vidéo" />
+        </a>
+        <T
+          locale={locale}
+          className="card__media-k mono"
+          es="// vídeo · 1 min"
+          en="// video · 1 min"
+          fr="// vidéo · 1 min"
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function Projects({ locale = "es" }: { locale?: Locale }) {
   return (
     <section className="section" id="work">
@@ -68,10 +138,88 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
 
         <div className="cards reveal" data-d="1" data-stagger>
 
+          {/* Operations assistant — first and full width: the newest project,
+              the only one running for a real business, and it opens the
+              section right after the "AI accelerates. Evidence decides." band
+              with the same thesis in practice. No sector, no company name: the
+              business stays unrecognisable here, as it does in the video.
+              Figures: tests = `pytest --collect-only` (8,144, 11 Oct 2026);
+              emails = the processed history (13,047). Both are on screen in the
+              video too, so they are said once here and nowhere else. */}
+          <article className="card card--wide">
+            <div className="card__body">
+              <div className="card__top">
+                <span className="card__idx">01</span>
+                <T
+                  locale={locale}
+                  className="card__year"
+                  es="2026 — Presente"
+                  en="2026 — Present"
+                  fr="2026 — Aujourd'hui"
+                />
+              </div>
+              <T
+                locale={locale}
+                as="h3"
+                className="card__title"
+                es="Asistente operativo con IA"
+                en="AI-powered operations assistant"
+                fr="Assistant opérationnel IA"
+              />
+              <T
+                locale={locale}
+                as="p"
+                className="card__kicker"
+                es="En producción para una PYME real"
+                en="In production for a real SME"
+                fr="En production pour une vraie PME"
+              />
+              <T
+                locale={locale}
+                as="p"
+                className="card__desc"
+                es="Aplicación de negocio construida sobre APIs de LLM: lee el correo y las notas de voz, prepara cada respuesta con los datos de la propia empresa (RAG autohospedado: los correos nunca salen de su red) y no envía nada sin confirmación humana."
+                en="A business application built on LLM APIs: it reads email and voice notes, drafts every reply from the company's own data (self-hosted RAG: the emails never leave its network) and sends nothing without human sign-off."
+                fr="Application métier construite sur des API de LLM : elle lit les e-mails et les notes vocales, prépare chaque réponse à partir des données de l'entreprise (RAG auto-hébergé : les e-mails ne quittent jamais son réseau) et n'envoie rien sans validation humaine."
+              />
+              <p className="card__metrics">
+                <T
+                  locale={locale}
+                  es="<b>8.000+</b> tests automáticos"
+                  en="<b>8,000+</b> automated tests"
+                  fr="<b>8&nbsp;000+</b> tests automatisés"
+                />
+                <T
+                  locale={locale}
+                  es="<b>13.000+</b> correos en memoria"
+                  en="<b>13,000+</b> emails in memory"
+                  fr="<b>13&nbsp;000+</b> e-mails en mémoire"
+                />
+                <T
+                  locale={locale}
+                  es="<b>Human-in-the-loop</b> verificable"
+                  en="<b>Verifiable</b> human-in-the-loop"
+                  fr="<b>Human-in-the-loop</b> vérifiable"
+                />
+              </p>
+            </div>
+            <AssistantVideo locale={locale} />
+            <div className="card__foot">
+              <div className="tags" role="list" {...tagsAria(locale)}>
+                <span className="tag tag--mut" role="listitem">Python · FastAPI</span>
+                <span className="tag tag--db" role="listitem">PostgreSQL</span>
+                <span className="tag tag--db" role="listitem">pgvector</span>
+                <span className="tag tag--mut" role="listitem">React</span>
+                <span className="tag tag--ai" role="listitem">Claude API</span>
+              </div>
+              <TagsNote locale={locale} />
+            </div>
+          </article>
+
           {/* MAMS */}
           <article className="card">
             <div className="card__top">
-              <span className="card__idx">01</span>
+              <span className="card__idx">02</span>
               <T
                 locale={locale}
                 className="card__year"
@@ -143,7 +291,7 @@ export default function Projects({ locale = "es" }: { locale?: Locale }) {
           {/* Proxmox Home Server */}
           <article className="card">
             <div className="card__top">
-              <span className="card__idx">02</span>
+              <span className="card__idx">03</span>
               <T
                 locale={locale}
                 className="card__year"

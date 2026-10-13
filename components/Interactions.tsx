@@ -23,6 +23,27 @@ export default function Interactions() {
     };
     const mailLinks = document.querySelectorAll("[data-mail]");
 
+    /* ---------- Project videos: poster first, controls on demand ---------- */
+    // The static HTML ships `controls` so the video plays without JS. With JS
+    // the poster stands alone (Chrome paints a dark control bar over any paused
+    // video with controls) and the controls arrive with the first play, from a
+    // click on the poster or on the "Watch" link next to it. That link points
+    // at the file, so without JS it opens the video natively instead.
+    const videos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>("video[data-src-en]")
+    );
+    const playLink = (v: HTMLVideoElement) =>
+      v.parentElement?.querySelector<HTMLAnchorElement>("[data-video-play]") ?? null;
+    videos.forEach((v) => {
+      const start = () => {
+        v.controls = true;
+        v.play().catch(() => {});
+      };
+      v.controls = false;
+      v.addEventListener("click", () => { if (!v.controls) start(); });
+      playLink(v)?.addEventListener("click", (e) => { e.preventDefault(); start(); });
+    });
+
     /* ---------- Language toggle ---------- */
     // Cache only outermost [data-en] nodes so nested ones aren't double-processed.
     // Spanish comes from the data-es attribute (the static HTML is rendered in
@@ -67,13 +88,28 @@ export default function Interactions() {
       const mail = MAIL[lang as keyof typeof MAIL] ?? MAIL.es;
       mailLinks.forEach((a) => { a.setAttribute("href", `mailto:${mail}`); });
 
+      // Project videos are recorded once per language. Only swap when the file
+      // actually differs: reassigning src resets the element, and setLang also
+      // runs on load, where the static HTML already carries the right one.
+      // Back to the bare poster: the new file hasn't been asked for yet.
+      videos.forEach((v) => {
+        const src = v.getAttribute(`data-src-${lang}`);
+        if (!src || v.getAttribute("src") === src) return;
+        v.pause();
+        v.controls = false;
+        v.setAttribute("poster", v.getAttribute(`data-poster-${lang}`) ?? "");
+        v.setAttribute("src", src);
+        v.load();
+        playLink(v)?.setAttribute("href", src);
+      });
+
       document.querySelectorAll("[data-setlang]").forEach((btn) => {
         const on = btn.getAttribute("data-setlang") === lang;
         btn.classList.toggle("is-on", on);
         btn.setAttribute("aria-pressed", String(on));
       });
 
-      try { localStorage.setItem("ga-lang", lang); } catch (_) {}
+      try { localStorage.setItem("ga-lang", lang); } catch {}
       // Keep the URL on the matching static route (/, /en, /fr) so a refresh or
       // a shared link lands on the right language and hreflang stays coherent.
       // Only on the language routes themselves: the 404 must keep its URL —
@@ -109,7 +145,7 @@ export default function Interactions() {
 
     const urlLang = new URLSearchParams(location.search).get("lang");
     let savedLang: string | null = null;
-    try { savedLang = localStorage.getItem("ga-lang"); } catch (_) {}
+    try { savedLang = localStorage.getItem("ga-lang"); } catch {}
 
     const initialLang =
       detectPathLang() ??
@@ -124,11 +160,11 @@ export default function Interactions() {
       document.documentElement.setAttribute("data-theme", theme);
       metaTheme?.setAttribute("content", theme === "dark" ? "#0d1a31" : "#ffffff");
       themeBtn?.setAttribute("aria-pressed", String(theme === "dark"));
-      try { localStorage.setItem("ga-theme", theme); } catch (_) {}
+      try { localStorage.setItem("ga-theme", theme); } catch {}
     }
 
     let savedTheme: string | null = null;
-    try { savedTheme = localStorage.getItem("ga-theme"); } catch (_) {}
+    try { savedTheme = localStorage.getItem("ga-theme"); } catch {}
     if (!savedTheme) {
       savedTheme = window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
