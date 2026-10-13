@@ -1,5 +1,8 @@
 name = "guillermoalbert"
 compatibility_date = "2026-06-03"
+# Only /video/* runs this script (see run_worker_first below and the comment in
+# worker/videos.js): it adds the byte-range answers Safari needs to play video.
+main = "worker/videos.js"
 
 [[routes]]
 pattern = "guillermoalbert.dev"
@@ -11,4 +14,6 @@ custom_domain = true
 
 [assets]
 directory = "./out"
+binding = "ASSETS"
 not_found_handling = "404-page"
+run_worker_first = ["/video/*"]
