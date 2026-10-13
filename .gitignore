@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# wrangler (npx wrangler dev: prueba local del Worker de worker/)
+.wrangler/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

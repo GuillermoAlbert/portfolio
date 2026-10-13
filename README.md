@@ -41,6 +41,8 @@ app/            Rutas: un route group por idioma, cada uno con su root layout
 components/     Un componente por sección de la página, más el shell compartido
 lib/            i18n (componente T) y SEO (metadatos por idioma)
 public/cv/      Los tres CV descargables desde el sitio
+public/video/   Vídeo del asistente operativo (proyecto 01), uno por idioma, con su póster
+worker/         Worker que sirve /video/* por trozos (byte ranges) para Safari
 ```
 
 ## Desarrollo
@@ -50,8 +52,13 @@ npm run dev     # servidor de desarrollo en http://localhost:3000
 npm run build   # export estático a /out
 npm start       # sirve /out en local (requiere build previo)
 npm run lint    # ESLint
+npx wrangler dev  # sirve /out con el Worker, como en Cloudflare, en http://localhost:8787 (requiere build previo)
 ```
 
 ## Deploy
 
 Cada push a `main` dispara un workflow de GitHub Actions que hace el build y publica `/out` como assets estáticos en Cloudflare Workers, con dominio propio y página 404 real (`wrangler.toml`).
+
+Los assets estáticos de Workers responden siempre con el fichero entero, y Safari (Mac e iPhone) no reproduce vídeo si el servidor no sirve trozos (`206 Partial Content`). Por eso `/video/*`, y solo esa ruta (`run_worker_first`), pasa por `worker/videos.js`, que atiende la cabecera `Range`. Todo lo demás sale directo de los assets.
+
+Los vídeos se generan fuera de este repo, desde una composición HyperFrames (HTML + GSAP) con una versión por idioma; el procedimiento está en sus fuentes (`video-portfolio/traduccion/LEEME.md`).
